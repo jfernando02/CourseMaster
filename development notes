@@ -1,0 +1,3 @@
+27/10/23 - starting to add authentication via OIDC. The OIDC client I am goining to use is The maicol07/laravel-oidc-client
+            Found maicol07/laravel-oidc-client doesn't install (too old?) so used https://github.com/autisid/laravel-oidc-client instead
+

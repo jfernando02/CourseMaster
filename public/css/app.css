@@ -1,0 +1,42 @@
+.table-min-width {
+    width: 2000px !important;
+    background-color: black !important;
+    column-width: 2000px !important;
+}
+
+.custom-tooltip {
+    --bs-tooltip-bg: var(--bd-violet-bg);
+    --bs-tooltip-color: var(--bs-white);
+  }
+
+.table-font-size {
+    font-size: 14px;
+}
+
+.bootstrap-select .dropdown-menu li a:hover {
+    background-color: #f00;
+}
+
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+}
+
+.form-control {
+    color: purple;
+}
+
+
+/* trimester */
+.modified {
+    color: #ff0000; /* Red color for modified cells */
+    font-weight: bold; /* Optional: Make the font bold */
+    background-color: #ffcccb  !important; /* Optional: Add a light red background color */
+}
+
+table.table-hover td {
+    padding: 15px; /* Increase padding for larger cells */
+    vertical-align: middle; /* Center vertically */
+
+}
+

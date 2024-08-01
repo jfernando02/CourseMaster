@@ -1,0 +1,35 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class AddLectureDayAndWorkshopDayColumnsToOfferingsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::table('offerings', function (Blueprint $table) {
+            $table->string('lecture_day')->nullable();
+            $table->string('workshop_day')->nullable();
+       
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::table('offerings', function (Blueprint $table) {
+            $table->dropColumn('lecture_day');
+            $table->dropColumn('workshop_day');
+        });
+    }
+}
