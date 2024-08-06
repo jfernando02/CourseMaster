@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AcademicController;
 use App\Http\Controllers\CourseController;
@@ -19,12 +20,8 @@ use Jumbojett\OpenIDConnectClient;
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
+
+@@ -28,117 +14,18 @@ use Jumbojett\OpenIDConnectClient;
 |
 */
 
@@ -102,23 +99,19 @@ Route::post('/academic/{id}/delete-class-schedule', [AcademicController::class, 
 
 Route::get('log', function () {
     $oidc = new OpenIDConnectClient('https://test-auth.griffith.edu.au',
-                                'oidc-coursemaster',
-                                'ryIAOL6oqowD28aCkQLgDbB1nUX7C3YK11AqJ0VPWcdupnIUJd4ccNkA3eqAyDNQ');
+        'oidc-coursemaster',
+        'ryIAOL6oqowD28aCkQLgDbB1nUX7C3YK11AqJ0VPWcdupnIUJd4ccNkA3eqAyDNQ');
 //     $oidc->setCertPath('/path/to/my.cert');
     $oidc->authenticate();
     dd();
     $name = $oidc->requestUserInfo('given_name');
 });
-
 /**
  * Home page
  */
 
 
-
-
-
-Route::get('/', function(){
+Route::get('/', function() {
     // for now, return a random academic to display. real home page will show current user
     $name = DB::table('academics')->inRandomOrder()->first();
     $academic_id = $name->id;
@@ -130,15 +123,23 @@ Route::get('/', function(){
     $trimester = $setting->current_trimester;
     $year = $setting->current_year;
 
-    
+
     // filter offering based on academic id
     $offerings = DB::table('offerings')
-                    ->join('courses', 'offerings.course_id', '=', 'courses.id')
-                    ->select('offerings.year AS Year', 'offerings.trimester AS Term', 'courses.code AS Course_Code', 'courses.name AS Course_Name')
-                    ->where('offerings.academic_id', $academic_id) // Filter by academic ID
-                    ->where('offerings.year', $year) // Filter by year
-                    ->where('offerings.trimester', $trimester) // Filter by trimester
-                    ->groupBy('offerings.year', 'offerings.trimester', 'courses.code', 'courses.name')
-                    ->get();
+        ->join('courses', 'offerings.course_id', '=', 'courses.id')
+        ->select('offerings.year AS Year', 'offerings.trimester AS Term', 'courses.code AS Course_Code', 'courses.name AS Course_Name')
+        ->where('offerings.academic_id', $academic_id) // Filter by academic ID
+        ->where('offerings.year', $year) // Filter by year
+        ->where('offerings.trimester', $trimester) // Filter by trimester
+        ->groupBy('offerings.year', 'offerings.trimester', 'courses.code', 'courses.name')
+        ->get();
     return view('index', compact('threshold_trimester', 'name', 'offerings', 'department', 'setting'));
+})->middleware(['auth', 'verified'])->name('view');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+require __DIR__.'/auth.php';

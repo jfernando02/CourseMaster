@@ -104,7 +104,7 @@
       }
     </style>
 
-    
+
     <!-- Custom styles for this template -->
   </head>
   <body>
@@ -159,7 +159,7 @@
       </ul>
     </div> --}}
 
-    
+
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="{{URL::to('/')}}">Course Master</a>
@@ -198,6 +198,13 @@
         <li class="nav-item">
           <a class="nav-link" href="{{url("settings")}}">Settings</a>
         </li>
+
+          <li class="form-inline my-2 my-lg-0">
+              <form method="POST" action="{{ route('logout') }}">
+                  @csrf
+                  <button type="submit" class="btn btn-outline-danger my-2 my-sm-0">Logout</button>
+              </form>
+          </li>
         <!-- show current department -->
 
 
@@ -206,8 +213,8 @@
       @if(isset($department))
         <h1 class="navbar-brand align-middle" href="{{url("settings")}}">{{$department}}</h1>
       @endif
-      
-      
+
+
 
       {{-- <form class="d-flex" role="search" method="post" action="{{url("search")}}">
         {{csrf_field()}}
