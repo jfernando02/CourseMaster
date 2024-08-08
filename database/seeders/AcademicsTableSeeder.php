@@ -19,6 +19,7 @@ class AcademicsTableSeeder extends Seeder
             'teaching_load' => 40,
             'area' => 'Data Analytics, HCI',
             'note' => '',
+            'email'=>'john@smith.com',
         ]);
         DB::table('Academics')->insert([
             'firstname'=>'Evelyn',
@@ -26,6 +27,7 @@ class AcademicsTableSeeder extends Seeder
             'teaching_load' => 40,
             'area' => 'Cyber Security, Ethics',
             'note' => '',
+            'email'=>'evelyn@hart.com',
         ]);
         DB::table('Academics')->insert([
             'firstname'=>'Amelia',
@@ -33,6 +35,7 @@ class AcademicsTableSeeder extends Seeder
             'teaching_load' => 40,
             'area' => 'Computer Networks',
             'note' => '',
+            'email'=>'amelia@ford.com',
         ]);
         DB::table('Academics')->insert([
             'firstname'=>'Ethan',
@@ -40,6 +43,7 @@ class AcademicsTableSeeder extends Seeder
             'teaching_load' => 40,
             'area' => 'Computer Networks, Block Chain',
             'note' => '',
+            'email'=>'ethan@long.com',
         ]);
         DB::table('Academics')->insert([
             'firstname'=>'Sophia',
@@ -47,6 +51,7 @@ class AcademicsTableSeeder extends Seeder
             'teaching_load' => 60,
             'area' => 'Programming, algorithms',
             'note' => '',
+            'email'=>'sophia@ross.com',
         ]);
         DB::table('Academics')->insert([
             'firstname'=>'Noah',
@@ -54,6 +59,7 @@ class AcademicsTableSeeder extends Seeder
             'teaching_load' => 40,
             'area' => 'VR',
             'note' => '',
+            'email'=>'noah@price.com',
         ]);
         DB::table('Academics')->insert([
             'firstname'=>'Emma',
@@ -61,6 +67,7 @@ class AcademicsTableSeeder extends Seeder
             'teaching_load' => 40,
             'area' => '',
             'note' => '',
+            'email'=>'emma@brooks.com',
         ]);
         DB::table('Academics')->insert([
             'firstname'=>'Mason',
@@ -68,6 +75,7 @@ class AcademicsTableSeeder extends Seeder
             'teaching_load' => 40,
             'area' => '',
             'note' => '',
+            'email'=>'mason@wells.com',
         ]);
 
         DB::table('Academics')->insert([
@@ -76,6 +84,25 @@ class AcademicsTableSeeder extends Seeder
             'teaching_load' => 100,
             'area' => '',
             'note' => '',
+            'email'=>'teachalot@email.com',
+        ]);
+
+        DB::table('Academics')->insert([
+            'firstname'=>'Joseph',
+            'lastname'=>'Fernando',
+            'teaching_load' => 60,
+            'area' => '',
+            'note' => '',
+            'email'=>'jfernando020202@gmail.com',
+        ]);
+
+        DB::table('Academics')->insert([
+            'firstname'=>'Test',
+            'lastname'=>'User',
+            'teaching_load' => 60,
+            'area' => '',
+            'note' => '',
+            'email'=>'joseph.fernando@griffithuni.edu.au',
         ]);
     }
 }

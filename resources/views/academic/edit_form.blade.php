@@ -33,17 +33,20 @@
         <th>
             <input type="text" class="form-control filter-input" placeholder="Search Lastname" data-column="2">
         </th>
+          <th>
+              <input type="text" class="form-control filter-input" placeholder="Search Email" data-column="3">
+          </th>
         <th>
-            <input type="text" class="form-control filter-input" placeholder="Search Teaching Load" data-column="3">
+            <input type="text" class="form-control filter-input" placeholder="Search Teaching Load" data-column="4">
         </th>
         <th>
-            <input type="text" class="form-control filter-input" placeholder="Search Area" data-column="4">
+            <input type="text" class="form-control filter-input" placeholder="Search Area" data-column="5">
         </th>
         <th>
-            <input type="text" class="form-control filter-input" placeholder="Search Home Campus" data-column="5">
+            <input type="text" class="form-control filter-input" placeholder="Search Home Campus" data-column="6">
         </th>
         <th>
-            <input type="text" class="form-control filter-input" placeholder="Search Note" data-column="6">
+            <input type="text" class="form-control filter-input" placeholder="Search Note" data-column="7">
         </th>
           </tr>
         <tr>
@@ -51,6 +54,7 @@
             <th>ID</th>
             <th>Firstname</th>
             <th>Lastname</th>
+            <th>Email</th>
             <th>Teaching Load</th>
             <th>Area</th>
             <th>Home Campus</th>
@@ -60,9 +64,10 @@
     <tbody>
         @foreach($academics as $academic)
         <tr>
-          <td><input class="form-control"type="text" name="id[]" value="{{$academic->id}}" readonly>
+          <td><input class="form-control" type="text" name="id[]" value="{{$academic->id}}" readonly>
           <td><input class="form-control" type="text" name="firstname[]" value="{{$academic->firstname}}"></td>
           <td><input class="form-control" type="text" name="lastname[]" value="{{$academic->lastname}}"></td>
+            <td><input class="form-control" type="text" name="email[]" value="{{$academic->email}}"></td>
           <td><input class="form-control" type="text" name="teaching_load[]" value="{{$academic->teaching_load}}"></td>
           <td><input class="form-control" type="text" name="area[]" value="{{$academic->area}}"></td>
           <td>
@@ -95,10 +100,10 @@ document.addEventListener('DOMContentLoaded', function() {
       const rows = document.querySelector("#academicTable tbody").rows;
 
       for (let row of rows) {
-        let showRow = true; 
+        let showRow = true;
 
         filters.forEach(filter => {
-          if (filter.value !== '') { 
+          if (filter.value !== '') {
             const colIndex = parseInt(filter.getAttribute('data-column'));
             const cell = row.cells[colIndex];
             const inputValue = cell.querySelector('input')?.value.toLowerCase() || '';
@@ -109,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function() {
           }
         });
 
-        row.style.display = showRow ? '' : 'none'; 
+        row.style.display = showRow ? '' : 'none';
       }
     });
   });

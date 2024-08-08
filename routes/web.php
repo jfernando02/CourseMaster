@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AcademicController;
 use App\Http\Controllers\CourseController;
@@ -112,9 +113,12 @@ Route::get('log', function () {
 
 
 Route::get('/', function() {
-    // for now, return a random academic to display. real home page will show current user
-    $name = DB::table('academics')->inRandomOrder()->first();
-    $academic_id = $name->id;
+    if (Auth::check()) {
+        $user = Auth::user();
+        // for now, return a random academic to display. real home page will show current user
+        $name = DB::table('academics')->where('email',$user->email)->first();
+        $academic_id = $name->id;
+    }
 
     // get setting through model
     $setting = \App\Models\Setting::latest()->first();

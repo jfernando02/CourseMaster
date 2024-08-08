@@ -28,7 +28,12 @@
     <div class="form-group">
       <label>Last Name (required)</label>
       <input type="text" class="form-control" name="lastname" value="{{old('lastname')}}" required>
-    </div>  
+    </div>
+
+      <div class="form-group">
+          <label>Email (required) (NOTE: this cannot be changed after!)</label>
+          <input type="email" class="form-control" name="email" value="{{old('email')}}" required>
+      </div>
 
     <div class="form-group">
       <label>Teaching load</label>

@@ -68,6 +68,7 @@
         <thead>
             <tr>
                 <th>Full Name</th>
+                <th>Email</th>
                 <th>Teaching Load (Current Trimester)</th>
                 <th>Area</th>
                 <th>Main Campus</th>
@@ -78,18 +79,21 @@
                     <input type="text" class="form-control filter-input" placeholder="Search Name" data-column="0">
                 </td>
                 <td>
-                    <input type="text" class="form-control filter-input" placeholder="Search Teaching Load"
-                        data-column="1">
+                    <input type="text" class="form-control filter-input" placeholder="Search Email" data-column="1">
                 </td>
                 <td>
-                    <input type="text" class="form-control filter-input" placeholder="Search Area" data-column="2">
+                    <input type="text" class="form-control filter-input" placeholder="Search Teaching Load"
+                        data-column="2">
+                </td>
+                <td>
+                    <input type="text" class="form-control filter-input" placeholder="Search Area" data-column="3">
                 </td>
                 <td>
                     <input type="text" class="form-control filter-input" placeholder="Search Main Campus"
-                        data-column="3">
+                        data-column="4">
                 </td>
                 <td>
-                    <input type="text" class="form-control filter-input" placeholder="Search Note" data-column="4">
+                    <input type="text" class="form-control filter-input" placeholder="Search Note" data-column="5">
                 </td>
         </thead>
         <tbody>
@@ -99,6 +103,7 @@
                     <td><a href="{{ url("academic/$academic->id") }}">{{ $academic->lastname }},
                             {{ $academic->firstname }}</a></td>
                     {{-- <td><a href="{{url("academic/$academic->id")}}">{{$academic->firstname}} {{$academic->lastname}}, </a></td> --}}
+                    <td>{{ $academic->email }}</td>
                     <td>{{ $academic->teachingHoursperSem($academic->id, 2024, 1) }} hours</td>
                     <td>{{ $academic->area }}</td>
                     <td>{{ $academic->home_campus }}</td>

@@ -68,15 +68,17 @@ class AcademicController extends Controller
         $this->validate($request, [
             'firstname' => 'required|max:255',
             'lastname' => 'required|max:255',
+            'email' => 'required|max:255',
 //             'teaching_load' => 'numeric'
         ]);
-    
+
         //Check if the convenor exists before adding
         if ($this->checkExist($request->firstname, $request->lastname))
             return back()->withInput()->with('error', 'Academic not added! This academic already exists!');;
         $academic = new Academic();
         $academic->firstname = $request->firstname;
         $academic->lastname = $request->lastname;
+        $academic->email = $request->email;
         $academic->teaching_load = $request->teaching_load;
         $academic->area = $request->area;
         $academic->note = $request->note;
@@ -127,7 +129,7 @@ class AcademicController extends Controller
                 'hours' => $this->teachingHoursperSem($academic->id, $year, $trimester)
             ];
         }
-        
+
         $offerings_arr = [];
         foreach ($offerings as $offering){
             $year = strval($offering->year);
@@ -135,14 +137,14 @@ class AcademicController extends Controller
                 array_push($offerings_arr[$year], $offering);
             } else {
                 $offerings_arr[$year] = array($offering);
-            }  
+            }
         }
 
 
         $offeringGC = $this->reportByCampus($id, "GC");
         $offeringNA = $this->reportByCampus($id, "NA");
         $offeringOL = $this->reportByCampus($id, "OL");
-        
+
         return view('academic.show', compact('teachingHours', 'classes', 'academic', 'offeringGC', 'offeringNA', 'offeringOL','classes'))->with('years_offerings', array_reverse($offerings_arr));
     }
 
@@ -152,7 +154,7 @@ class AcademicController extends Controller
      */
     public function edit()
     {
-        
+
         // dd('edit');
         $academics = Academic::with('course')->get();
         $offerings = Offering::with('course')->get();
@@ -165,7 +167,7 @@ class AcademicController extends Controller
 
     public function edit_bulk(string $id)
     {
-        
+
         // dd('edit');
         $academics = Academic::with('course')->get();
         $offerings = Offering::with('course')->get();
@@ -189,7 +191,7 @@ class AcademicController extends Controller
             'lastname' => 'required|max:255',
 //            'teaching_load' => 'numeric'
         ]);
-         
+
         $academic = Academic::findOrFail($id);
         $academic->firstname = $request->firstname;
         $academic->lastname = $request->lastname;
@@ -232,7 +234,7 @@ class AcademicController extends Controller
             return $offerings->contains('academic_id', $academic->id);
         });
 
-    
+
         $offering_trimester = Offering::select('year', 'trimester')->distinct()->get();
 
         // create $unassigned_academics
@@ -261,7 +263,7 @@ class AcademicController extends Controller
         $home_campuses = $request->input('home_campus');
         $notes = $request->input('note');
         // dd($ids);
-        
+
         foreach ($ids as $index => $id) {
             $academic = Academic::find($id);
             if ($academic) {
@@ -337,17 +339,17 @@ class AcademicController extends Controller
 
         return $totalTeachingHours;
     }
-    
+
     public function deleteClassSchedule($id)
     {
         $classSchedule = ClassSchedule::findOrFail($id);
         $academicID = $classSchedule->academic_id;
         $classSchedule->delete();
-    
+
         return redirect("academic/$academicID")->with('success', 'Class schedule deleted successfully');
     }
 
-    public function import(Request $request) 
+    public function import(Request $request)
     {
         try {
             $import = new AcademicsImport;
@@ -359,16 +361,16 @@ class AcademicController extends Controller
         } catch (\Exception $e) {
             return back()->with('error', $e->getMessage());
         }
-        
+
     }
 
     // export excel file with details of all academics
-    public function export(string $id) 
+    public function export(string $id)
     {
         return Excel::download(new AcademicsExport, 'academics.xlsx');
     }
 
-    public function exportWorkload(string $id) 
+    public function exportWorkload(string $id)
     {
         return Excel::download(new AcademicWorkloadExport, 'academicworkload.xlsx');
     }
