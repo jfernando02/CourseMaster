@@ -3,7 +3,7 @@
 @section('title')
   Home
 @endsection
- 
+
 
 
 
@@ -13,8 +13,8 @@
 
 
   <h1>Welcome to CourseMaster</h1>
-  <h2>Hi, {{$name->firstname}} {{$name->lastname}}</h2>
-  
+  <h2>Hi, {{$name}}</h2>
+
   <h1>Current Offerings</h1>
   <table class="table table-striped">
     <thead>
@@ -26,7 +26,7 @@
       </tr>
     </thead>
     <tbody>
-      
+
       @forelse($offerings as $offering)
         <tr>
           <td>{{$offering->Year}}</td>
@@ -58,18 +58,18 @@
             {{csrf_field()}}
             <div class="form-group row">
               <label class="col-sm-2 col-form-label">  Enter year</label>
-              <div class="col-sm-10"> 
+              <div class="col-sm-10">
                 <input type="text" name="year" class="form-control" >
               </div>
             </div>
             <div class="form-group row">
               <label class="col-sm-2 col-form-label">Trimester</label>
-                <div class="col-sm-10"> 
-                <select class="col-sm-10" name="trimester" class="form-control">
+                <div class="col-sm-10">
+                <select name="trimester" class="form-control">
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
-                </select>   
+                </select>
                 </div>
             </div>
             <button type="submit" class="btn btn-outline-success"><i class="fa-regular fa-circle-check"></i> Submit</button>
@@ -80,7 +80,7 @@
             {{csrf_field()}}
             <div class="form-group row">
               <label class="col-sm-2 col-form-label">  Enter year</label>
-              <div class="col-sm-10"> 
+              <div class="col-sm-10">
                 <input type="text" name="year" class="form-control" >
               </div>
             </div>
@@ -95,11 +95,11 @@
       <form method="post" action="{{url("offering_copy")}}">
         {{csrf_field()}}
         <label>  From year</label>
-        <div class="col-sm-10"> 
+        <div class="col-sm-10">
           <input type="text" name="from_year" class="form-control" >
         </div>
         <label class="col-sm-2 col-form-label">  To year</label>
-        <div class="col-sm-10"> 
+        <div class="col-sm-10">
           <input type="text" name="to_year" class="form-control" >
         </div>
         <br>

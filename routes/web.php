@@ -105,7 +105,6 @@ Route::get('log', function () {
 //     $oidc->setCertPath('/path/to/my.cert');
     $oidc->authenticate();
     dd();
-    $name = $oidc->requestUserInfo('given_name');
 });
 /**
  * Home page
@@ -115,9 +114,13 @@ Route::get('log', function () {
 Route::get('/', function() {
     if (Auth::check()) {
         $user = Auth::user();
-        // for now, return a random academic to display. real home page will show current user
-        $name = DB::table('academics')->where('email',$user->email)->first();
-        $academic_id = $name->id;
+        $name = $user->name;
+        $academic_id = DB::table('academics')->where('email',$user->email)->first();
+        if($academic_id) {
+            $academic_id = $academic_id->id;
+        } else {
+            $academic_id = DB::table('academics')->inRandomOrder()->first()->id;
+        }
     }
 
     // get setting through model

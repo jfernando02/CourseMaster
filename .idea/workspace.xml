@@ -4,16 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0e3fdc26-a780-4964-b490-9e33aa918199" name="Changes" comment="Academics now have associated emails, academics must be created in the system (i.e. added to academics) before their account is valid. Updated pages to reflect new field. Index page personalises depending on user.">
-      <change afterPath="$PROJECT_DIR$/database/migrations/2024_08_08_053457_add_email_to_academics_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/726c7542-c3ea-46ea-b5f0-645aafbd5c5d.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/726c7542-c3ea-46ea-b5f0-645aafbd5c5d.xml" afterDir="false" />
+    <list default="true" id="0e3fdc26-a780-4964-b490-9e33aa918199" name="Changes" comment="Academic dashboard no longer reliant on user having academic email">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AcademicController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AcademicController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/database.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/database/database.sqlite" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeders/AcademicsTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/AcademicsTableSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/academic/add_academic.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/academic/add_academic.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/academic/edit_form.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/academic/edit_form.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/academic/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/academic/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -28,18 +22,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "jfernando02"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;jfernando02&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/jfernando02/CourseMaster.git",
-    "accountId": "8341b673-3705-47e0-98dd-cc61d79dc560"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/jfernando02/CourseMaster.git&quot;,
+    &quot;accountId&quot;: &quot;8341b673-3705-47e0-98dd-cc61d79dc560&quot;
   }
-}]]></component>
+}</component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="D:\Other\XAMPP\php\php.exe">
     <include_path>
       <path value="$PROJECT_DIR$/vendor/autisid/laravel-oidc-client" />
@@ -180,28 +174,30 @@
       <path value="$PROJECT_DIR$/vendor/laravel/framework" />
     </include_path>
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 1
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 1
+}</component>
   <component name="ProjectId" id="2kGMCsn60bBoRz0M1e9YvfH7Iyi" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "ts.external.directory.path": "D:\\PhpStorm 2024.1.4\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Other/Repos/CourseMaster&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;D:\\PhpStorm 2024.1.4\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="Main" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner configuration_file="$PROJECT_DIR$/phpunit.xml" scope="XML" use_alternative_configuration_file="true" />
@@ -224,7 +220,10 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1722905346947</updated>
-      <workItem from="1722905348250" duration="24579000" />
+      <workItem from="1722905348250" duration="25830000" />
+      <workItem from="1724297004876" duration="2988000" />
+      <workItem from="1724555114823" duration="2854000" />
+      <workItem from="1724816275103" duration="1363000" />
     </task>
     <task id="LOCAL-00001" summary="Add login page, add stock laravel pages, add logout button to dashboard, add login/register functionality">
       <option name="closed" value="true" />
@@ -250,7 +249,15 @@
       <option name="project" value="LOCAL" />
       <updated>1723093298073</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Academics now have associated emails, academics must be created in the system (i.e. added to academics) before their account is valid. Updated pages to reflect new field. Index page personalises depending on user.">
+      <option name="closed" value="true" />
+      <created>1723099434510</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1723099434511</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -261,6 +268,7 @@
     <MESSAGE value="Remove unneccessary views" />
     <MESSAGE value="Add email recovery functionality (copy paste mail settings from .env.joseph into local .env), add .env reference file" />
     <MESSAGE value="Academics now have associated emails, academics must be created in the system (i.e. added to academics) before their account is valid. Updated pages to reflect new field. Index page personalises depending on user." />
-    <option name="LAST_COMMIT_MESSAGE" value="Academics now have associated emails, academics must be created in the system (i.e. added to academics) before their account is valid. Updated pages to reflect new field. Index page personalises depending on user." />
+    <MESSAGE value="Academic dashboard no longer reliant on user having academic email" />
+    <option name="LAST_COMMIT_MESSAGE" value="Academic dashboard no longer reliant on user having academic email" />
   </component>
 </project>
