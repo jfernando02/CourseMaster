@@ -104,7 +104,7 @@
                     <th class='toggle-column'>Time End</th>
                     <th class='toggle-column'>Day</th>
                     <th>Notes</th>
-                    <th>Save</th>
+                    <th>Select</th>
 
                 </tr>
             </thead>

@@ -21,6 +21,9 @@
   <a class="btn btn-outline-primary" href="{{ url('academic/create') }}"><i class="fa-regular fa-plus"></i> Add a new academic</a>
   <form method="POST" action="{{ route('academic.save') }}">
     @csrf
+      <button class="btn btn-outline-danger" type="submit" name="delete" value="delete" onclick="return confirm('Are you sure you want to delete these academics?')">
+          <i class="fa-regular fa-trash"></i> Delete Selected Academics
+      </button>
     <table class="table table-hover" id="academicTable">
     <thead>
       <tr>
@@ -59,6 +62,7 @@
             <th>Area</th>
             <th>Home Campus</th>
             <th>Note</th>
+            <th>Select</th>
         </tr>
     </thead>
     <tbody>
@@ -78,6 +82,9 @@
             </select>
           </td>
           <td><input class="form-control" type="text" name="note[]" value="{{$academic->note}}"></td>
+            <td><div class="form-check">
+                <input class="btn btn-outline-success" type="checkbox" name="save_row[]" value="{{ $academic->id }}">
+            </div></td>
         </tr>
         @endforeach
     </tbody>

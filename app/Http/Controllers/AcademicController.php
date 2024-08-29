@@ -263,6 +263,10 @@ class AcademicController extends Controller
         $home_campuses = $request->input('home_campus');
         $notes = $request->input('note');
         // dd($ids);
+        if ($request->has('delete')) {
+            // Perform deletion operation on selected classes
+            Academic::destroy($request->input('save_row'));
+        }
 
         foreach ($ids as $index => $id) {
             $academic = Academic::find($id);
