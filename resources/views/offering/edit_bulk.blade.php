@@ -3,9 +3,10 @@
 @section('title')
   Offerings
 @endsection
- 
+
 @section('content')
 <h1>Edit Offerings</h1>
+<a class="btn btn-outline-primary" href="{{ url('offering/create') }}"><i class="fa-regular fa-plus"></i> Add a new offering</a>
 <form method="POST" action="{{ route('offering.saveBulk') }}">
   @csrf
 <table class="table table-striped" id="offeringsTable">
@@ -43,6 +44,7 @@
       <th>Campus</th>
       <th>Convenor</th>
       <th>Notes</th>
+        <th>Select</th>
 
     </tr>
   </thead>
@@ -55,7 +57,7 @@
       <td><input class="form-control" type="text" name="year[]"   value="{{$offering->year}}"></td>
       <td><input class="form-control" type="text" name="trimester[]" value="{{$offering->trimester}}"></td>
       {{-- <td><input class="form-control" type="text" name="campus" value="{{$offering->campus}}"></td> --}}
-      <td> 
+      <td>
         <select class="form-control" name="campus[]">
         @foreach($campuses as $campus)
           <option value="{{$campus}}" {{$offering->campus == $campus ? 'selected' : ''}}>{{$campus}}</option>
@@ -69,16 +71,16 @@
         @else Unassigned
         @endif --}}
         <select class="selectpicker form-control" name="academic_id[]">
-          {{-- <option 
+          {{-- <option
           title="ddd"
           >Select Lecturer</option> --}}
           @foreach ($academics as $academic)
 
-              <option 
+              <option
 
-          
-              class="dropdown-item custom-tooltip" 
-              value="{{ $academic->id }}" @if ($academic->id == $offering->academic_id) selected @endif 
+
+              class="dropdown-item custom-tooltip"
+              value="{{ $academic->id }}" @if ($academic->id == $offering->academic_id) selected @endif
               >
              {{ $academic->firstname }} {{ $academic->lastname }} ({{$academic->home_campus}})
               </option>
@@ -88,6 +90,10 @@
       </td>
       <td>
         <input class="form-control" type="text" name="note[]" value="{{$offering->note}}">
+      </td>
+        <td><div class="form-check">
+                <input class="btn btn-outline-success" type="checkbox" name="save_row[]" value="{{ $offering->id }}">
+            </div></td>
     </tr>
     @endforeach
   </tbody>
@@ -107,10 +113,10 @@ document.addEventListener('DOMContentLoaded', function() {
       const rows = document.querySelector("#offeringsTable tbody").rows;
 
       for (let row of rows) {
-        let showRow = true; 
+        let showRow = true;
 
         filters.forEach(filter => {
-          if (filter.value !== '') { 
+          if (filter.value !== '') {
             const colIndex = parseInt(filter.getAttribute('data-column'));
             const cell = row.cells[colIndex];
             const inputValue = cell.querySelector('input')?.value.toLowerCase() || '';
@@ -121,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
           }
         });
 
-        row.style.display = showRow ? '' : 'none'; 
+        row.style.display = showRow ? '' : 'none';
       }
     });
   });

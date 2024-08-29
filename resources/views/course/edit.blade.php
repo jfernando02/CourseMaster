@@ -15,6 +15,7 @@
       </ul>
     </div>
   @endif
+  <a class="btn btn-outline-primary" href="{{ url('course/create') }}"><i class="fa-regular fa-plus"></i> Add a new course</a>
   <form method="post" action="{{ route('course.save') }}">
 
 
@@ -37,9 +38,6 @@
               <input type="text" class="form-control filter-input" placeholder="Search Transition" data-column="3">
             </th>
             <th>
-              <input type="text" class="form-control filter-input" placeholder="Search Teaching Method" data-column="4">
-            </th>
-            <th>
               <input type="text" class="form-control filter-input" placeholder="Search Note" data-column="5">
             </th>
         <tr>
@@ -47,8 +45,8 @@
           <th>Name</th>
           <th>Course Level</th>
           <th>Superseded By</th>
-          <th>Teaching Method</th>
           <th>Note</th>
+            <th>Select</th>
         </tr>
       </thead>
       <tbody>
@@ -81,11 +79,11 @@
             </select>
           </td>
           <td>
-            <input class="form-control type="text" name="tmethod[]" value="{{ $course->tmethod }}">
-          </td>
-          <td>
             <input class="form-control type="text" name="note[]" value="{{ $course->note }}">
           </td>
+            <td><div class="form-check">
+                    <input class="btn btn-outline-success" type="checkbox" name="save_row[]" value="{{ $course->id }}">
+                </div></td>
         </tr>
         @endforeach
       </tbody>
@@ -108,10 +106,10 @@ document.addEventListener('DOMContentLoaded', function() {
       const query = this.value.toLowerCase();
 
       for (let row of rows) {
-        let showRow = true; 
+        let showRow = true;
 
         filters.forEach(filter => {
-          if (filter.value !== '') { 
+          if (filter.value !== '') {
             const colIndex = parseInt(filter.getAttribute('data-column'));
             const cell = row.cells[colIndex];
             let textContent = '';
@@ -131,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function() {
           }
         });
 
-        row.style.display = showRow ? '' : 'none'; 
+        row.style.display = showRow ? '' : 'none';
       }
     });
   });
