@@ -1,22 +1,22 @@
 @extends('layouts.master')
 
 @section('title')
-    Trimesters
+    Classes
 @endsection
 
 @section('content')
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
 <div class="row">
-   
+
     <div >
-        <h1>Edit Trimester</h1>
+        <h1>Edit Class</h1>
     @if(session('error'))
         <div class="alert alert-danger">
             {{ session('error') }}
         </div>
     @endif
-    
+
     @if($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -26,34 +26,36 @@
             </ul>
         </div>
     @endif
-    
+
     <form action="{{ route('trimester.save') }}" method="POST">
 
     <h2>{{ $year }} {{$trimester}}</h2>
         <div class='row'>
             <div class="d-flex justify-content-between">
                 <a class="btn btn-outline-primary"
-    
+
                     href="{{ route('trimester.edit', ['year' => $prev_trimester[0], 'trimester' => $prev_trimester[1]]) }}">
                     <i class="fa-solid fa-chevron-left"></i> Previous Trimester
                 </a>
-                
+
                 <button id="toggleColumns" class="btn btn-outline-success">Toggle Time & Day Columns</button>
 
                 <button class="btn btn-outline-success" type="submit"><i class="fa-regular fa-floppy-disk"></i> Save</button>
+
+                <button class="btn btn-outline-danger" type="submit" name="delete" value="delete" onclick="return confirm('Are you sure you want to delete these classes?')"><i class="fa-regular fa-trash"></i> Delete Selected Classes</button>
                     <a class="btn btn-outline-primary">
 
                         <href="{{ route('trimester.edit', ['year' => $next_trimester[0], 'trimester' => $next_trimester[1]]) }}">
                         Next Trimester <i class="fa-solid fa-chevron-right"></i>
                     </a>
-<!--  
+<!--
                 <a class="btn btn-primary"
                     href="{{ route('trimester.edit', ['year' => $next_trimester[0], 'trimester' => $next_trimester[1]]) }}">
                     Next Trimester
                 </a> -->
-    
+
             </div>
-    
+
         </div>
         <br>
 
@@ -103,7 +105,7 @@
                     <th class='toggle-column'>Day</th>
                     <th>Notes</th>
                     <th>Save</th>
-    
+
                 </tr>
             </thead>
             <tbody>
@@ -115,7 +117,7 @@
                         <input type="hidden" name="class_id[]" id="selectedClassID" value="{{ $class->id }}">
                         <input type="hidden" name="offering_id[]" id="selectedOfferingID" value="{{ $class->offering_id }}">
                         <td>
-                            
+
                             {{-- <div class="form-group">
                                 <select class="form-control" name="course_id[]">
                                     @foreach ($courses as $course)
@@ -127,26 +129,26 @@
                             </div> --}}
                             {{-- show course as h1 --}}
                             {{$class->course_name}}
-                            
+
                         </td>
                         <td>
                             <div class="form-group">
                                 <select class="selectpicker form-control" name="academic_id[]">
-                                    {{-- <option 
+                                    {{-- <option
                                     title="ddd"
                                     >Select Lecturer</option> --}}
                                     @foreach ($academics as $academic)
                                     @php
-                                    $load = $academic->teachingHoursperSem($academic->id, $year ,$trimester); 
-                                    $ratio = min(($load / $threshold_trimester), 1) * 100; 
+                                    $load = $academic->teachingHoursperSem($academic->id, $year ,$trimester);
+                                    $ratio = min(($load / $threshold_trimester), 1) * 100;
                                     @endphp
 
-                                        <option 
+                                        <option
 
                                         style="background: linear-gradient(to right, rgb(77, 181, 71) {{ $ratio }}%, white {{ $ratio }}%);"
-                                    
-                                        class="dropdown-item custom-tooltip" 
-                                        value="{{ $academic->id }}" @if ($academic->id == $class->academic_id) selected @endif 
+
+                                        class="dropdown-item custom-tooltip"
+                                        value="{{ $academic->id }}" @if ($academic->id == $class->academic_id) selected @endif
                                         >
                                        {{ $academic->firstname }} {{ $academic->lastname }} ({{$academic->home_campus}})
                                         </option>
@@ -157,18 +159,18 @@
                         <td>
                             <div class="form-group">
                                 <select class="form-control" name="class_type[]">
-    
+
                                 @foreach ($class_types as $class_type)
-                                    <option name="class_type[]" value="{{ $class_type }}" 
+                                    <option name="class_type[]" value="{{ $class_type }}"
                                     @if ($class_type == $class->class_type) selected @endif>
                                     {{ $class_type }}
                                 @endforeach
-    
+
                                 </select>
-                                
+
                             </div>
-    
-                            
+
+
                         </td>
                         <td>
                                 {{-- <select class="form-control" name="campus[]">
@@ -184,7 +186,7 @@
                         <td class='toggle-column'>
                             <div class="form-group ">
                                 <input type="time" class="form-control" name="start_time[]" value="{{ $class->start_time }}">
-                            
+
                             </div>
                         </td>
                         <td class='toggle-column'>
@@ -207,18 +209,18 @@
                         <td>
                             <div class="form-group
                             ">
-                                <input type="text" class="form-control" name="notes[]" value="{{ $class->notes }}">
+                                <input type="text" class="form-control" name="notes[]" value="{{ $class->note }}">
                             </div>
                         </td>
                         {{-- save button --}}
                         <td>
 
                             <div class="form-check">
-                                <input class="btn btn-outline-success" type="checkbox" name="save_row[]" value="{{ $class->id }}" checked>
+                                <input class="btn btn-outline-success" type="checkbox" name="save_row[]" value="{{ $class->id }}">
                             </div>
                         </td>
 
-                        
+
                     </tr>
                 @endforeach
             </tbody>
@@ -253,23 +255,23 @@ function addNewRow() {
             <td>
                 <div class="form-group">
                     <select class="selectpicker" name="new_academic_id[]">
-                        
-                        <option 
+
+                        <option
                         {{-- title="ddd" --}}
                         >Select Lecturer</option>
                         @foreach ($academics as $academic)
                         @php
-                        $load = $academic->teachingHoursperSem($academic->id, $year ,$trimester); 
-                        $ratio = min(($load / $threshold_trimester), 1) * 100; 
+                        $load = $academic->teachingHoursperSem($academic->id, $year ,$trimester);
+                        $ratio = min(($load / $threshold_trimester), 1) * 100;
                         @endphp
                             <option data-ratio="{{ $ratio }}" data-bs-toggle="tooltip" data-bs-placement="top"
 
                             style="background: linear-gradient(to right, rgb(77, 181, 71) {{ $ratio }}%, white {{ $ratio }}%);"
-                            data-bs-custom-class="custom-tooltip" 
-                            data-bs-html="true" 
-                            data-bs-title="Previous Teaching Load: {{$academic->teaching_load}} <br> Notes: {{$academic->note}}" 
-                            class="dropdown-item" 
-                            value="{{ $academic->id }}" @if ($academic->id == $class->academic_id) selected @endif 
+                            data-bs-custom-class="custom-tooltip"
+                            data-bs-html="true"
+                            data-bs-title="Previous Teaching Load: {{$academic->teaching_load}} <br> Notes: {{$academic->note}}"
+                            class="dropdown-item"
+                            value="{{ $academic->id }}" @if ($academic->id == $class->academic_id) selected @endif
                             {{-- title="{{$academic->lastname}}" --}}
                             {{-- title="Load: {{$academic->teaching_load}} Notes: {{$academic->note}}" --}}
                             >
@@ -283,7 +285,7 @@ function addNewRow() {
             <td>
                 <select class="form-control" name="new_class_type[]">
                 @foreach ($class_types as $class_type)
-                    <option name="class_type[]" value="{{ $class_type }}" 
+                    <option name="class_type[]" value="{{ $class_type }}"
                     @if ($class_type == $class->class_type) selected @endif>
                     {{ $class_type }}
                 @endforeach
@@ -329,8 +331,8 @@ function addNewRow() {
                     </div>
                 </td>
         </tr>
-    
-    
+
+
     `;
     $(newRow).find('.selectpicker').selectpicker();
 
@@ -358,10 +360,10 @@ document.addEventListener('DOMContentLoaded', function() {
       const query = this.value.toLowerCase();
 
       for (let row of rows) {
-        let showRow = true; 
+        let showRow = true;
 
         filters.forEach(filter => {
-          if (filter.value !== '') { 
+          if (filter.value !== '') {
             const colIndex = parseInt(filter.getAttribute('data-column'));
             const cell = row.cells[colIndex];
             let textContent = '';
@@ -382,7 +384,7 @@ document.addEventListener('DOMContentLoaded', function() {
           }
         });
 
-        row.style.display = showRow ? '' : 'none'; 
+        row.style.display = showRow ? '' : 'none';
       }
     });
   });

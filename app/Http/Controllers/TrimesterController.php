@@ -25,7 +25,7 @@ class TrimesterController extends Controller
      * Display a listing of the resource.
      */
     public function index(Request $request)
-    {    
+    {
         // Using the Eloquent model
         // truncate offers and class
         // ClassSchedule::truncate();
@@ -98,7 +98,7 @@ class TrimesterController extends Controller
         $campuses = ['GC', 'NA', 'OL'];
         $class_types = ['Lecture', 'Workshop'];
         $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
-    
+
         // dd($trimester_number);
 
 
@@ -238,7 +238,7 @@ class TrimesterController extends Controller
         // foreach ($academics as $academic) {
         //     $academic->teaching_load = $this->teachingHours($academic->id, $year, $trimester);
         // }
-        
+
         // random value for teaching load from 30 to 60 hours
         $teachingHours = rand(30, 60);
 
@@ -260,7 +260,6 @@ class TrimesterController extends Controller
      */
     public function destroy(Request $request)
     {
-        //
 
     }
 
@@ -271,10 +270,10 @@ class TrimesterController extends Controller
     {
         //
         // delete offerings that match the year and trimester
-        
+
         $year = $request->input('year');
         $trimester = $request->input('trimester');
-        
+
         // dd($year, $trimester);
         Offering::where('year', $year)->where('trimester', $trimester)->delete();
 
@@ -387,7 +386,7 @@ class TrimesterController extends Controller
             $offering_id = $request->input('offering_id')[$rowNo];
             // dd($offering_id);
             $offering = Offering::find($offering_id);
-            
+
             if ($class) {
                 $class->academic_id = $request->input('academic_id')[$rowNo];
                 $class->class_type = $request->input('class_type')[$rowNo];
@@ -402,12 +401,16 @@ class TrimesterController extends Controller
                     // dd($request->all());
                     return redirect()->back()->with('error', 'An error occurred while saving the offering and class.');
                 }
-                // dd($offering);   
+                // dd($offering);
 
-            } 
+            }
         }
-        
-        if ($request->input('new_course_id')) {
+
+        if ($request->has('delete')) {
+            ClassSchedule::destroy($request->input('save_row'));
+        }
+
+        else if ($request->input('new_course_id')) {
             foreach ($request->input('new_course_id') as $i => $course_id) {
                 $offering = Offering::
                 where('course_id', $course_id)
@@ -415,17 +418,17 @@ class TrimesterController extends Controller
                 ->where('trimester', $request->trimester)
                 ->where('campus', $request->new_campus[$i])
                 ->first();
-    
+
                 if (!$offering) {
                     // create new offering
                     // return error with message to show course id, year, trimester and campus
                     // get course name
                     $course = Course::find($course_id);
-    
+
                     return redirect()->back()->with('error', 'Offering not found for course ' . $course->code . ' ' . $course->name . ' at ' . $request->new_campus[$i] . ' campus. Please create the offering at the chosen campus before proceeding.');
-    
+
                 }
-                
+
                 // create new class
                 $class = new ClassSchedule();
                 $class->offering_id = $offering->id;
@@ -437,7 +440,7 @@ class TrimesterController extends Controller
                 $class->save();
             }
         }
-        
+
 
         return redirect()->route('trimester.index')->with('success', 'Trimester offerings updated successfully!');
     }
