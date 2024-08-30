@@ -43,7 +43,7 @@ class OfferingController extends Controller
         $campuses = json_decode($campuses, true);
         return view('offering.edit_bulk', compact('campuses', 'offerings', 'academics'));
     }
-    
+
 
     // public function edit_bulk()
     // {
@@ -57,14 +57,14 @@ class OfferingController extends Controller
      * @param  int  $course_id
      * @return \Illuminate\Http\Response
      */
-    public function create(int $course_id)
+    public function create()
     {
         //dd($course_id);
         $academics = Academic::orderBy('lastname')->get();
-        $course = Course::findOrFail($course_id);
+        $course = Course::orderBy('code')->get();
         return view('offering.create')->with('course', $course)->with('academics', $academics);
     }
-    
+
     /**
      * Check if the offering with the same course_id, year, trimester, campus exists.
      *
@@ -82,7 +82,7 @@ class OfferingController extends Controller
         if ($offerings->isEmpty()) return false;
         else return true;
     }
-    
+
     /**
      * Store a newly created offering in storage.
      *
@@ -110,7 +110,7 @@ class OfferingController extends Controller
         $offering->campus = $request->campus;
         $offering->academic_id = $request->convenor;
 
-        $offering->note = $request->note;   
+        $offering->note = $request->note;
 
 
         $offering->save();
@@ -134,7 +134,7 @@ class OfferingController extends Controller
             $new->save();
         }
         return redirect('/');
-        
+
     }
 
     /**
@@ -151,7 +151,7 @@ class OfferingController extends Controller
         $classes = ClassSchedule::where('offering_id', $id)
                         ->with('academic')
                         ->get();
-        
+
         return view('offering.show', compact('offering', 'academic', 'course', 'classes'));
     }
 
@@ -208,10 +208,10 @@ class OfferingController extends Controller
         $offering->workshop_day = $request->workshopday;
         $offering->workshop_start_time = $request->workshopstarttime;
         $offering->workshop_end_time = $request->workshopendtime;
-        
+
         $offering->save();
         return redirect("offering/".$id);
-        
+
 
     }
 
@@ -280,7 +280,7 @@ class OfferingController extends Controller
             return back()->with('error', $e->getMessage());
         }
     }
-    
+
     /**
      * Export offerings to a file.
      *

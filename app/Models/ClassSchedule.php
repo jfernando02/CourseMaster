@@ -26,7 +26,7 @@ class ClassSchedule extends Model
 
     public function offering()
     {
-        return $this->belongsTo(Offering::class);
+        return $this->belongsTo(Offering::class, 'offering_id');
     }
 
     public function academic()

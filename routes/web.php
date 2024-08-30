@@ -12,6 +12,7 @@ use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\TrimesterController;
+use App\Http\Controllers\HomeController;
 
 use Illuminate\Support\Facades\DB;
 
@@ -95,8 +96,10 @@ Route::get('/trimester/export/{year}/{trimester}', [TrimesterController::class, 
 // Route::post('/class-schedule/{id}/delete', AcademicController::class, 'deleteClassSchedule')->name('class-schedule.delete');
 Route::post('/academic/{id}/delete-class-schedule', [AcademicController::class, 'deleteClassSchedule'])->name('academic.delete-class-schedule');
 
-
-
+//For getting tables at home
+Route::get('coursesdashboard', [HomeController::class, 'getCourses'])->name('get.courses');
+Route::get('offeringsdashboard', [HomeController::class, 'getOfferings'])->name('get.offerings');
+Route::get('classesdashboard', [HomeController::class, 'getClasses'])->name('get.classes');
 
 Route::get('log', function () {
     $oidc = new OpenIDConnectClient('https://test-auth.griffith.edu.au',
@@ -111,37 +114,7 @@ Route::get('log', function () {
  */
 
 
-Route::get('/', function() {
-    if (Auth::check()) {
-        $user = Auth::user();
-        $name = $user->name;
-        $academic_id = DB::table('academics')->where('email',$user->email)->first();
-        if($academic_id) {
-            $academic_id = $academic_id->id;
-        } else {
-            $academic_id = DB::table('academics')->inRandomOrder()->first()->id;
-        }
-    }
-
-    // get setting through model
-    $setting = \App\Models\Setting::latest()->first();
-    $department = $setting ? $setting->department : null;
-    $threshold_trimester = $setting ? $setting->threshold_trimester : null;
-    $trimester = $setting->current_trimester;
-    $year = $setting->current_year;
-
-
-    // filter offering based on academic id
-    $offerings = DB::table('offerings')
-        ->join('courses', 'offerings.course_id', '=', 'courses.id')
-        ->select('offerings.year AS Year', 'offerings.trimester AS Term', 'courses.code AS Course_Code', 'courses.name AS Course_Name')
-        ->where('offerings.academic_id', $academic_id) // Filter by academic ID
-        ->where('offerings.year', $year) // Filter by year
-        ->where('offerings.trimester', $trimester) // Filter by trimester
-        ->groupBy('offerings.year', 'offerings.trimester', 'courses.code', 'courses.name')
-        ->get();
-    return view('index', compact('threshold_trimester', 'name', 'offerings', 'department', 'setting'));
-})->middleware(['auth', 'verified'])->name('view');
+Route::get('/', 'App\Http\Controllers\HomeController@showHome')->middleware(['auth', 'verified'])->name('view');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

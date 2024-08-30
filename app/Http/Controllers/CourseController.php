@@ -92,7 +92,7 @@ class CourseController extends Controller
         $cotaughts = $course->cotaught();
 
         // Create a data structure like:
-        // ["2023"=> ["1" => [{offering1}, {offering2}], "2"=>[], "3"=>[]], 
+        // ["2023"=> ["1" => [{offering1}, {offering2}], "2"=>[], "3"=>[]],
         //  "2024"=>["1" => [{offering3},{offering4}], "2"=> [], "3"=>[]] ]
         $offerings_arr = [];
         foreach ($offerings as $offering){
@@ -103,8 +103,8 @@ class CourseController extends Controller
                 $offerings_arr[$year]['1']= [];
                 $offerings_arr[$year]['2']= [];
                 $offerings_arr[$year]['3']= [];
-            } 
-            array_push($offerings_arr[$year][$trimester], $offering); 
+            }
+            array_push($offerings_arr[$year][$trimester], $offering);
         }
 
         krsort($offerings_arr);
@@ -253,7 +253,7 @@ class CourseController extends Controller
         $tmethods = $request->input('tmethod');
         $notes = $request->input('note');
 
-        
+
         foreach ($ids as $index => $id) {
             $course = Course::find($id);
             if ($course) {
@@ -262,7 +262,6 @@ class CourseController extends Controller
                 // $course->prereq = $prereqs[$index];
                 $course->course_level = $courseLevel[$index];
                 $course->transition = $transitions[$index];
-                $course->tmethod = $tmethods[$index];
                 $course->note = $notes[$index];
                 $course->save();
             }
@@ -277,7 +276,7 @@ class CourseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function import(Request $request) 
+    public function import(Request $request)
     {
         try {
             $import = new CoursesImport;
@@ -297,7 +296,7 @@ class CourseController extends Controller
      * @param  string  $id
      * @return \Illuminate\Http\Response
      */
-    public function export(string $id) 
+    public function export(string $id)
     {
         return Excel::download(new CoursesExport, 'courses.xlsx');
     }
