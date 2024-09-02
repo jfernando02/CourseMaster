@@ -4,11 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0e3fdc26-a780-4964-b490-9e33aa918199" name="Changes" comment="Academic dashboard no longer reliant on user having academic email">
+    <list default="true" id="0e3fdc26-a780-4964-b490-9e33aa918199" name="Changes" comment="Add new dashboard WIP">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/726c7542-c3ea-46ea-b5f0-645aafbd5c5d.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/726c7542-c3ea-46ea-b5f0-645aafbd5c5d.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/database.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/database/database.sqlite" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/home/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/master.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/master.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -198,6 +201,13 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Other\Repos\CourseMaster\resources\views\home" />
+      <recent name="D:\Other\Repos\CourseMaster\resources\views" />
+      <recent name="D:\Other\Repos\CourseMaster\resources\views\initial" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="Main" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner configuration_file="$PROJECT_DIR$/phpunit.xml" scope="XML" use_alternative_configuration_file="true" />
@@ -223,7 +233,7 @@
       <workItem from="1722905348250" duration="25830000" />
       <workItem from="1724297004876" duration="2988000" />
       <workItem from="1724555114823" duration="2854000" />
-      <workItem from="1724816275103" duration="1363000" />
+      <workItem from="1724816275103" duration="38631000" />
     </task>
     <task id="LOCAL-00001" summary="Add login page, add stock laravel pages, add logout button to dashboard, add login/register functionality">
       <option name="closed" value="true" />
@@ -257,7 +267,55 @@
       <option name="project" value="LOCAL" />
       <updated>1723099434511</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Academic dashboard no longer reliant on user having academic email">
+      <option name="closed" value="true" />
+      <created>1724817671933</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1724817671933</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Fixed register route">
+      <option name="closed" value="true" />
+      <created>1724904688606</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1724904688606</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Added delete button and functionality for classes">
+      <option name="closed" value="true" />
+      <created>1724909951199</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1724909951199</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Added delete button and functionality for academics">
+      <option name="closed" value="true" />
+      <created>1724911768174</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1724911768174</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Added buttons to course and offering page">
+      <option name="closed" value="true" />
+      <created>1724914358301</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1724914358301</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Add new dashboard WIP">
+      <option name="closed" value="true" />
+      <created>1725028088162</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1725028088162</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -269,6 +327,11 @@
     <MESSAGE value="Add email recovery functionality (copy paste mail settings from .env.joseph into local .env), add .env reference file" />
     <MESSAGE value="Academics now have associated emails, academics must be created in the system (i.e. added to academics) before their account is valid. Updated pages to reflect new field. Index page personalises depending on user." />
     <MESSAGE value="Academic dashboard no longer reliant on user having academic email" />
-    <option name="LAST_COMMIT_MESSAGE" value="Academic dashboard no longer reliant on user having academic email" />
+    <MESSAGE value="Fixed register route" />
+    <MESSAGE value="Added delete button and functionality for classes" />
+    <MESSAGE value="Added delete button and functionality for academics" />
+    <MESSAGE value="Added buttons to course and offering page" />
+    <MESSAGE value="Add new dashboard WIP" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add new dashboard WIP" />
   </component>
 </project>

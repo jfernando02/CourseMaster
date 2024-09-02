@@ -82,11 +82,32 @@
                 .then(function (response) {
                     // handle the response data
                     var html = '';
-                    response.data.forEach(function (item) {
-                        if(selectedOption1==='classes'){
-                            html += '<tr><td>' + item.class_type + '</td><td>' + item.offering_id + '</td></tr>';
-                        }
-                    });
+                    if(selectedOption1==='classes') {
+                        // Define Table Headers
+                        html += `
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Course</th>
+                                    <th>Class Type</th>
+                                    <th>Campus</th>
+                                    <th>Time Start</th>
+                                    <th>Time End</th>
+                                    <th>Day</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                        `;
+                        response.data.forEach(function (item) {
+                            html += '<tr>'
+                            html += '<td>' + item.offering.course.name + '</td>'
+                            html += '<td>' + item.class_type + '</td><td>' + item.offering.campus + '</td>';
+                            html += '<td>' + item.start_time + '</td><td>' + item.end_time + '</td>';
+                            html += '<td>' + item.class_day + '</td>';
+                            html += '</tr>'
+                        });
+                        html += '</tbody></table>';
+                    }
                     document.getElementById('data-table').innerHTML = html;
                 })
                 .catch(function (error) {
