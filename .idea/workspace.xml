@@ -228,7 +228,7 @@
       <workItem from="1722905348250" duration="25830000" />
       <workItem from="1724297004876" duration="2988000" />
       <workItem from="1724555114823" duration="2854000" />
-      <workItem from="1724816275103" duration="48375000" />
+      <workItem from="1724816275103" duration="48506000" />
     </task>
     <task id="LOCAL-00001" summary="Add login page, add stock laravel pages, add logout button to dashboard, add login/register functionality">
       <option name="closed" value="true" />
@@ -366,7 +366,15 @@
       <option name="project" value="LOCAL" />
       <updated>1725355507164</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="modify VerifyCsrfToken.php, this is a bad fix!">
+      <option name="closed" value="true" />
+      <created>1725355530926</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1725355530926</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
