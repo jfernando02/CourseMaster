@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0e3fdc26-a780-4964-b490-9e33aa918199" name="Changes" comment="add ext-pdo_sqlite to composer.json">
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+    <list default="true" id="0e3fdc26-a780-4964-b490-9e33aa918199" name="Changes" comment="add post-install-cmd">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Procfile" beforeDir="false" afterPath="$PROJECT_DIR$/Procfile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -228,7 +229,7 @@
       <workItem from="1722905348250" duration="25830000" />
       <workItem from="1724297004876" duration="2988000" />
       <workItem from="1724555114823" duration="2854000" />
-      <workItem from="1724816275103" duration="46347000" />
+      <workItem from="1724816275103" duration="46849000" />
     </task>
     <task id="LOCAL-00001" summary="Add login page, add stock laravel pages, add logout button to dashboard, add login/register functionality">
       <option name="closed" value="true" />
@@ -342,7 +343,15 @@
       <option name="project" value="LOCAL" />
       <updated>1725352916428</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="add post-install-cmd">
+      <option name="closed" value="true" />
+      <created>1725353257517</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1725353257517</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -374,6 +383,7 @@
     <MESSAGE value="Create dashboards for offerings and courses, remove ID from bulk edit academics and offerings" />
     <MESSAGE value="composer update run" />
     <MESSAGE value="add ext-pdo_sqlite to composer.json" />
-    <option name="LAST_COMMIT_MESSAGE" value="add ext-pdo_sqlite to composer.json" />
+    <MESSAGE value="add post-install-cmd" />
+    <option name="LAST_COMMIT_MESSAGE" value="add post-install-cmd" />
   </component>
 </project>
