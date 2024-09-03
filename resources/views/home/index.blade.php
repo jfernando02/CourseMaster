@@ -108,6 +108,53 @@
                         });
                         html += '</tbody></table>';
                     }
+                    else if(selectedOption1==='offerings') {
+                        // Define Table Headers
+                        html += `
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Course</th>
+                                    <th>Campus</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                        `;
+                        response.data.forEach(function (item) {
+                            html += '<tr>'
+                            html += '<td>' + item.course.name + '</td>';
+                            html += '<td>' + item.campus + '</td>';
+                            html += '</tr>'
+                        });
+                        html += '</tbody></table>';
+                    }
+                    else if(selectedOption1==='courses') {
+                        // Define Table Headers
+                        html += `
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Course</th>
+                                    <th>Code</th>
+                                    <th>Note</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                        `;
+                        response.data.forEach(function (item) {
+                            html += '<tr>'
+                            html += '<td>' + item.name + '</td>';
+                            html += '<td>' + item.code + '</td>';
+                            if(item.note===null){
+                                html += '<td>' + "" + '</td>';
+                            }
+                            else{
+                                html += '<td>' + item.note + '</td>';
+                            }
+                            html += '</tr>'
+                        });
+                        html += '</tbody></table>';
+                    }
                     document.getElementById('data-table').innerHTML = html;
                 })
                 .catch(function (error) {

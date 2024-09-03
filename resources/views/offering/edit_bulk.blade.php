@@ -12,9 +12,6 @@
 <table class="table table-striped" id="offeringsTable">
   <thead>
     <th>
-      <input type="text" class="form-control filter-input" placeholder="Search ID" data-column="0">
-    </th>
-    <th>
       <input type="text" class="form-control filter-input" placeholder="Search Code" data-column="1">
     </th>
     <th>
@@ -36,7 +33,6 @@
       <input type="text" class="form-control filter-input" placeholder="Search Notes" data-column="7">
     </th>
     <tr>
-      <th>ID</th>
       <th>Code</th>
       <th>Course</th>
       <th>Year</th>
@@ -51,7 +47,6 @@
   <tbody>
     @foreach($offerings as $offering)
     <tr>
-      <td><input class="form-control" type="text" name="id[]"   value="{{$offering->id}}"></td>
       <td><input class="form-control" type="text" name="code[]"   value="{{$offering->course->code}}"></td>
       <td><input class="form-control" type="text" name="name[]"   value="{{$offering->course->name}}"></td>
       <td><input class="form-control" type="text" name="year[]"   value="{{$offering->year}}"></td>
@@ -99,7 +94,7 @@
   </tbody>
 </table>
 <button type="submit" class="btn btn-primary">Save</button>
-
+</form>
 
 <script>
 
@@ -145,6 +140,5 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-</script>
 </script>
 @endsection

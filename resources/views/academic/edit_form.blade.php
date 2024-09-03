@@ -54,7 +54,6 @@
           </tr>
         <tr>
 
-            <th>ID</th>
             <th>Firstname</th>
             <th>Lastname</th>
             <th>Email</th>
@@ -68,7 +67,6 @@
     <tbody>
         @foreach($academics as $academic)
         <tr>
-          <td><input class="form-control" type="text" name="id[]" value="{{$academic->id}}" readonly>
           <td><input class="form-control" type="text" name="firstname[]" value="{{$academic->firstname}}"></td>
           <td><input class="form-control" type="text" name="lastname[]" value="{{$academic->lastname}}"></td>
             <td><input class="form-control" type="text" name="email[]" value="{{$academic->email}}"></td>
