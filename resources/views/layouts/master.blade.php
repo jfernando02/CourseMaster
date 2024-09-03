@@ -12,8 +12,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
 
     <!-- link the app.css from resources css app.css -->
-    <link rel="stylesheet" href="{{ asset('css/fontawesome/css/all.min.css') }}">
-      <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('css/fontawesome/css/all.min.css') }}">
+      <link rel="stylesheet" href="{{ secure_asset('css/app.css') }}">
     {{-- select2 --}}
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
@@ -82,6 +82,7 @@
       .btn-bd-primary {
         --bd-violet-bg: #712cf9;
         --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+          --bs-white: #FFFFFF;
 
         --bs-btn-font-weight: 600;
         --bs-btn-color: var(--bs-white);
