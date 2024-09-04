@@ -24,7 +24,7 @@
     <div class="form-group">
       <label>Course Name</label>
       <input type="text" class="form-control" name="name">
-    </div>  
+    </div>
 
     <div class="form-group">
       <label>Prereq</label>
@@ -44,11 +44,6 @@
     <div class="form-group">
       <label>Transition</label>
       <input type="text" class="form-control" name="transition">
-    </div>
-
-    <div class="form-group">
-      <label>Teaching Methods</label>
-      <textarea type="text" class="form-control" name="tmethod"></textarea>
     </div>
 
     <div class="form-group">

@@ -75,9 +75,6 @@
                     <input type="text" class="form-control filter-input" placeholder="Search Transition" data-column="4">
                 </td>
                 <td>
-                    <input type="text" class="form-control filter-input" placeholder="Search Teaching Method" data-column="5">
-                </td>
-                <td>
                     <input type="text" class="form-control filter-input" placeholder="Search Note" data-column="6">
                 </td>
             </tr>
@@ -90,7 +87,6 @@
                     <td><a href="{{ url("course/$course->id") }}">{{ $course->name }}</a></td>
                     <td>{{ $course->prereq }}</td>
                     <td>{{ $course->transition }}</td>
-                    <td>{{ $course->tmethod }}</td>
                     <td>{{ $course->note }}</td>
                 </tr>
             @endforeach
