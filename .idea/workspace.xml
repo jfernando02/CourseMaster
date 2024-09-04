@@ -4,19 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0e3fdc26-a780-4964-b490-9e33aa918199" name="Changes" comment="courses column primary_convener to correct FK academic_id, course pages reflect new column, minor text edits to various pages">
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AcademicController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AcademicController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Academic.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Academic.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/database.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/database/database.sqlite" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/academic/edit_form.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/academic/edit_form.blade.php" afterDir="false" />
+    <list default="true" id="0e3fdc26-a780-4964-b490-9e33aa918199" name="Changes" comment="Fix academic and offering save, add 1:1 relationship between user and academic">
       <change beforePath="$PROJECT_DIR$/resources/views/home/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/offering/edit_bulk.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/offering/edit_bulk.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -243,7 +232,7 @@
       <workItem from="1722905348250" duration="25830000" />
       <workItem from="1724297004876" duration="2988000" />
       <workItem from="1724555114823" duration="2854000" />
-      <workItem from="1724816275103" duration="60811000" />
+      <workItem from="1724816275103" duration="61160000" />
     </task>
     <task id="LOCAL-00001" summary="Add login page, add stock laravel pages, add logout button to dashboard, add login/register functionality">
       <option name="closed" value="true" />
@@ -445,7 +434,15 @@
       <option name="project" value="LOCAL" />
       <updated>1725410997089</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Fix academic and offering save, add 1:1 relationship between user and academic">
+      <option name="closed" value="true" />
+      <created>1725414412863</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1725414412863</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -487,6 +484,7 @@
     <MESSAGE value="force HTTPS for AppServiceProvider.php" />
     <MESSAGE value="changed secure_asset to asset in master layout, added primary convenor column to courses, fixed config for local vs prod env" />
     <MESSAGE value="courses column primary_convener to correct FK academic_id, course pages reflect new column, minor text edits to various pages" />
-    <option name="LAST_COMMIT_MESSAGE" value="courses column primary_convener to correct FK academic_id, course pages reflect new column, minor text edits to various pages" />
+    <MESSAGE value="Fix academic and offering save, add 1:1 relationship between user and academic" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix academic and offering save, add 1:1 relationship between user and academic" />
   </component>
 </project>

@@ -22,7 +22,7 @@
                     <option value="{{$option}}">{{$option}}</option>
                 @endforeach
             </select>
-            for trimester
+            assigned to you for trimester
             <select id="menu2">
                 <!-- Dynamically generate options -->
                 @foreach($menu2Options as $option)
