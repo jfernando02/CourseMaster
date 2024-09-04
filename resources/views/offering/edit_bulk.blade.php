@@ -47,6 +47,7 @@
   <tbody>
     @foreach($offerings as $offering)
     <tr>
+        <input type="hidden" name="id[]" value="{{$offering->id}}">
       <td><input class="form-control" type="text" name="code[]"   value="{{$offering->course->code}}"></td>
       <td><input class="form-control" type="text" name="name[]"   value="{{$offering->course->name}}"></td>
       <td><input class="form-control" type="text" name="year[]"   value="{{$offering->year}}"></td>

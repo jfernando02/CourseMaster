@@ -121,10 +121,12 @@
                             <tbody>
                         `;
                         response.data.forEach(function (item) {
-                            html += '<tr>'
-                            html += '<td>' + item.course.name + '</td>';
-                            html += '<td>' + item.campus + '</td>';
-                            html += '</tr>'
+                            if(item.course) {
+                                html += '<tr>'
+                                html += '<td>' + item.course.name + '</td>';
+                                html += '<td>' + item.campus + '</td>';
+                                html += '</tr>'
+                            }
                         });
                         html += '</tbody></table>';
                     }

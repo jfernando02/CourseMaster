@@ -26,14 +26,18 @@ class Academic extends Model
         return $this->belongsToMany(Course::class, 'offerings', 'academic_id', 'course_id');
     }
 
-    
+
     //an academic can have many class schedules
     function classSchedules()
     {
         return $this->hasMany(ClassSchedule::class, 'academic_id');
     }
 
-    
+    public function user(){
+        return $this->belongsTo(User::class, 'email', 'email');
+    }
+
+
     // Calculate the total teaching hours for an academic in a specified year and trimester
     public function teachingHoursperSem($academicID, $year, $trimester)
     {

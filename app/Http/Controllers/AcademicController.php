@@ -258,6 +258,7 @@ class AcademicController extends Controller
         $ids = $request->input('id');  // Getting IDs to find each academic
         $firstnames = $request->input('firstname');
         $lastnames = $request->input('lastname');
+        $emails=$request->input('email');
         $teaching_loads = $request->input('teaching_load');
         $areas = $request->input('area');
         $home_campuses = $request->input('home_campus');
@@ -273,6 +274,7 @@ class AcademicController extends Controller
             if ($academic) {
                 $academic->firstname = $firstnames[$index];
                 $academic->lastname = $lastnames[$index];
+                $academic->email=$emails[$index];
                 $academic->teaching_load = $teaching_loads[$index];
                 $academic->area = $areas[$index];
                 $academic->home_campus = $home_campuses[$index];

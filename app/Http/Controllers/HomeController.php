@@ -14,9 +14,10 @@ class HomeController extends Controller
     public function getClasses(Request $request){
         $year = (string) $request->query('year');
         $trimester = (string) $request->query('trimester');
-        $classes = ClassSchedule::with('offering', 'offering.course')->whereHas('offering', function ($query) use ($year, $trimester) {
+        $academic_id = Auth::user()->academic->id;
+        $classes = ClassSchedule::with('offering', 'offering.course')->whereHas('offering', function ($query) use ($year, $trimester, $academic_id) {
             $query->where('year', $year)
-                ->where('trimester', $trimester);
+                ->where('trimester', $trimester)->where('academic_id', $academic_id);
         })->get();
         // Transform the data into a suitable format, if necessary
 
@@ -26,15 +27,17 @@ class HomeController extends Controller
     public function getOfferings(Request $request){
         $year = (string) $request->query('year');
         $trimester = (string) $request->query('trimester');
+        $academic_id = Auth::user()->academic->id;
         $offerings = Offering::with('course')->where('year', $year)
-                ->where('trimester', $trimester)->get();
+                ->where('trimester', $trimester)->where('academic_id', $academic_id)->get();
         // Transform the data into a suitable format, if necessary
 
         return response()->json($offerings); // Returns data as JSON response
     }
 
-    public function getCourses(){
-        $courses = Course::all();
+    public function getCourses(Request $request){
+        $academic_id = Auth::user()->academic->id;
+        $courses = Course::where('academic_id', $academic_id)->get();
         // Transform the data into a suitable format, if necessary
 
         return response()->json($courses); // Returns data as JSON response

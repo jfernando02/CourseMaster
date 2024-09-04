@@ -28,9 +28,6 @@
     <thead>
       <tr>
         <th>
-            <input type="text" class="form-control filter-input" placeholder="Search IDs" data-column="0">
-        </th>
-        <th>
             <input type="text" class="form-control filter-input" placeholder="Search Firstname" data-column="1">
         </th>
         <th>
@@ -67,6 +64,7 @@
     <tbody>
         @foreach($academics as $academic)
         <tr>
+            <input type="hidden" name="id[]" value="{{$academic->id}}">
           <td><input class="form-control" type="text" name="firstname[]" value="{{$academic->firstname}}"></td>
           <td><input class="form-control" type="text" name="lastname[]" value="{{$academic->lastname}}"></td>
             <td><input class="form-control" type="text" name="email[]" value="{{$academic->email}}"></td>

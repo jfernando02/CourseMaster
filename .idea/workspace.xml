@@ -4,19 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0e3fdc26-a780-4964-b490-9e33aa918199" name="Changes" comment="changed secure_asset to asset in master layout, added primary convenor column to courses, fixed config for local vs prod env">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/726c7542-c3ea-46ea-b5f0-645aafbd5c5d.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/726c7542-c3ea-46ea-b5f0-645aafbd5c5d.xml" afterDir="false" />
+    <list default="true" id="0e3fdc26-a780-4964-b490-9e33aa918199" name="Changes" comment="courses column primary_convener to correct FK academic_id, course pages reflect new column, minor text edits to various pages">
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CourseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CourseController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AcademicController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AcademicController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Academic.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Academic.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/database.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/database/database.sqlite" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/academic/edit_form.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/academic/edit_form.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/academic/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/academic/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/course/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/course/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/course/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/course/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/offering/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/offering/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/trimester/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/trimester/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/trimester/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/trimester/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/trimester/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/trimester/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/home/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/offering/edit_bulk.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/offering/edit_bulk.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -181,6 +181,10 @@
       <path value="$PROJECT_DIR$/vendor/laravel/breeze" />
       <path value="$PROJECT_DIR$/vendor/laravel/framework" />
       <path value="$PROJECT_DIR$/vendor/spatie/error-solutions" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/cache" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/event-manager" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/dbal" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/deprecations" />
     </include_path>
   </component>
   <component name="ProjectColorInfo">{
@@ -239,7 +243,7 @@
       <workItem from="1722905348250" duration="25830000" />
       <workItem from="1724297004876" duration="2988000" />
       <workItem from="1724555114823" duration="2854000" />
-      <workItem from="1724816275103" duration="57369000" />
+      <workItem from="1724816275103" duration="60811000" />
     </task>
     <task id="LOCAL-00001" summary="Add login page, add stock laravel pages, add logout button to dashboard, add login/register functionality">
       <option name="closed" value="true" />
@@ -433,7 +437,15 @@
       <option name="project" value="LOCAL" />
       <updated>1725409166708</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="courses column primary_convener to correct FK academic_id, course pages reflect new column, minor text edits to various pages">
+      <option name="closed" value="true" />
+      <created>1725410997089</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1725410997089</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -474,6 +486,7 @@
     <MESSAGE value="use secure_asset for master.blade.php" />
     <MESSAGE value="force HTTPS for AppServiceProvider.php" />
     <MESSAGE value="changed secure_asset to asset in master layout, added primary convenor column to courses, fixed config for local vs prod env" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed secure_asset to asset in master layout, added primary convenor column to courses, fixed config for local vs prod env" />
+    <MESSAGE value="courses column primary_convener to correct FK academic_id, course pages reflect new column, minor text edits to various pages" />
+    <option name="LAST_COMMIT_MESSAGE" value="courses column primary_convener to correct FK academic_id, course pages reflect new column, minor text edits to various pages" />
   </component>
 </project>
