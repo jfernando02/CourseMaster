@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    Trimesters
+    Classes
 @endsection
 
 @section('content')
@@ -33,9 +33,9 @@
                     href="{{ route('trimester.index', ['year' => $next_trimester[0], 'trimester' => $next_trimester[1]]) }}">
                     Next Trimester <i class="fa-solid fa-chevron-right"></i>
                 </a>
-    
+
             </div>
-            
+
 
             <div class="col-6 row">
                 <form action="{{ url('trimester') }}" method="GET">
@@ -50,7 +50,7 @@
                     @endforeach
                     </select>
                 </div>
-    
+
                 <div class="col-6 input-group">
                     <label class="col-3 input-group-text" name="year">Select Trimester</label>
                     <select class="col-9 form-select" name="trimester">
@@ -60,10 +60,10 @@
                     </select>
                 </div>
             </div>
-    
+
         </div>
         </form>
-    
+
         {{-- create a table of trimesters showing the offering details based on the offerings table but based on the current selected trimester --}}
         <table class="table table-striped">
             <thead>
@@ -89,13 +89,13 @@
                             <td>
                                 <div class="form-group">
                                     <select class="selectpicker" name="lecturer_id">
-                                        <option 
+                                        <option
                                         {{-- title="ddd" --}}
                                         >Select Lecturer</option>
                                         @foreach ($academics as $academic)
                                         @php
-                                        $load = $academic->teachingHoursperSem($academic->id, 2022, 1); 
-                                        $ratio = min(($load / 100), 1) * 100; 
+                                        $load = $academic->teachingHoursperSem($academic->id, 2022, 1);
+                                        $ratio = min(($load / 100), 1) * 100;
 
                                         @endphp
                                             <option data-ratio="{{ $ratio }}" data-bs-toggle="tooltip" data-bs-placement="top"
@@ -152,17 +152,17 @@
         <button class="btn btn-outline-success" type="submit"><i class="fa-regular fa-floppy-disk"></i> Save</button>
 
         </form>
-    
+
         <script>
             function addNewRow() {
                 // Clone the first row of the table body
                 var newRow = document.getElementById('trimester-table-body').rows[0].cloneNode(true);
-    
+
                 // Append the cloned row to the table body
                 document.getElementById('trimester-table-body').appendChild(newRow);
             }
         </script>
-    </div>    
+    </div>
 </div>
 
 @endsection

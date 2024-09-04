@@ -26,8 +26,9 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $courses = Course::orderBy('id')->get();;
-        return view('course.index')->with('courses', $courses);
+        $courses = Course::orderBy('id')->get();
+        $academics = Academic::all()->unique('id');
+        return view('course.index')->with(['courses' => $courses, 'academics' => $academics]);
     }
 
     /**
@@ -57,7 +58,6 @@ class CourseController extends Controller
         $course->name = $request->name;
         $course->prereq = $request->prereq;
         $course->transition = $request->transition;
-        $course->tmethod = $request->tmethod;
         $course->note = $request->note;
         $course->save();
         $programs = program::all();
@@ -120,7 +120,8 @@ class CourseController extends Controller
     public function edit(string $id)
     {
         $courses = course::all();
-        return view('course.edit')->with('courses', $courses);
+        $academics = Academic::all()->unique('id');
+        return view('course.edit')->with(['courses' => $courses, 'academics' => $academics]);
     //     $course = Course::findOrFail($id);
     //    // dd($course->tmethod);
     //     $coursePrograms = [];
@@ -147,7 +148,6 @@ class CourseController extends Controller
         $course->name = $request->name;
         $course->prereq = $request->prereq;
         $course->transition = $request->transition;
-        $course->tmethod = $request->tmethod;
         $course->note = $request->note;
         $course->save();
         DB::table('program_course')->where('course_id', $course->id)->delete();
@@ -250,7 +250,6 @@ class CourseController extends Controller
         // $prereqs = $request->input('prereq');
         $courseLevel = $request->input('courseLevel');
         $transitions = $request->input('transition');
-        $tmethods = $request->input('tmethod');
         $notes = $request->input('note');
 
 

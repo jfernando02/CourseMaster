@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    Academic list
+    Academics
 @endsection
 
 @section('content')

@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-  Edit Offering
+  Edit Offerings
 @endsection
 
 @section('content')
@@ -19,8 +19,8 @@
           <option value="1" @if (old('trimester', $offering->trimester) == 1) selected @endif>1</option>
           <option value="2" @if (old('trimester', $offering->trimester) == 2) selected @endif>2</option>
           <option value="3" @if (old('trimester', $offering->trimester) == 3) selected @endif>3</option>
-      </select>   
-    </div>  
+      </select>
+    </div>
     <div class="form-group">
       <label>Campus (required)</label>
       <select name="campus" class="form-control" required>
@@ -83,7 +83,7 @@
     <!-- create lecture day editing -->
     <div class="form-group row">
       <label class="col-sm-2 col-form-label">Lecture day</label>
-        <div class="col-sm-10"> 
+        <div class="col-sm-10">
         <select class="col-sm-10" name="lectureday" class="form-control">
             <option value="Monday" @if (old('lectureday', $offering->lecture_day) == "Monday") selected @endif>Monday</option>
             <option value="Tuesday" @if (old('lectureday', $offering->lecture_day) == "Tuesday") selected @endif>Tuesday</option>
@@ -106,7 +106,7 @@
     <!-- create workshop day editing -->
     <div class="form-group row">
       <label class="col-sm-2 col-form-label">Workshop day</label>
-        <div class="col-sm-10"> 
+        <div class="col-sm-10">
         <select class="col-sm-10" name="workshopday" class="form-control">
             <option value="Monday" @if (old('workshopday', $offering->workshop_day) == "Monday") selected @endif>Monday</option>
             <option value="Tuesday" @if (old('workshopday', $offering->workshop_day) == "Tuesday") selected @endif>Tuesday</option>
@@ -125,7 +125,7 @@
       <label>Workshop end time</label>
       <input type="time" name="workshopendtime" class="form-control" value="{{old('workshopendtime', $offering->workshop_end_time)}}">
     </div>
-    
+
 
     <div class="form-group">
       <label>Note</label>

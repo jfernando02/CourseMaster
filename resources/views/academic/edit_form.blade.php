@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-  Update Academic
+  Edit Academics
 @endsection
 
   @section('content')
@@ -54,8 +54,8 @@
           </tr>
         <tr>
 
-            <th>Firstname</th>
-            <th>Lastname</th>
+            <th>First Name</th>
+            <th>Last Name</th>
             <th>Email</th>
             <th>Teaching Load</th>
             <th>Area</th>

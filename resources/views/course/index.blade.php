@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    Course list
+    Courses
 @endsection
 
 @section('content')
@@ -55,7 +55,7 @@
                 <th>Name</th>
                 <th>Prerequisite</th>
                 <th>Transition</th>
-                <th>Teaching Method</th>
+                <th>Primary Convener</th>
                 <th>Note</th>
             </tr>
             <tr>
@@ -75,6 +75,9 @@
                     <input type="text" class="form-control filter-input" placeholder="Search Transition" data-column="4">
                 </td>
                 <td>
+                    <input type="text" class="form-control filter-input" placeholder="Search Primary Convener" data-column="4">
+                </td>
+                <td>
                     <input type="text" class="form-control filter-input" placeholder="Search Note" data-column="6">
                 </td>
             </tr>
@@ -87,6 +90,7 @@
                     <td><a href="{{ url("course/$course->id") }}">{{ $course->name }}</a></td>
                     <td>{{ $course->prereq }}</td>
                     <td>{{ $course->transition }}</td>
+                    <td>{{ $course->primary_convener }}</td>
                     <td>{{ $course->note }}</td>
                 </tr>
             @endforeach

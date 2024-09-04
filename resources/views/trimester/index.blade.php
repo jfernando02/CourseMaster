@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    Trimesters
+    Classes
 @endsection
 
 @section('content')
@@ -83,7 +83,7 @@
         <a class="btn btn-outline-primary" href="{{ route('trimester.edit', ['year' => $currentTrimester[0], 'trimester' => $currentTrimester[1]]) }}"><i class="fa-regular fa-pen-to-square"></i> Edit Trimester</a>
         {{-- Form for copying trimester --}}
         <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#copyTrimesterModal">
-            <i class="fa-regular fa-copy"></i> Copy Trimester 
+            <i class="fa-regular fa-copy"></i> Copy Trimester
         </button>
         <div class="modal fade" id="copyTrimesterModal" tabindex="-1" aria-labelledby="copyTrimesterModalLabel"
             aria-hidden="true">
@@ -118,7 +118,7 @@
             </div>
         </div>
 
-        {{-- <a class="btn btn-outline-primary" 
+        {{-- <a class="btn btn-outline-primary"
         href="{{ route('trimester.index', ['year' => $next_trimester[0], 'trimester' => $next_trimester[1]]) }}">
         Next Trimester <i class="fa-solid fa-angle-right"></i>
     </a> --}}
@@ -174,7 +174,7 @@
                 <tr>
                     <td>
                                 @foreach ($courses as $course)
-                                @if ($course->id == $offering->course_id)  
+                                @if ($course->id == $offering->course_id)
                                 {{ $course->code }} {{ $course->name }}
                                  @endif
                                 @endforeach
@@ -182,8 +182,8 @@
                     </td>
                     <td>
                                 @foreach ($academics as $academic)
-                                    @if ($academic->id == $offering->academic_id) 
-                                    
+                                    @if ($academic->id == $offering->academic_id)
+
                                     {{ $academic->firstname }} {{ $academic->lastname }}
                                     @endif
                                 @endforeach
@@ -194,10 +194,10 @@
 
                             @foreach ($class_types as $class_type)
                                 @if ($class_type == $offering->class_type)
-                                
+
                                 {{ $class_type }}
                                 @endif
-                            @endforeach                        
+                            @endforeach
                     </td>
                     <td>
                                 @foreach ($campuses as $campus)
@@ -215,7 +215,7 @@
                     </td>
                     <td>
                                 @foreach ($days as $day)
-                                    @if ($day == $offering->class_day) 
+                                    @if ($day == $offering->class_day)
                                     {{ $day }}
                                     @endif
                                 @endforeach
@@ -226,7 +226,7 @@
             @endforeach
         </tbody>
     </table>
-    
+
 
     </form>
     <form action="{{ route('trimester.delete', ['year' => $currentTrimester[0], 'trimester' => $currentTrimester[1]]) }}"

@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    Classes
+    Edit Classes
 @endsection
 
 @section('content')
