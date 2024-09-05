@@ -88,6 +88,7 @@
                         {{-- <option
                         title="ddd"
                         >Select Lecturer</option> --}}
+                        <option value="">Unassigned</option>
                         @foreach ($academics as $academic)
                             <option
 

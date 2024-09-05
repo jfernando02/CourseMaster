@@ -24,6 +24,16 @@ class CourseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    private function fillCourseData($request, $course){
+        $course->code = $request->code;
+        $course->name = $request->name;
+        $course->prereq = $request->prereq;
+        $course->transition = $request->transition;
+        $course->note = $request->note;
+        $course->academic_id = $request->academic_id;
+
+        return $course;
+    }
     public function index()
     {
         $courses = Course::orderBy('id')->get();
@@ -53,12 +63,7 @@ class CourseController extends Controller
             'code' => 'required|max:255',
         ]);
 //        dd($request['BIT']);
-        $course = new Course();
-        $course->code = $request->code;
-        $course->name = $request->name;
-        $course->prereq = $request->prereq;
-        $course->transition = $request->transition;
-        $course->note = $request->note;
+        $course = $this->fillCourseData($request, new Course());
         $course->save();
         $programs = program::all();
         $program_ids = [];
@@ -144,11 +149,7 @@ class CourseController extends Controller
             'code' => 'required|max:255',
         ]);
         $course = Course::findOrFail($id);
-        $course->code = $request->code;
-        $course->name = $request->name;
-        $course->prereq = $request->prereq;
-        $course->transition = $request->transition;
-        $course->note = $request->note;
+        $course = $this->fillCourseData($request, $course);
         $course->save();
         DB::table('program_course')->where('course_id', $course->id)->delete();
         $programs = program::all();
@@ -251,6 +252,7 @@ class CourseController extends Controller
         $courseLevel = $request->input('courseLevel');
         $transitions = $request->input('transition');
         $notes = $request->input('note');
+        $academic_ids = $request->input('academic_id');
 
 
         foreach ($ids as $index => $id) {
@@ -262,6 +264,7 @@ class CourseController extends Controller
                 $course->course_level = $courseLevel[$index];
                 $course->transition = $transitions[$index];
                 $course->note = $notes[$index];
+                $course->academic_id = $academic_ids[$index];
                 $course->save();
             }
         }

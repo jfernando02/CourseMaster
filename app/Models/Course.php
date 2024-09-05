@@ -33,8 +33,8 @@ class Course extends Model
         return $this->belongsToMany(Program::class, 'program_course');
     }
 
-    function academics()
+    function academic()
     {
-        return $this->belongsToMany(Academic::class, 'academic_course', 'course_id', 'academic_id');
+        return $this->belongsTo(Academic::class, 'academic_id');
     }
 }

@@ -90,7 +90,7 @@
                     <td><a href="{{ url("course/$course->id") }}">{{ $course->name }}</a></td>
                     <td>{{ $course->prereq }}</td>
                     <td>{{ $course->transition }}</td>
-                    <td>{{ $course->primary_convener }}</td>
+                    <td>{{ $course->academic ? $course->academic->firstname.' '.$course->academic->lastname : '' }}</td>
                     <td>{{ $course->note }}</td>
                 </tr>
             @endforeach

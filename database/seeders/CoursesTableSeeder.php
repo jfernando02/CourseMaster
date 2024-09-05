@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -18,7 +17,6 @@ class CoursesTableSeeder extends Seeder
             'name'=>'Professional Practice in ICT',
             'prereq' => 'None',
             'transition' => 'New version of 1004ICT from 2024',
-            'tmethod' => 'Online lecture, on campus/online workshops',
             'note' => '',
         ]);
         DB::table('Courses')->insert([
@@ -26,7 +24,6 @@ class CoursesTableSeeder extends Seeder
             'name'=>'Computer Systems and Cyber Security',
             'prereq' => 'None',
             'transition' => 'New version of 1007ICT from 2024',
-            'tmethod' => 'Lecture on each campus, and online. Workshop at each campus.',
             'note' => '',
         ]);
         DB::table('Courses')->insert([
@@ -34,7 +31,6 @@ class CoursesTableSeeder extends Seeder
             'name'=>'Human Computer Interaction',
             'prereq' => 'None',
             'transition' => 'Last offering in 2023. Students take 1022ENG instead.',
-            'tmethod' => '',
             'note' => 'None',
         ]);
         DB::table('Courses')->insert([
@@ -42,7 +38,6 @@ class CoursesTableSeeder extends Seeder
             'name'=>'Computer Systems and Networks',
             'prereq' => 'None',
             'transition' => '',
-            'tmethod' => '',
             'note' => 'None',
         ]);
         DB::table('Courses')->insert([
@@ -50,7 +45,6 @@ class CoursesTableSeeder extends Seeder
             'name'=>'Creative Coding',
             'prereq' => 'None',
             'transition' => '',
-            'tmethod' => 'Flipped mode. Prerecorded lecture, with common time online. Workshops at each campus',
             'note' => 'None',
         ]);
         DB::table('Courses')->insert([
@@ -58,7 +52,6 @@ class CoursesTableSeeder extends Seeder
             'name'=>'Information Systems Foundations',
             'prereq' => 'None',
             'transition' => '',
-            'tmethod' => '',
             'note' => 'None',
         ]);
         DB::table('Courses')->insert([
@@ -66,7 +59,6 @@ class CoursesTableSeeder extends Seeder
             'name'=>'Software Technologies',
             'prereq' => '1811ICT/2807ICT Programming Principles',
             'transition' => 'Name change to Software Engineering from 2025',
-            'tmethod' => 'Hybrid Nathan and online lecture. GC lecture run separately.',
             'note' => 'None',
         ]);
         DB::table('Courses')->insert([
@@ -74,7 +66,6 @@ class CoursesTableSeeder extends Seeder
             'name'=>'Web Technologies',
             'prereq' => '',
             'transition' => 'Last offer 2024. From 2025 students do 2008ICT Design Thinking in IT',
-            'tmethod' => 'Lecture at each campus. Workshop at each campus.',
             'note' => 'None',
         ]);
         DB::table('Courses')->insert([
@@ -82,7 +73,6 @@ class CoursesTableSeeder extends Seeder
             'name'=>'Programming Principles 1',
             'prereq' => '',
             'transition' => '',
-            'tmethod' => '',
             'note' => 'None',
         ]);
         DB::table('Courses')->insert([
@@ -90,7 +80,6 @@ class CoursesTableSeeder extends Seeder
             'name'=>'Systems Development',
             'prereq' => '',
             'transition' => '',
-            'tmethod' => '',
             'note' => 'None',
         ]);
         DB::table('Courses')->insert([
@@ -98,7 +87,6 @@ class CoursesTableSeeder extends Seeder
             'name'=>'Data Management',
             'prereq' => '',
             'transition' => 'Last offered 2024. Becomes a 1st year course from 2025.',
-            'tmethod' => '',
             'note' => 'None',
         ]);
         DB::table('Courses')->insert([
@@ -106,7 +94,6 @@ class CoursesTableSeeder extends Seeder
             'name'=>'The Ethical Technologist',
             'prereq' => '',
             'transition' => 'Not offered from 2026. Students do 2007ICT Cyber Security Standards and Operations from 2026.',
-            'tmethod' => '',
             'note' => 'None',
         ]);
     }
