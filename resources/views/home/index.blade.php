@@ -11,7 +11,8 @@
 
     <html>
     <head>
-        <title>Coursemaster</title></head>
+        <title>Coursemaster</title>
+    </head>
     <body>
     <h1>Welcome {{$name}}</h1>
     <header>
@@ -39,7 +40,7 @@
             <button id="submitButton">Submit</button>
         </h1>
     </header>
-    <table id="data-table">
+    <table class="table table-hover" id="data-table">
         <!-- Populated by JavaScript -->
     </table>
     </body>
