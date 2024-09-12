@@ -246,6 +246,12 @@ class OfferingController extends Controller
             }
         }
 
+
+        if ($request->has('delete')) {
+            // Perform deletion operation on selected offerings
+            Offering::destroy($request->input('save_row'));
+        }
+
         // return redirect('edit_bulk');
         return redirect()->route('offering.edit_bulks')->with('success', 'Academics updated successfully!');
     }

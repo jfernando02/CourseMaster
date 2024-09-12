@@ -269,6 +269,11 @@ class CourseController extends Controller
             }
         }
 
+        if ($request->has('delete')) {
+            // Perform deletion operation on selected classes
+            Course::destroy($request->input('save_row'));
+        }
+
         return redirect()->route('course.index')->with('success', 'Courses updated successfully!');
     }
 

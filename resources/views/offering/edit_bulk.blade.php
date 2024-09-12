@@ -9,6 +9,9 @@
 <a class="btn btn-outline-primary" href="{{ url('offering/create') }}"><i class="fa-regular fa-plus"></i> Add a new offering</a>
 <form method="POST" action="{{ route('offering.saveBulk') }}">
   @csrf
+    <button class="btn btn-outline-danger" type="submit" name="delete" value="delete" onclick="return confirm('Are you sure you want to delete these offerings?')">
+        <i class="fa-regular fa-trash"></i> Delete Selected Offerings
+    </button>
 <table class="table table-striped" id="offeringsTable">
   <thead>
     <th>

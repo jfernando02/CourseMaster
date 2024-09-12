@@ -221,13 +221,8 @@ class TrimesterController extends Controller
         ->orderBy('classSchedule.id')
         ->get();
 
-
-        // $courses = Course::all()->unique('code');
-        // courses offered in the current trimester
-        $courses = Course::whereHas('offerings', function ($query) use ($year, $trimester) {
-            $query->where('year', $year)->where('trimester', $trimester);
-        })->get();
-
+        // offerings offered in the current trimester
+        $offerings = Offering::whereHas('course')->where('year', $year)->where('trimester', $trimester)->get();
         $academics = Academic::all()->unique('id')->sortBy('firstname');
         $campuses = ['GC', 'NA', 'OL'];
         $class_types = ['Lecture', 'Workshop'];
@@ -243,7 +238,7 @@ class TrimesterController extends Controller
         $teachingHours = rand(30, 60);
 
 
-        return view('trimester.edit', compact('threshold_trimester', 'teachingHours', 'days', 'class_types', 'campuses', 'year', 'trimester', 'classes', 'courses', 'academics', 'trimester_number', 'prev_trimester', 'next_trimester'));
+        return view('trimester.edit', compact('threshold_trimester', 'teachingHours', 'days', 'class_types', 'campuses', 'year', 'trimester', 'classes', 'offerings', 'academics', 'trimester_number', 'prev_trimester', 'next_trimester'));
     }
 
 
@@ -368,8 +363,7 @@ class TrimesterController extends Controller
     {
         // dd($request->all());
         $request->validate([
-            // 'offering_id.*' => 'nullable|exists:offerings,id',
-            'course_id.*' => 'required|exists:courses,id',
+            'offering_id.*' => 'nullable|exists:offerings,id',
             'academic_id.*' => 'required|exists:academics,id',
             'class_type.*' => 'nullable|string',
             'campus.*' => 'nullable|string',
@@ -410,24 +404,10 @@ class TrimesterController extends Controller
             ClassSchedule::destroy($request->input('save_row'));
         }
 
-        else if ($request->input('new_course_id')) {
-            foreach ($request->input('new_course_id') as $i => $course_id) {
+        else if ($request->input('new_offering_id')) {
+            foreach ($request->input('new_offering_id') as $i => $offering_id) {
                 $offering = Offering::
-                where('course_id', $course_id)
-                ->where('year', $request->year)
-                ->where('trimester', $request->trimester)
-                ->where('campus', $request->new_campus[$i])
-                ->first();
-
-                if (!$offering) {
-                    // create new offering
-                    // return error with message to show course id, year, trimester and campus
-                    // get course name
-                    $course = Course::find($course_id);
-
-                    return redirect()->back()->with('error', 'Offering not found for course ' . $course->code . ' ' . $course->name . ' at ' . $request->new_campus[$i] . ' campus. Please create the offering at the chosen campus before proceeding.');
-
-                }
+                where('id', $offering_id)->first();
 
                 // create new class
                 $class = new ClassSchedule();

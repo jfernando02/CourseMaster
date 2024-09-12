@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-  <h1>Edit Course</h1>
+  <h1>Edit Courses</h1>
   @if (count($errors) > 0)
     <div class="alert">
       <ul>
@@ -21,7 +21,9 @@
 
 
     @csrf
-
+      <button class="btn btn-outline-danger" type="submit" name="delete" value="delete" onclick="return confirm('Are you sure you want to delete these courses?')">
+          <i class="fa-regular fa-trash"></i> Delete Selected Courses
+      </button>
     <table class="table table-hover" id="coursesTable">
       <thead>
         <tr>

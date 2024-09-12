@@ -70,7 +70,7 @@
                         <input type="text" class="form-control filter-input" placeholder="IDs" data-column="-1">
                     </th> --}}
                     <th>
-                        <input type="text" class="form-control filter-input" placeholder="Search courses" data-column="0">
+                        <input type="text" class="form-control filter-input" placeholder="Search offerings" data-column="0">
                     </th>
                     <th>
                         <input type="text" class="form-control filter-input" placeholder="Search lecturers" data-column="1">
@@ -96,7 +96,7 @@
                 </tr>
                 <tr>
                     {{-- <th>ID</th> --}}
-                    <th>Course</th>
+                    <th>Offering</th>
                     <th>Lecturers</th>
                     <th>Class Type</th>
                     <th>Campus</th>
@@ -246,18 +246,18 @@ function addNewRow() {
     <tr>
         <input type="hidden" name="new_class_id[]" id="selectedClassID" value="new">
             <td>
-                <select class="form-control" name="new_course_id[]">
-                    @foreach ($courses as $course)
-                        <option value="{{ $course->id }}">{{ $course->id }} - {{ $course->name }}</option>
-                    @endforeach
+                <select class="selectpicker" name="new_offering_id[]">
+                @foreach ($offerings as $offering)
+                    <option value="{{ $offering->id }}">{{ $offering->course->name}} ({{ $offering->course->code}}) at {{ $offering->campus}}</option>
+                @endforeach
                 </select>
             </td>
             <td>
-                <div class="form-group">
-                    <select class="selectpicker" name="new_academic_id[]">
+            <div class="form-group">
+                <select class="selectpicker" name="new_academic_id[]">
 
-                        <option
-                        {{-- title="ddd" --}}
+                    <option
+{{-- title="ddd" --}}
                         >Select Lecturer</option>
                         @foreach ($academics as $academic)
                         @php
@@ -292,11 +292,6 @@ function addNewRow() {
                 </select>
             </td>
             <td>
-                <select class="form-control" name="new_campus[]">
-                    @foreach ($campuses as $campus)
-                        <option value="{{ $campus }}">{{ $campus }}</option>
-                    @endforeach
-                </select>
             </td>
                 <td>
                     <div class="form-group
