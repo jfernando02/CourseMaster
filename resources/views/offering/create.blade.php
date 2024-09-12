@@ -21,8 +21,8 @@
   <form method="post" action="{{url("offering/create")}}">
     {{csrf_field()}}
       <div class="form-group">
-          <label>Course code (required) </label>
-          <input type="number" name="course code" class="form-control" required>
+          <label>Course code (required) (e.g. 1004ICT) </label>
+          <input type="text" name="course_code" class="form-control" required>
       </div>
 
     <div class="form-group">
@@ -39,14 +39,14 @@
       </select>
     </div>
 
-    <div class="form-group">
-      <label>Campus (required)</label>
-      <select name="campus" class="form-control" required>
-          <option value="GC">GC</option>
-          <option value="NA">NA</option>
-          <option value="OL">OL</option>
-      </select>
-    </div>
+      <div class="form-group">
+          <label>Campus (required)</label>
+          <select name="campus" class="form-control" required>
+              @foreach($campuses as $campus)
+                  <option value="{{ $campus }}">{{ $campus }}</option>
+              @endforeach
+          </select>
+      </div>
 
     <div class="form-group">
       <label>Convenor</label>
@@ -55,27 +55,6 @@
           <option value="{{$academic->id}}">{{$academic->lastname}}, {{$academic->firstname}}</option>
         @endforeach
       </select>
-    </div>
-
-    <div class="form-group">
-      <label>Primary convenor</label>
-      <select name="primary" class="form-control">
-          <option value="1">Yes</option>
-          <option value="0">No</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label>Count towards teaching load?</label>
-      <select name="tcount" class="form-control">
-          <option value="1">Yes</option>
-          <option value="0">No</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label>Number of students (post census)</label>
-      <input type="number" name="nstudents" class="form-control" >
     </div>
 
     <div class="form-group">

@@ -12,7 +12,7 @@ class Course extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['code', 'name', 'prereq', 'transition', 'tmethod', 'note'];
+    protected $fillable = ['code', 'name', 'prereq', 'transition', 'note'];
 
     function offerings(){
         return $this->hasMany('App\Models\Offering');

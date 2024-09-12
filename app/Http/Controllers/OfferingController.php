@@ -62,7 +62,8 @@ class OfferingController extends Controller
         //dd($course_id);
         $academics = Academic::orderBy('lastname')->get();
         $course = Course::orderBy('code')->get();
-        return view('offering.create')->with('course', $course)->with('academics', $academics);
+        $campuses = json_decode(Setting::latest()->first()->campuses);
+        return view('offering.create')->with('course', $course)->with('academics', $academics)->with('campuses', $campuses);
     }
 
     /**
@@ -87,24 +88,26 @@ class OfferingController extends Controller
      * Store a newly created offering in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id)
+    public function store(Request $request)
     {
         $this->validate($request, [
+            'course_code' => 'required',
             'year' => 'required',
             'trimester' => 'required|integer|between:1,3',
             'campus' => 'required',
-/*             'nstudents' => 'integer',
-            'nlectures' => 'integer',
-            'nworkshops' => 'integer' */
         ]);
         // validation: need to ensure trimester is an integer betweeen 1 and 3
         $offering = new Offering();
-        if ($this->checkExist($id, $request->year, $request->trimester, $request->campus))
-            return redirect("course/$id")->with('error', 'Offering NOT added! This offering already exists!');
-        $offering->course_id = $id;
+        $course = Course::where('code', $request->course_code)->first();
+
+        if (!$course)
+            return redirect("offering/create")->with('error', 'Offering NOT added! The course code submitted does not exist!');
+        if ($this->checkExist($course->id, $request->year, $request->trimester, $request->campus))
+            return redirect("offering/create")->with('error', 'Offering NOT added! This offering already exists!');
+
+        $offering->course_id = $course->id;
         $offering->year = $request->year;
         $offering->trimester = $request->trimester;
         $offering->campus = $request->campus;
@@ -112,9 +115,8 @@ class OfferingController extends Controller
 
         $offering->note = $request->note;
 
-
         $offering->save();
-        return redirect("course/".$id);
+        return redirect("offering/");
     }
 
     /**
@@ -194,20 +196,8 @@ class OfferingController extends Controller
         $offering->trimester = $request->trimester;
         $offering->campus = $request->campus;
         $offering->academic_id = $request->convenor;
-        $offering->primary = $request->primary;
-        $offering->tcount = $request->tcount;
-        $offering->nstudents = $request->nstudents;
-        $offering->nlectures = $request->nlectures;
-        $offering->nworkshops = $request->nworkshops;
-        $offering->TAThours = $request->nlectures + $request->nworkshops;
         $offering->note = $request->note;
 
-        $offering->lecture_day = $request->lectureday;
-        $offering->lecture_start_time = $request->lecturestarttime;
-        $offering->lecture_end_time = $request->lectureendtime;
-        $offering->workshop_day = $request->workshopday;
-        $offering->workshop_start_time = $request->workshopstarttime;
-        $offering->workshop_end_time = $request->workshopendtime;
 
         $offering->save();
         return redirect("offering/".$id);
