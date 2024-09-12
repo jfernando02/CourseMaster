@@ -18,12 +18,21 @@
   @if(session('error'))
     <h6 class="text-danger">Error: {{session('error')}}</h6>
   @endif
-  <a class="btn btn-outline-primary" href="{{ url('academic/create') }}"><i class="fa-regular fa-plus"></i> Add a new academic</a>
   <form method="POST" action="{{ route('academic.save') }}">
     @csrf
+      <div class='row'>
+          <div class="d-flex justify-content-between">
+
+              <a class="btn btn-outline-primary" href="{{ url('academic/create') }}"><i class="fa-regular fa-plus"></i> Add a new academic</a>
+
       <button class="btn btn-outline-danger" type="submit" name="delete" value="delete" onclick="return confirm('Are you sure you want to delete these academics?')">
           <i class="fa-regular fa-trash"></i> Delete Selected Academics
+
+          <button type="submit" class="btn btn-outline-success"><i class="fa-regular fa-floppy-disk"></i>  Save</button>
       </button>
+
+          </div>
+      </div>
     <table class="table table-hover" id="academicTable">
     <thead>
       <tr>
@@ -85,8 +94,6 @@
         @endforeach
     </tbody>
 </table>
-
-    <button type="submit" class="btn btn-outline-success"><i class="fa-regular fa-floppy-disk"></i>  Save</button>
 </form>
 
 

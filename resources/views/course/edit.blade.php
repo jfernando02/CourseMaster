@@ -15,15 +15,23 @@
       </ul>
     </div>
   @endif
-  <a class="btn btn-outline-primary" href="{{ url('course/create') }}"><i class="fa-regular fa-plus"></i> Add a new course</a>
+
   <form method="post" action="{{ route('course.save') }}">
 
-
-
     @csrf
+      <div class='row'>
+          <div class="d-flex justify-content-between">
+
+              <a class="btn btn-outline-primary" href="{{ url('course/create') }}"><i class="fa-regular fa-plus"></i> Add a new course</a>
+
       <button class="btn btn-outline-danger" type="submit" name="delete" value="delete" onclick="return confirm('Are you sure you want to delete these courses?')">
           <i class="fa-regular fa-trash"></i> Delete Selected Courses
       </button>
+
+              <button type="submit" class="btn btn-outline-success"><i class="fa-regular fa-floppy-disk"></i> Save</button>
+
+          </div>
+      </div>
     <table class="table table-hover" id="coursesTable">
       <thead>
         <tr>
@@ -114,7 +122,6 @@
       </tbody>
     </table>
 
-    <button type="submit" class="btn btn-outline-success"><i class="fa-regular fa-floppy-disk"></i> Save</button>
   </form>
 
 

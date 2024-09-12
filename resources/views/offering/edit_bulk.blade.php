@@ -6,12 +6,22 @@
 
 @section('content')
 <h1>Edit Offerings</h1>
-<a class="btn btn-outline-primary" href="{{ url('offering/create') }}"><i class="fa-regular fa-plus"></i> Add a new offering</a>
+
 <form method="POST" action="{{ route('offering.saveBulk') }}">
   @csrf
+    <div class='row'>
+        <div class="d-flex justify-content-between">
+
+            <a class="btn btn-outline-primary" href="{{ url('offering/create') }}"><i class="fa-regular fa-plus"></i> Add a new offering</a>
+
     <button class="btn btn-outline-danger" type="submit" name="delete" value="delete" onclick="return confirm('Are you sure you want to delete these offerings?')">
         <i class="fa-regular fa-trash"></i> Delete Selected Offerings
     </button>
+
+            <button type="submit" class="btn btn-primary">Save</button>
+
+        </div>
+    </div>
 <table class="table table-striped" id="offeringsTable">
   <thead>
     <th>
@@ -97,7 +107,7 @@
     @endforeach
   </tbody>
 </table>
-<button type="submit" class="btn btn-primary">Save</button>
+
 </form>
 
 <script>
