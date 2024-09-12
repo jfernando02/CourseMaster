@@ -28,25 +28,25 @@
     <thead>
       <tr>
         <th>
-            <input type="text" class="form-control filter-input" placeholder="Search Firstname" data-column="1">
+            <input type="text" class="form-control filter-input" placeholder="Search Firstname" data-column="0">
         </th>
         <th>
-            <input type="text" class="form-control filter-input" placeholder="Search Lastname" data-column="2">
+            <input type="text" class="form-control filter-input" placeholder="Search Lastname" data-column="1">
         </th>
           <th>
-              <input type="text" class="form-control filter-input" placeholder="Search Email" data-column="3">
+              <input type="text" class="form-control filter-input" placeholder="Search Email" data-column="2">
           </th>
         <th>
-            <input type="text" class="form-control filter-input" placeholder="Search Teaching Load" data-column="4">
+            <input type="text" class="form-control filter-input" placeholder="Search Teaching Load" data-column="3">
         </th>
         <th>
-            <input type="text" class="form-control filter-input" placeholder="Search Area" data-column="5">
+            <input type="text" class="form-control filter-input" placeholder="Search Area" data-column="4">
         </th>
         <th>
-            <input type="text" class="form-control filter-input" placeholder="Search Home Campus" data-column="6">
+            <input type="text" class="form-control filter-input" placeholder="Search Home Campus" data-column="5">
         </th>
         <th>
-            <input type="text" class="form-control filter-input" placeholder="Search Note" data-column="7">
+            <input type="text" class="form-control filter-input" placeholder="Search Note" data-column="6">
         </th>
           </tr>
         <tr>

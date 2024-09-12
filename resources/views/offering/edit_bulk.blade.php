@@ -15,25 +15,25 @@
 <table class="table table-striped" id="offeringsTable">
   <thead>
     <th>
-      <input type="text" class="form-control filter-input" placeholder="Search Code" data-column="1">
+      <input type="text" class="form-control filter-input" placeholder="Search Code" data-column="0">
     </th>
     <th>
-      <input type="text" class="form-control filter-input" placeholder="Search Course" data-column="2">
+      <input type="text" class="form-control filter-input" placeholder="Search Course" data-column="1">
     </th>
     <th>
-      <input type="text" class="form-control filter-input" placeholder="Search Year" data-column="3">
+      <input type="text" class="form-control filter-input" placeholder="Search Year" data-column="2">
     </th>
     <th>
-      <input type="text" class="form-control filter-input" placeholder="Search Trimester" data-column="4">
+      <input type="text" class="form-control filter-input" placeholder="Search Trimester" data-column="3">
     </th>
     <th>
-      <input type="text" class="form-control filter-input" placeholder="Search Campus" data-column="5">
+      <input type="text" class="form-control filter-input" placeholder="Search Campus" data-column="4">
     </th>
     <th>
-      <input type="text" class="form-control filter-input" placeholder="Search Convenor" data-column="6">
+      <input type="text" class="form-control filter-input" placeholder="Search Convenor" data-column="5">
     </th>
     <th>
-      <input type="text" class="form-control filter-input" placeholder="Search Notes" data-column="7">
+      <input type="text" class="form-control filter-input" placeholder="Search Notes" data-column="6">
     </th>
     <tr>
       <th>Code</th>

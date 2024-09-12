@@ -10,7 +10,7 @@
 <div class="row">
 
     <div >
-        <h1>Edit Class</h1>
+        <h1>Edit Classes</h1>
     @if(session('error'))
         <div class="alert alert-danger">
             {{ session('error') }}
@@ -66,9 +66,6 @@
         <table class="table table-hover" id="offeringsTable">
             <thead>
                 <tr>
-                    {{-- <th>
-                        <input type="text" class="form-control filter-input" placeholder="IDs" data-column="-1">
-                    </th> --}}
                     <th>
                         <input type="text" class="form-control filter-input" placeholder="Search offerings" data-column="0">
                     </th>
@@ -82,10 +79,10 @@
                         <input type="text" class="form-control filter-input" placeholder="Search campus" data-column="3">
                     </th>
                     <th class='toggle-column'>
-                        <input type="text" class="form-control filter-input" placeholder="Search start time" data-column="4">
+                        <input type="time" class="form-control filter-input" placeholder="Search start time" data-column="4">
                     </th>
                     <th class='toggle-column'>
-                        <input type="text" class="form-control filter-input" placeholder="Search end time" data-column="5">
+                        <input type="time" class="form-control filter-input" placeholder="Search end time" data-column="5">
                     </th>
                     <th class='toggle-column'>
                         <input type="text" class="form-control filter-input" placeholder="Search day" data-column="6">
@@ -349,7 +346,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const filters = document.querySelectorAll('.filter-input');
 
   filters.forEach(filter => {
-    filter.addEventListener('keyup', function() {
+    filter.addEventListener('input', function() {
       const rows = document.querySelector("#offeringsTable tbody").rows;
       const currentColumnIndex = parseInt(this.getAttribute('data-column'));
       const query = this.value.toLowerCase();
