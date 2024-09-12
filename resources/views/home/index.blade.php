@@ -101,7 +101,7 @@
                         `;
                         response.data.forEach(function (item) {
                             html += '<tr>'
-                            html += '<td>' + item.offering.course.name + '</td>'
+                            html += '<td>' + item.id + '</td>'
                             html += '<td>' + item.class_type + '</td><td>' + item.offering.campus + '</td>';
                             html += '<td>' + item.start_time + '</td><td>' + item.end_time + '</td>';
                             html += '<td>' + item.class_day + '</td>';

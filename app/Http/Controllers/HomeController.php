@@ -15,8 +15,12 @@ class HomeController extends Controller
         $year = (string) $request->query('year');
         $trimester = (string) $request->query('trimester');
         $academic_id = Auth::user()->academic->id;
-        $classes = ClassSchedule::with('offering', 'offering.course')->where('year', $year)
-                ->where('trimester', $trimester)->where('academic_id', $academic_id)->get();
+        $classes = ClassSchedule::with('offering')->where('academic_id', $academic_id)
+            ->whereHas('offering', function ($query) use ($year, $trimester) {
+                $query->where('year', $year)
+                    ->where('trimester', $trimester);
+            })
+            ->get();
         // Transform the data into a suitable format, if necessary
 
         return response()->json($classes); // Returns data as JSON response
