@@ -296,20 +296,6 @@ class TrimesterController extends Controller
     }
 
     /**
-     * Returns previous trimester.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Contracts\View\View
-     */
-    public function backTrimester(Request $request)
-    {
-        $currentTrimesterLength = $request->currentTrimesterLength - 1;
-        dd($trimester_number);
-
-        return view('trimester.index', compact('trimester_number', 'offerings'));
-    }
-
-    /**
      * Copy Trimester
      */
     public function copy(Request $request)
@@ -370,9 +356,8 @@ class TrimesterController extends Controller
         ]);
 
         $classScheduleIDs = $request->input('class_id', []);
-        $toSaveClasses = $request->input('save_row', []);
 
-        foreach ($toSaveClasses as $index => $id) {
+        foreach ($classScheduleIDs as $index => $id) {
             // find the index number of the class schedule
             $rowNo = array_search($id, $classScheduleIDs);
 

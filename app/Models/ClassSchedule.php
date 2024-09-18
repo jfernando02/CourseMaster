@@ -31,7 +31,7 @@ class ClassSchedule extends Model
 
     public function academic()
     {
-        return $this->belongsTo(Academic::class);
+        return $this->belongsTo(Academic::class, 'academic_id');
     }
 
     public function findOffering($course_id, $year, $trimester)

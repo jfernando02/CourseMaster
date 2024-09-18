@@ -13,6 +13,12 @@
     font-size: 14px;
 }
 
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Adjust according to the number of child elements */
+    justify-content: space-between;
+}
+
 .table {
     border-collapse: collapse;
 }
@@ -30,6 +36,13 @@
     color: purple;
 }
 
+.sticky-header th{
+    position: sticky;
+    top: 50px; /* You can adjust this value according to your requirement */
+    background: white; /* To prevent cells from overlapping when scrolling */
+    z-index: 10; /* to bring the cell in front of the other elements */
+    align-self: flex-start;
+}
 
 /* trimester */
 .modified {
@@ -41,6 +54,5 @@
 table.table-hover td {
     padding: 15px; /* Increase padding for larger cells */
     vertical-align: middle; /* Center vertically */
-
 }
 

@@ -64,17 +64,22 @@
 
 
 
-        <form action="{{ url('trimester') }}" method="GET">
+        <form action="{{ route('trimester.index') }}" id="selectTrimester" method="GET">
+            <input type="hidden" id="year" name="year" value="" />
+            <input type="hidden" id="trimester" name="trimester" value="" />
             <div class="dropdown">
-                <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton1"
-                    data-bs-toggle="dropdown" aria-expanded="false">
+                <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                     Select Trimester
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                     @foreach ($trimester_number as $trimester)
-                        <li><button class="dropdown-item" type="submit" name="year"
-                                value="{{ $trimester->year }} {{ $trimester->tri }}">{{ $trimester->year }}
-                                {{ $trimester->tri }}</button></li>
+                        <li>
+                            <button class="dropdown-item"
+                                    type="button"
+                                    onclick="submitSelectTrimester('{{ $trimester->year }}', '{{ $trimester->tri }}')">
+                                {{ $trimester->year }} {{ $trimester->tri }}
+                            </button>
+                        </li>
                     @endforeach
                 </ul>
             </div>
@@ -237,4 +242,11 @@
 
 
 <script src="{{ asset('js/table-filter.js') }}"></script>
+    <script>
+        function submitSelectTrimester(year, tri) {
+            document.getElementById('year').value = year;
+            document.getElementById('trimester').value = tri;
+            document.getElementById('selectTrimester').submit();
+        }
+    </script>
 @endsection

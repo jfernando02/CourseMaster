@@ -45,7 +45,7 @@
                 <button class="btn btn-outline-danger" type="submit" name="delete" value="delete" onclick="return confirm('Are you sure you want to delete these classes?')"><i class="fa-regular fa-trash"></i> Delete Selected Classes</button>
                     <a class="btn btn-outline-primary">
 
-                        <href="{{ route('trimester.edit', ['year' => $next_trimester[0], 'trimester' => $next_trimester[1]]) }}">
+                        href="{{ route('trimester.edit', ['year' => $next_trimester[0], 'trimester' => $next_trimester[1]]) }}"
                         Next Trimester <i class="fa-solid fa-chevron-right"></i>
                     </a>
 <!--
@@ -65,7 +65,7 @@
         @csrf
         <table class="table table-hover" id="offeringsTable">
             <thead>
-                <tr>
+                <tr class="sticky-header">
                     <th>
                         <input type="text" class="form-control filter-input" placeholder="Search offerings" data-column="0">
                     </th>
@@ -73,28 +73,32 @@
                         <input type="text" class="form-control filter-input" placeholder="Search lecturers" data-column="1">
                     </th>
                     <th>
-                        <input type="text" class="form-control filter-input" placeholder="Search class type" data-column="2">
+                        <input type="text" class="form-control filter-input" placeholder="Search teaching load" data-column="2">
                     </th>
                     <th>
-                        <input type="text" class="form-control filter-input" placeholder="Search campus" data-column="3">
-                    </th>
-                    <th class='toggle-column'>
-                        <input type="time" class="form-control filter-input" placeholder="Search start time" data-column="4">
-                    </th>
-                    <th class='toggle-column'>
-                        <input type="time" class="form-control filter-input" placeholder="Search end time" data-column="5">
-                    </th>
-                    <th class='toggle-column'>
-                        <input type="text" class="form-control filter-input" placeholder="Search day" data-column="6">
+                        <input type="text" class="form-control filter-input" placeholder="Search class type" data-column="3">
                     </th>
                     <th>
-                        <input type="text" class="form-control filter-input" placeholder="Search notes" data-column="7">
+                        <input type="text" class="form-control filter-input" placeholder="Search campus" data-column="4">
+                    </th>
+                    <th class='toggle-column'>
+                        <input type="time" class="form-control filter-input" placeholder="Search start time" data-column="5">
+                    </th>
+                    <th class='toggle-column'>
+                        <input type="time" class="form-control filter-input" placeholder="Search end time" data-column="6">
+                    </th>
+                    <th class='toggle-column'>
+                        <input type="text" class="form-control filter-input" placeholder="Search day" data-column="7">
+                    </th>
+                    <th>
+                        <input type="text" class="form-control filter-input" placeholder="Search notes" data-column="8">
                     </th>
                 </tr>
                 <tr>
                     {{-- <th>ID</th> --}}
                     <th>Offering</th>
                     <th>Lecturers</th>
+                    <th>Teaching Load</th>
                     <th>Class Type</th>
                     <th>Campus</th>
                     <th class='toggle-column'>Time Start</th>
@@ -154,6 +158,13 @@
                             </div>
                         </td>
                         <td>
+                            @php
+                                $academic = App\Models\Academic::findOrFail($class->academic_id);
+                                $load = $academic->teachingHoursperSem($academic->id, $year ,$trimester);
+                            @endphp
+                            {{ $load }}
+                        </td>
+                        <td>
                             <div class="form-group">
                                 <select class="form-control" name="class_type[]">
 
@@ -178,7 +189,7 @@
                                     @endforeach
                                 </select> --}}
                                 {{$class->campus}}
-                            </div>
+
                         </td>
                         <td class='toggle-column'>
                             <div class="form-group ">
@@ -238,6 +249,31 @@
 function addNewRow() {
     const table = document.getElementById('offeringsTable').getElementsByTagName('tbody')[0];
     const newRow = table.insertRow(table.rows.length);
+    const timeDayVisible = document.querySelector('.toggle-column').style.display !== 'none';
+
+    let timeDayCells = `
+        <td>
+            <div class="form-group">
+                <input type="time" class="form-control" name="new_start_time[]">
+            </div>
+        </td>
+        <td>
+            <div class="form-group">
+                <input type="time" class="form-control" name="new_end_time[]">
+            </div>
+        </td>
+        <td>
+            <div class="form-group">
+                <select class="form-control" name="new_class_day[]">
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                </select>
+            </div>
+        </td>
+    `;
 
     newRow.innerHTML = `
     <tr>
@@ -279,6 +315,8 @@ function addNewRow() {
                     </select>
                 </div>
             </td>
+             <td>
+            </td>
             <td>
                 <select class="form-control" name="new_class_type[]">
                 @foreach ($class_types as $class_type)
@@ -290,28 +328,7 @@ function addNewRow() {
             </td>
             <td>
             </td>
-                <td>
-                    <div class="form-group
-                    ">
-                        <input type="time" class="form-control" name="new_start_time[]">
-                    </div>
-                </td>
-                <td>
-                    <div class="form-group">
-                        <input type="time" class="form-control" name="new_end_time[]">
-                    </div>
-                </td>
-                <td>
-                    <div class="form-group">
-                        <select class="form-control" name="new_class_day[]">
-                            <option value="Monday">Monday</option>
-                            <option value="Tuesday">Tuesday</option>
-                            <option value="Wednesday">Wednesday</option>
-                            <option value="Thursday">Thursday</option>
-                            <option value="Friday">Friday</option>
-                        </select>
-                    </div>
-                </td>
+            ${timeDayVisible ? timeDayCells : ''}
                 <td>
                         <div class="form-group">
                             <input type="text" class="form-control" name="new_notes[]" >
@@ -386,6 +403,7 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('DOMContentLoaded', function() {
     const toggleBtn = document.getElementById('toggleColumns');
     toggleBtn.addEventListener('click', function() {
+        event.preventDefault();
         // Select all elements with the class 'toggle-column' and toggle their visibility
         document.querySelectorAll('.toggle-column').forEach(column => {
             column.style.display = column.style.display === 'none' ? '' : 'none';

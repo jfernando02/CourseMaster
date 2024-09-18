@@ -27,30 +27,42 @@
                 <input type="text" class="form-control" id="department" name="department" placeholder="Enter Department"
                     value="{{ $department }}">
             </div>
-    
+
             <div class="mb-3">
-                <label for="threshold_year" class="form-label">Teaching Load Threshold (Yearly)</label>
+                <label for="threshold_year" class="form-label">Overwork Teaching Load Threshold (Yearly)</label>
                 <input type="number" class="form-control" id="threshold_year" name="threshold_year"
-                    placeholder="Enter Yearly Teaching Load Threshold" value="{{ $threshold_year }}">
+                    placeholder="Enter Overwork Yearly Teaching Load Threshold" value="{{ $threshold_year }}">
             </div>
-    
+
             <div class="mb-3">
-                <label for="threshold_trimester" class="form-label">Teaching Load Threshold (Trimester)</label>
+                <label for="threshold_trimester" class="form-label">Overwork Teaching Load Threshold (Trimester)</label>
                 <input type="number" class="form-control" id="threshold_trimester" name="threshold_trimester"
-                    placeholder="Enter Trimester Teaching Load Threshold" value="{{ $threshold_trimester }}">
+                    placeholder="Enter Overwork Trimester Teaching Load Threshold" value="{{ $threshold_trimester }}">
             </div>
-    
+
+            <div class="mb-3">
+                <label for="threshold_year" class="form-label">Underwork Teaching Load Threshold (Yearly)</label>
+                <input type="number" class="form-control" id="underwork_threshold_year" name="underwork_threshold_year"
+                       placeholder="Enter Yearly Underwork Teaching Load Threshold" value="{{ $underwork_threshold_year }}">
+            </div>
+
+            <div class="mb-3">
+                <label for="threshold_trimester" class="form-label">Underwork Teaching Load Threshold (Trimester)</label>
+                <input type="number" class="form-control" id="underwork_threshold_trimester" name="underwork_threshold_trimester"
+                       placeholder="Enter Trimester Underwork Teaching Load Threshold" value="{{ $underwork_threshold_trimester }}">
+            </div>
+
             <div class="mb-3">
                 <label for="current_year" class="form-label">Current Year</label>
                 <input type="number" class="form-control" id="current_year" name="current_year" value="{{ $current_year }}">
             </div>
-    
+
             <div class="mb-3">
                 <label for="current_trimester" class="form-label">Current Trimester</label>
                 <input type="number" class="form-control" id="current_trimester" name="current_trimester"
                     value="{{ $current_trimester }}">
             </div>
-    
+
             <div class="mb-3">
                 <label for="campuses" class="form-label">Campuses</label>
                 <div id="campuses" class="mb-2">
@@ -63,7 +75,7 @@
                 </div>
                 <button type="button" class="btn btn-primary" onclick="addCampus()">Add Campus</button>
             </div>
-    
+
             <button type="submit" class="btn btn-success">Submit</button>
         </form>
         <br>
@@ -120,7 +132,7 @@
         </div>
     </div>
 
-    
+
     <script>
         function addCampus() {
             let container = document.getElementById('campuses');
@@ -138,7 +150,7 @@
         }
 
     </script>
-    
-    
+
+
 @endsection
 
