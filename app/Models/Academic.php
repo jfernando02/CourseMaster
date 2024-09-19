@@ -23,7 +23,7 @@ class Academic extends Model
     function course()
     {
         // return $this->belongsToMany('App\Models\Course', 'id');
-        return $this->belongsToMany(Course::class, 'offerings', 'academic_id', 'course_id');
+        return $this->hasMany(Course::class, 'academic_id', 'course_id');
     }
 
 

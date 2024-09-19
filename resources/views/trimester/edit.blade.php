@@ -43,10 +43,10 @@
                 <button class="btn btn-outline-success" type="submit"><i class="fa-regular fa-floppy-disk"></i> Save</button>
 
                 <button class="btn btn-outline-danger" type="submit" name="delete" value="delete" onclick="return confirm('Are you sure you want to delete these classes?')"><i class="fa-regular fa-trash"></i> Delete Selected Classes</button>
-                    <a class="btn btn-outline-primary">
+                    <a class="btn btn-outline-primary"
 
-                        href="{{ route('trimester.edit', ['year' => $next_trimester[0], 'trimester' => $next_trimester[1]]) }}"
-                        Next Trimester <i class="fa-solid fa-chevron-right"></i>
+                        href="{{ route('trimester.edit', ['year' => $next_trimester[0], 'trimester' => $next_trimester[1]]) }}">
+                        <i class="fa-solid fa-chevron-right"></i> Next Trimester
                     </a>
 <!--
                 <a class="btn btn-primary"
