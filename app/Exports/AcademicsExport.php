@@ -23,6 +23,7 @@ class AcademicsExport implements FromCollection, WithHeadings
             'First Name',
             'Last Name',
             'Teaching Load',
+            'Yearly Teaching Load',
             'Area',
             'Note',
             'Created At',

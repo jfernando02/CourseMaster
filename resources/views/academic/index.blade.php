@@ -70,6 +70,7 @@
                 <th>Full Name</th>
                 <th>Email</th>
                 <th>Teaching Load (Current Trimester)</th>
+                <th>Teaching Load (Current Year)</th>
                 <th>Area</th>
                 <th>Main Campus</th>
                 <th>Note</th>
@@ -86,14 +87,18 @@
                         data-column="2">
                 </td>
                 <td>
-                    <input type="text" class="form-control filter-input" placeholder="Search Area" data-column="3">
+                    <input type="text" class="form-control filter-input" placeholder="Search Teaching Load (Year)"
+                           data-column="3">
+                </td>
+                <td>
+                    <input type="text" class="form-control filter-input" placeholder="Search Area" data-column="4">
                 </td>
                 <td>
                     <input type="text" class="form-control filter-input" placeholder="Search Main Campus"
-                        data-column="4">
+                        data-column="5">
                 </td>
                 <td>
-                    <input type="text" class="form-control filter-input" placeholder="Search Note" data-column="5">
+                    <input type="text" class="form-control filter-input" placeholder="Search Note" data-column="6">
                 </td>
         </thead>
         <tbody>
@@ -104,7 +109,8 @@
                             {{ $academic->firstname }}</a></td>
                     {{-- <td><a href="{{url("academic/$academic->id")}}">{{$academic->firstname}} {{$academic->lastname}}, </a></td> --}}
                     <td>{{ $academic->email }}</td>
-                    <td>{{ $academic->teachingHoursperSem($academic->id, 2024, 1) }} hours</td>
+                    <td>{{ $academic->teachingHours($academic->id, 2024, 1) }} hours</td>
+                    <td>{{ $academic->teachingHours($academic->id, 2024, 0) }} hours</td>
                     <td>{{ $academic->area }}</td>
                     <td>{{ $academic->home_campus }}</td>
                     <td>{{ $academic->note }}</td>

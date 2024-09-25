@@ -29,8 +29,8 @@ class Offering extends Model
         return $this->belongsTo(Course::class);
     }
 
-    function academic(){
-        return $this->belongsTo('App\Models\Academic', 'academic_id');
+    function academics(){
+        return $this->belongsToMany(Academic::class);
     }
 
     function classSchedules(){

@@ -4,9 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0e3fdc26-a780-4964-b490-9e33aa918199" name="Changes" comment="Add sticky filters, teaching load column, correct toggle time and day, better save to trimester page. Add underwork definitions in settings page and underwork values in settings table">
+    <list default="true" id="0e3fdc26-a780-4964-b490-9e33aa918199" name="Changes" comment="Changed relationship between courses and academic, fixed next trimester bug">
+      <change afterPath="$PROJECT_DIR$/database/migrations/2024_09_25_041654_create_academic_offering_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2024_09_25_043324_add_yearly_teaching_load_to_academics_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/726c7542-c3ea-46ea-b5f0-645aafbd5c5d.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/726c7542-c3ea-46ea-b5f0-645aafbd5c5d.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Exports/AcademicWorkloadExport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exports/AcademicWorkloadExport.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Exports/AcademicsExport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exports/AcademicsExport.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Exports/TrimestersExport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exports/TrimestersExport.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AcademicController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AcademicController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/Academic.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Academic.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Offering.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Offering.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/database.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/database/database.sqlite" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/academic/add_academic.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/academic/add_academic.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/academic/edit_form.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/academic/edit_form.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/academic/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/academic/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/settings/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/settings/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/trimester/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/trimester/edit.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -183,25 +196,29 @@
   &quot;associatedIndex&quot;: 1
 }</component>
   <component name="ProjectId" id="2kGMCsn60bBoRz0M1e9YvfH7Iyi" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Other/Repos/CourseMaster&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;D:\\PhpStorm 2024.1.4\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "D:/Other/Repos/CourseMaster",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "D:\\PhpStorm 2024.1.4\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Other\Repos\CourseMaster\resources\views\home" />
@@ -241,7 +258,8 @@
       <workItem from="1726112605875" duration="8152000" />
       <workItem from="1726182126509" duration="3510000" />
       <workItem from="1726367251239" duration="92000" />
-      <workItem from="1726628896254" duration="18287000" />
+      <workItem from="1726628896254" duration="25376000" />
+      <workItem from="1727236858613" duration="3035000" />
     </task>
     <task id="LOCAL-00001" summary="Add login page, add stock laravel pages, add logout button to dashboard, add login/register functionality">
       <option name="closed" value="true" />
@@ -539,7 +557,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726643951656</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="Changed relationship between courses and academic, fixed next trimester bug">
+      <option name="closed" value="true" />
+      <created>1726721543276</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1726721543276</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -557,7 +583,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add to classes academic dashboard still WIP" />
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Create dashboards for offerings and courses, remove ID from bulk edit academics and offerings" />
     <MESSAGE value="composer update run" />
     <MESSAGE value="add ext-pdo_sqlite to composer.json" />
@@ -582,6 +608,7 @@
     <MESSAGE value="Fix home dashboard for classes" />
     <MESSAGE value="Temp fix for index.blade.php, fix HomeController.php classes query" />
     <MESSAGE value="Add sticky filters, teaching load column, correct toggle time and day, better save to trimester page. Add underwork definitions in settings page and underwork values in settings table" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add sticky filters, teaching load column, correct toggle time and day, better save to trimester page. Add underwork definitions in settings page and underwork values in settings table" />
+    <MESSAGE value="Changed relationship between courses and academic, fixed next trimester bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed relationship between courses and academic, fixed next trimester bug" />
   </component>
 </project>

@@ -143,7 +143,6 @@
                                     $load = $academic->teachingHoursperSem($academic->id, $year ,$trimester);
                                     $ratio = min(($load / $threshold_trimester), 1) * 100;
                                     @endphp
-
                                         <option
 
                                         style="background: linear-gradient(to right, rgb(77, 181, 71) {{ $ratio }}%, white {{ $ratio }}%);"
@@ -161,8 +160,9 @@
                             @php
                                 $academic = App\Models\Academic::findOrFail($class->academic_id);
                                 $load = $academic->teachingHoursperSem($academic->id, $year ,$trimester);
+                                $workloadStatus = $academic->workloadStatus($academic->id, $load);
                             @endphp
-                            {{ $load }}
+                            {{ $load . ' ' . $workloadStatus}}
                         </td>
                         <td>
                             <div class="form-group">

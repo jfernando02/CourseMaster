@@ -48,14 +48,17 @@
         <th>
             <input type="text" class="form-control filter-input" placeholder="Search Teaching Load" data-column="3">
         </th>
+          <th>
+              <input type="text" class="form-control filter-input" placeholder="Search Teaching Load (Year)" data-column="4">
+          </th>
         <th>
-            <input type="text" class="form-control filter-input" placeholder="Search Area" data-column="4">
+            <input type="text" class="form-control filter-input" placeholder="Search Area" data-column="5">
         </th>
         <th>
-            <input type="text" class="form-control filter-input" placeholder="Search Home Campus" data-column="5">
+            <input type="text" class="form-control filter-input" placeholder="Search Home Campus" data-column="6">
         </th>
         <th>
-            <input type="text" class="form-control filter-input" placeholder="Search Note" data-column="6">
+            <input type="text" class="form-control filter-input" placeholder="Search Note" data-column="7">
         </th>
           </tr>
         <tr>
@@ -64,6 +67,7 @@
             <th>Last Name</th>
             <th>Email</th>
             <th>Teaching Load</th>
+            <th>Teaching Load (Year)</th>
             <th>Area</th>
             <th>Home Campus</th>
             <th>Note</th>
@@ -78,6 +82,7 @@
           <td><input class="form-control" type="text" name="lastname[]" value="{{$academic->lastname}}"></td>
             <td><input class="form-control" type="text" name="email[]" value="{{$academic->email}}"></td>
           <td><input class="form-control" type="text" name="teaching_load[]" value="{{$academic->teaching_load}}"></td>
+            <td><input class="form-control" type="text" name="yearly_teaching_load[]" value="{{$academic->yearly_teaching_load}}"></td>
           <td><input class="form-control" type="text" name="area[]" value="{{$academic->area}}"></td>
           <td>
             <select class="form-control" name="home_campus[]">

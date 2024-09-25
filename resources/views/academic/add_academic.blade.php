@@ -31,15 +31,21 @@
     </div>
 
       <div class="form-group">
-          <label>Email (required) (NOTE: this cannot be changed after!)</label>
+          <label>Email (required) (NOTE: To see an academic's dashboard, you must login with the same email as the academic)</label>
           <input type="email" class="form-control" name="email" value="{{old('email')}}" required>
       </div>
 
     <div class="form-group">
       <label>Teaching load</label>
       <input type="number" class="form-control" name="teaching_load" value="{{old('teaching_load')}}">
-      <small class="form-text text-muted">E.g. enter 30 for 30%</small>
+      <small class="form-text text-muted">E.g. enter 30 for 30 hours a trimester</small>
     </div>
+
+      <div class="form-group">
+          <label>Teaching load (Year)</label>
+          <input type="number" class="form-control" name="yearly_teaching_load" value="{{old('yearly_teaching_load')}}">
+          <small class="form-text text-muted">E.g. enter 60 for 60 hours a year</small>
+      </div>
 
     <div class="form-group">
       <label>Expertise Area</label>

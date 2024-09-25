@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\Offering;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Course;
-use App\Models\Offering;
 
 class Academic extends Model
 {
@@ -15,7 +15,7 @@ class Academic extends Model
 
     //an academic can have many offerings as convenor
     function offerings(){
-        return $this->hasMany(Offering::class, 'academic_id');
+        return $this->belongsToMany(Offering::class);
     }
 
 
@@ -39,7 +39,8 @@ class Academic extends Model
 
 
     // Calculate the total teaching hours for an academic in a specified year and trimester
-    public function teachingHoursperSem($academicID, $year, $trimester)
+    // If trimester is 0, will get classes for whole year
+    public function teachingHours($academicID, $year, $trimester = 0)
     {
         // Get list of class schedules for the academic
         $classSchedules = ClassSchedule::where('academic_id', $academicID)->get();
@@ -49,11 +50,18 @@ class Academic extends Model
 
         // Loop through each class schedule
         foreach ($classSchedules as $classSchedule) {
+            if($trimester == 0){
+                $offering = Offering::where('id', $classSchedule->offering_id)
+                    ->where('year', $year)
+                    ->first();
+            }
             // Get the associated offering for the class schedule to check if it is for the specified year and trimester
-            $offering = Offering::where('id', $classSchedule->offering_id)
-                ->where('year', $year)
-                ->where('trimester', $trimester)
-                ->first();
+            else {
+                $offering = Offering::where('id', $classSchedule->offering_id)
+                    ->where('year', $year)
+                    ->where('trimester', $trimester)
+                    ->first();
+            }
 
             // If offering exists for the specified year and trimester, add to total teaching hours
             if ($offering) {
@@ -72,6 +80,20 @@ class Academic extends Model
         $totalTeachingHours = round($totalTeachingHours, 2) * $workloadMultiplier;
 
         return $totalTeachingHours;
+    }
+
+    public function workloadStatus($academicID, $totalTeachingHours): string
+    {
+        $academic = Academic::find($academicID);
+        $setting = Setting::latest()->first();
+        if($academic && $academic->teaching_load) {
+            if ($totalTeachingHours > $academic->teaching_load * ($setting->threshold_trimester / 100)) {
+                return "(OW)";
+            } elseif ($totalTeachingHours < $academic->teaching_load * ($setting->underwork_threshold_trimester / 100)) {
+                return "(UW)";
+            }
+        }
+        return "";
     }
 
 

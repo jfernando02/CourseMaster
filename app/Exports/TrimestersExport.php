@@ -31,8 +31,9 @@ class TrimestersExport implements FromCollection, WithHeadings
             ->map(function ($schedule) {
                 return [
                     'id' => $schedule->id,
-                    'offering' => $schedule->offering->course->code . ' ' . $schedule->offering->course->name,
+                    'offering' => $schedule->offering->course ? $schedule->offering->course->code . ' ' . $schedule->offering->course->name : "N/A",
                     'academic' => $schedule->academic ? $schedule->academic->firstname . ' ' . $schedule->academic->lastname : 'N/A',
+                    'teaching_load' => $schedule->academic ? $schedule->academic->teaching_load : 'N/A',
                     'class_type' => $schedule->class_type,
                     'start_time' => $schedule->start_time,
                     'end_time' => $schedule->end_time,
@@ -53,6 +54,7 @@ class TrimestersExport implements FromCollection, WithHeadings
             'ID',
             'Offering',
             'Academic',
+            'Teaching Load',
             'Class Type',
             'Start Time',
             'End Time',

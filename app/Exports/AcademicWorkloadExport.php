@@ -16,7 +16,7 @@ class AcademicWorkloadExport implements FromCollection, WithHeadings
     {
         $academics = Academic::all();
         $entries = collect();
-        
+
         foreach ($academics as $academic) {
             $classSchedules = $academic->classSchedules()
                 ->join('offerings', 'classschedule.offering_id', '=', 'offerings.id')
@@ -41,7 +41,8 @@ class AcademicWorkloadExport implements FromCollection, WithHeadings
                     'trimester' => 'Trimester '.$classSchedule->trimester.' '.$classSchedule->year,
                     'id' => $academic->id,
                     'fullname' => $academic->firstname.' '.$academic->lastname,
-                    'teaching_load' => $academic->teachingHoursperSem($academic->id, $classSchedule->year, $classSchedule->trimester),
+                    'teaching_load' => $academic->teachingHours($academic->id, $classSchedule->year, $classSchedule->trimester),
+                    'yearly_teaching_load' => $academic->teachingHours($academic->id, $classSchedule->year),
                     'area' => $academic->area,
                     'courses' => implode(", ", $courseNames),
                     'home_campus' => $academic->home_campus,
@@ -66,6 +67,7 @@ class AcademicWorkloadExport implements FromCollection, WithHeadings
             'ID',
             'Full Name',
             'Total Teaching Load',
+            'Total Teaching Load (Year)',
             'Area',
             'Allocated Courses',
             'Home Campus',

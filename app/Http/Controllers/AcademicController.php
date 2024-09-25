@@ -80,6 +80,7 @@ class AcademicController extends Controller
         $academic->lastname = $request->lastname;
         $academic->email = $request->email;
         $academic->teaching_load = $request->teaching_load;
+        $academic->yearly_teaching_load = $request->yearly_teaching_load;
         $academic->area = $request->area;
         $academic->note = $request->note;
         $academic->save();
@@ -196,6 +197,7 @@ class AcademicController extends Controller
         $academic->firstname = $request->firstname;
         $academic->lastname = $request->lastname;
         $academic->teaching_load = $request->teaching_load;
+        $academic->yearly_teaching_load = $request->yearly_teaching_load;
         $academic->area = $request->area;
         $academic->note = $request->note;
         $academic->save();
@@ -260,6 +262,7 @@ class AcademicController extends Controller
         $lastnames = $request->input('lastname');
         $emails=$request->input('email');
         $teaching_loads = $request->input('teaching_load');
+        $yearly_teaching_loads = $request->input('yearly_teaching_load');
         $areas = $request->input('area');
         $home_campuses = $request->input('home_campus');
         $notes = $request->input('note');
@@ -276,6 +279,7 @@ class AcademicController extends Controller
                 $academic->lastname = $lastnames[$index];
                 $academic->email=$emails[$index];
                 $academic->teaching_load = $teaching_loads[$index];
+                $academic->yearly_teaching_load = $yearly_teaching_loads[$index];
                 $academic->area = $areas[$index];
                 $academic->home_campus = $home_campuses[$index];
                 $academic->note = $notes[$index];
