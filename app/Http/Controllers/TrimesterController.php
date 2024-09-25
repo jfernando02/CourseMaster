@@ -69,21 +69,6 @@ class TrimesterController extends Controller
         $next_trimester = $trimester_combinations[$next_index];
         $currentTrimester = $trimester_combinations[$current_index];
 
-        // $offerings = Offering::all()
-        //     ->where('year', $currentTrimester[0])
-        //     ->where('trimester', $currentTrimester[1]);
-
-        // $offerings = ClassSchedule::where('year', $year)->where('trimester', $trimester)->get();
-        // join offerings table and classSchedule table based on offering_id and courses table based on course_id of offerings table
-        // $offerings = DB::table('offerings')
-        // ->join('classSchedule', 'offerings.id', '=', 'classSchedule.offering_id')
-        // ->join('courses', 'offerings.course_id', '=', 'courses.id')
-        // ->select('offerings.*', 'classSchedule.*', 'courses.code as course_code', 'courses.name as course_name')
-        // ->where('offerings.year', $year)
-        // ->where('offerings.trimester', $trimester)
-        // ->get();
-
-        // dd($offerings);
         $offerings = DB::table('offerings')
         ->join('classSchedule', 'offerings.id', '=', 'classSchedule.offering_id')
         ->join('courses', 'offerings.course_id', '=', 'courses.id')
@@ -212,14 +197,10 @@ class TrimesterController extends Controller
         $next_trimester = $trimester_combinations[$next_index];
 
 
-        $classes = DB::table('offerings')
-        ->join('classSchedule', 'offerings.id', '=', 'classSchedule.offering_id')
-        ->join('courses', 'offerings.course_id', '=', 'courses.id')
-        ->select('offerings.*', 'classSchedule.*', 'courses.code as course_code', 'courses.name as course_name')
-        ->where('offerings.year', $year)
-        ->where('offerings.trimester', $trimester)
-        ->orderBy('classSchedule.id')
-        ->get();
+        $classes = ClassSchedule::whereHas('offering', function ($query) use ($year, $trimester) {
+            $query->where('year', $year);
+            $query->where('trimester', $trimester);
+        })->get();
 
         // offerings offered in the current trimester
         $offerings = Offering::whereHas('course')->where('year', $year)->where('trimester', $trimester)->get();
@@ -228,17 +209,7 @@ class TrimesterController extends Controller
         $class_types = ['Lecture', 'Workshop'];
         $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
 
-
-        // calculate teaching load of an academic using teachinghours function from academic controller
-        // foreach ($academics as $academic) {
-        //     $academic->teaching_load = $this->teachingHours($academic->id, $year, $trimester);
-        // }
-
-        // random value for teaching load from 30 to 60 hours
-        $teachingHours = rand(30, 60);
-
-
-        return view('trimester.edit', compact('threshold_trimester', 'teachingHours', 'days', 'class_types', 'campuses', 'year', 'trimester', 'classes', 'offerings', 'academics', 'trimester_number', 'prev_trimester', 'next_trimester'));
+        return view('trimester.edit', compact('threshold_trimester',  'days', 'class_types', 'campuses', 'year', 'trimester', 'classes', 'offerings', 'academics', 'trimester_number', 'prev_trimester', 'next_trimester'));
     }
 
 
@@ -350,7 +321,6 @@ class TrimesterController extends Controller
         // dd($request->all());
         $request->validate([
             'offering_id.*' => 'nullable|exists:offerings,id',
-            'academic_id.*' => 'required|exists:academics,id',
             'class_type.*' => 'nullable|string',
             'campus.*' => 'nullable|string',
         ]);
@@ -397,7 +367,7 @@ class TrimesterController extends Controller
                 // create new class
                 $class = new ClassSchedule();
                 $class->offering_id = $offering->id;
-                $class->academic_id = $request->new_academic_id[$i];
+                $class->academic_id = $request->new_academic_id[$i] ?? null;
                 $class->class_type = $request->new_class_type[$i];
                 $class->start_time = $request->new_start_time[$i];
                 $class->end_time = $request->new_end_time[$i];
@@ -406,35 +376,10 @@ class TrimesterController extends Controller
             }
         }
 
+        $year = $request->year;
+        $trimester = $request->trimester;
 
-        return redirect()->route('trimester.index')->with('success', 'Trimester offerings updated successfully!');
-    }
-
-    /**
-     * Get the teaching hours for an academic in a specific year and trimester.
-     */
-    public function teachingHours($academicID)
-    {
-        $result = ClassSchedule::with('offering.course', 'academic')
-            ->selectRaw('
-                CONCAT(academics.firstname, " ", academics.lastname) AS academic_name,
-                offerings.academic_id AS academic_id,
-                offerings.year,
-                offerings.trimester,
-                SUM(
-                    CAST((julianday(classSchedule.end_time) - julianday(classSchedule.start_time)) * 24 * 12 AS REAL)
-                ) AS teaching_hours
-            ')
-            ->join('offerings', 'classSchedule.offering_id', '=', 'offerings.id')
-            ->join('academics', 'classSchedule.academic_id', '=', 'academics.id')
-            ->groupBy('academic_name', 'offerings.year', 'offerings.trimester')
-            ->orderBy('academic_name')
-            ->orderBy('offerings.year')
-            ->orderBy('offerings.trimester')
-            ->where('offerings.academic_id', $academicID)
-            ->get();
-
-        return $result;
+        return redirect()->route('trimester.edit', ['year' => $year, 'trimester' => $trimester])->with('success', 'Trimester offerings updated successfully!');
     }
 
     /**

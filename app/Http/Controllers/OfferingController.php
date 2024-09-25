@@ -116,7 +116,7 @@ class OfferingController extends Controller
 
         $offering->save();
 
-        foreach($request->convenor as $academicId){
+        foreach($request->convenors as $academicId){
             $offering->academics()->attach($academicId);
         }
 

@@ -120,14 +120,14 @@
                         <input type="hidden" name="class_id[]" id="selectedClassID" value="{{ $class->id }}">
                         <input type="hidden" name="offering_id[]" id="selectedOfferingID" value="{{ $class->offering_id }}">
                         <td>
-                            {{$class->course_name}}
+                            {{$class->offering->course->name}}
 
                         </td>
                         <td>
                             <div class="form-group">
                                 <select class="selectpicker form-control" name="academic_id[]">
                                     <option value="">Unassigned</option>
-                                    @foreach ($academics as $academic)
+                                    @foreach ($class->offering->academics as $academic)
                                     @php
                                     $load = $academic->teachingHours($academic->id, $year ,$trimester);
                                     $ratio = min(($load / $threshold_trimester), 1) * 100;
@@ -159,7 +159,7 @@
                             @php
                                 $academic = optional(Academic::find($class->academic_id));
                                 $load = $academic->teachingHours($academic->id, $year ,0);
-                                $workloadStatus = $academic->workloadStatus($academic->id, $load);
+                                $workloadStatus = $academic->workloadStatus($academic->id, $load, "year");
                             @endphp
                             @if($academic->exists)
                                 {{ $load . ' ' . $workloadStatus}}
@@ -182,7 +182,7 @@
 
                         </td>
                         <td>
-                                {{$class->campus}}
+                                {{$class->offering->campus}}
 
                         </td>
                         <td class='toggle-column'>
@@ -280,32 +280,8 @@ function addNewRow() {
                 </select>
             </td>
             <td>
-            <div class="form-group">
-                <select class="selectpicker" name="new_academic_id[]">
-
-                    <option>Select Lecturer</option>
-                        @foreach ($academics as $academic)
-                        @php
-                        $load = $academic->teachingHours($academic->id, $year ,$trimester);
-                        $ratio = min(($load / $threshold_trimester), 1) * 100;
-                        @endphp
-                            <option data-ratio="{{ $ratio }}" data-bs-toggle="tooltip" data-bs-placement="top"
-
-                            style="background: linear-gradient(to right, rgb(77, 181, 71) {{ $ratio }}%, white {{ $ratio }}%);"
-                            data-bs-custom-class="custom-tooltip"
-                            data-bs-html="true"
-                            data-bs-title="Previous Teaching Load: {{$academic->teaching_load}} <br> Notes: {{$academic->note}}"
-                            class="dropdown-item"
-                            value="{{ $academic->id }}" @if (isset($class) && $academic->id == $class->academic_id) selected @endif
-                            {{-- title="{{$academic->lastname}}" --}}
-                            {{-- title="Load: {{$academic->teaching_load}} Notes: {{$academic->note}}" --}}
-                            >
-                            {{ $academic->firstname }} {{ $academic->lastname }}
-                            </option>
-                        @endforeach
-
-                    </select>
-                </div>
+            </td>
+             <td>
             </td>
              <td>
             </td>

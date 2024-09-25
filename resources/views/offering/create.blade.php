@@ -49,10 +49,10 @@
       </div>
 
     <div class="form-group">
-      <label>Convenor</label>
-      <select name="convenor" class="form-control">
+      <label>Convenors</label>
+      <select name="convenors[]" class="selectpicker form-control" multiple>
         @foreach($academics as $academic)
-          <option value="{{$academic->id}}">{{$academic->lastname}}, {{$academic->firstname}}</option>
+          <option value="{{$academic->id}}">{{$academic->firstname}} {{$academic->lastname}}</option>
         @endforeach
       </select>
     </div>

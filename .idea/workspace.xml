@@ -4,17 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0e3fdc26-a780-4964-b490-9e33aa918199" name="Changes" comment="Add academic_offering bridging table, add academic yearly workload">
-      <change afterPath="$PROJECT_DIR$/database/migrations/2024_09_25_081934_modify_class_schedule_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/726c7542-c3ea-46ea-b5f0-645aafbd5c5d.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/726c7542-c3ea-46ea-b5f0-645aafbd5c5d.xml" afterDir="false" />
+    <list default="true" id="0e3fdc26-a780-4964-b490-9e33aa918199" name="Changes" comment="Add set null foreign key constraint on academic delete for courses, classes, add year workload for academics, add many to many relationship between offerings and academics">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AcademicController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AcademicController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OfferingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OfferingController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TrimesterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TrimesterController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/Academic.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Academic.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/database.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/database/database.sqlite" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/offering/edit_bulk.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/offering/edit_bulk.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/trimester/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/trimester/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/offering/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/offering/create.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/trimester/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/trimester/edit.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -258,7 +254,7 @@
       <workItem from="1726182126509" duration="3510000" />
       <workItem from="1726367251239" duration="92000" />
       <workItem from="1726628896254" duration="25376000" />
-      <workItem from="1727236858613" duration="17195000" />
+      <workItem from="1727236858613" duration="22794000" />
     </task>
     <task id="LOCAL-00001" summary="Add login page, add stock laravel pages, add logout button to dashboard, add login/register functionality">
       <option name="closed" value="true" />
@@ -572,7 +568,15 @@
       <option name="project" value="LOCAL" />
       <updated>1727240008718</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="Add set null foreign key constraint on academic delete for courses, classes, add year workload for academics, add many to many relationship between offerings and academics">
+      <option name="closed" value="true" />
+      <created>1727254238068</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1727254238068</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -591,7 +595,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="composer update run" />
     <MESSAGE value="add ext-pdo_sqlite to composer.json" />
     <MESSAGE value="add post-install-cmd" />
     <MESSAGE value="delete procfile quotes" />
@@ -616,6 +619,7 @@
     <MESSAGE value="Add sticky filters, teaching load column, correct toggle time and day, better save to trimester page. Add underwork definitions in settings page and underwork values in settings table" />
     <MESSAGE value="Changed relationship between courses and academic, fixed next trimester bug" />
     <MESSAGE value="Add academic_offering bridging table, add academic yearly workload" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add academic_offering bridging table, add academic yearly workload" />
+    <MESSAGE value="Add set null foreign key constraint on academic delete for courses, classes, add year workload for academics, add many to many relationship between offerings and academics" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add set null foreign key constraint on academic delete for courses, classes, add year workload for academics, add many to many relationship between offerings and academics" />
   </component>
 </project>
