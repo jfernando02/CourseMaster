@@ -1,3 +1,4 @@
+@php use App\Models\Academic; @endphp
 @extends('layouts.master')
 
 @section('title')
@@ -76,22 +77,25 @@
                         <input type="text" class="form-control filter-input" placeholder="Search teaching load" data-column="2">
                     </th>
                     <th>
-                        <input type="text" class="form-control filter-input" placeholder="Search class type" data-column="3">
+                        <input type="text" class="form-control filter-input" placeholder="Search teaching load (year)" data-column="3">
                     </th>
                     <th>
-                        <input type="text" class="form-control filter-input" placeholder="Search campus" data-column="4">
-                    </th>
-                    <th class='toggle-column'>
-                        <input type="time" class="form-control filter-input" placeholder="Search start time" data-column="5">
-                    </th>
-                    <th class='toggle-column'>
-                        <input type="time" class="form-control filter-input" placeholder="Search end time" data-column="6">
-                    </th>
-                    <th class='toggle-column'>
-                        <input type="text" class="form-control filter-input" placeholder="Search day" data-column="7">
+                        <input type="text" class="form-control filter-input" placeholder="Search class type" data-column="4">
                     </th>
                     <th>
-                        <input type="text" class="form-control filter-input" placeholder="Search notes" data-column="8">
+                        <input type="text" class="form-control filter-input" placeholder="Search campus" data-column="5">
+                    </th>
+                    <th class='toggle-column'>
+                        <input type="time" class="form-control filter-input" placeholder="Search start time" data-column="6">
+                    </th>
+                    <th class='toggle-column'>
+                        <input type="time" class="form-control filter-input" placeholder="Search end time" data-column="7">
+                    </th>
+                    <th class='toggle-column'>
+                        <input type="text" class="form-control filter-input" placeholder="Search day" data-column="8">
+                    </th>
+                    <th>
+                        <input type="text" class="form-control filter-input" placeholder="Search notes" data-column="9">
                     </th>
                 </tr>
                 <tr>
@@ -99,6 +103,7 @@
                     <th>Offering</th>
                     <th>Lecturers</th>
                     <th>Teaching Load</th>
+                    <th>Teaching Load (Year)</th>
                     <th>Class Type</th>
                     <th>Campus</th>
                     <th class='toggle-column'>Time Start</th>
@@ -112,35 +117,19 @@
             <tbody>
                 @foreach ($classes as $class)
                     <tr data-row-id="{{ $class->id }}">
-                        {{-- <td>
-                            {{ $class->id }}
-                        </td> --}}
                         <input type="hidden" name="class_id[]" id="selectedClassID" value="{{ $class->id }}">
                         <input type="hidden" name="offering_id[]" id="selectedOfferingID" value="{{ $class->offering_id }}">
                         <td>
-
-                            {{-- <div class="form-group">
-                                <select class="form-control" name="course_id[]">
-                                    @foreach ($courses as $course)
-                                        <option value="{{ $course->id }}" @if ($course->id == $class->course_id) selected @endif>
-                                            {{ $course->code }} {{ $course->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div> --}}
-                            {{-- show course as h1 --}}
                             {{$class->course_name}}
 
                         </td>
                         <td>
                             <div class="form-group">
                                 <select class="selectpicker form-control" name="academic_id[]">
-                                    {{-- <option
-                                    title="ddd"
-                                    >Select Lecturer</option> --}}
+                                    <option value="">Unassigned</option>
                                     @foreach ($academics as $academic)
                                     @php
-                                    $load = $academic->teachingHoursperSem($academic->id, $year ,$trimester);
+                                    $load = $academic->teachingHours($academic->id, $year ,$trimester);
                                     $ratio = min(($load / $threshold_trimester), 1) * 100;
                                     @endphp
                                         <option
@@ -158,11 +147,23 @@
                         </td>
                         <td>
                             @php
-                                $academic = App\Models\Academic::findOrFail($class->academic_id);
-                                $load = $academic->teachingHoursperSem($academic->id, $year ,$trimester);
+                                $academic = optional(Academic::find($class->academic_id));
+                                $load = $academic->teachingHours($academic->id, $year ,$trimester);
                                 $workloadStatus = $academic->workloadStatus($academic->id, $load);
                             @endphp
-                            {{ $load . ' ' . $workloadStatus}}
+                            @if($academic->exists)
+                                {{ $load . ' ' . $workloadStatus}}
+                            @endif
+                        </td>
+                        <td>
+                            @php
+                                $academic = optional(Academic::find($class->academic_id));
+                                $load = $academic->teachingHours($academic->id, $year ,0);
+                                $workloadStatus = $academic->workloadStatus($academic->id, $load);
+                            @endphp
+                            @if($academic->exists)
+                                {{ $load . ' ' . $workloadStatus}}
+                            @endif
                         </td>
                         <td>
                             <div class="form-group">
@@ -181,13 +182,6 @@
 
                         </td>
                         <td>
-                                {{-- <select class="form-control" name="campus[]">
-                                    @foreach ($campuses as $campus)
-                                        <option value="{{ $campus }}" @if ($campus == $class->campus) selected @endif>
-                                            {{ $campus }}
-                                        </option>
-                                    @endforeach
-                                </select> --}}
                                 {{$class->campus}}
 
                         </td>
@@ -289,12 +283,10 @@ function addNewRow() {
             <div class="form-group">
                 <select class="selectpicker" name="new_academic_id[]">
 
-                    <option
-{{-- title="ddd" --}}
-                        >Select Lecturer</option>
+                    <option>Select Lecturer</option>
                         @foreach ($academics as $academic)
                         @php
-                        $load = $academic->teachingHoursperSem($academic->id, $year ,$trimester);
+                        $load = $academic->teachingHours($academic->id, $year ,$trimester);
                         $ratio = min(($load / $threshold_trimester), 1) * 100;
                         @endphp
                             <option data-ratio="{{ $ratio }}" data-bs-toggle="tooltip" data-bs-placement="top"
@@ -304,7 +296,7 @@ function addNewRow() {
                             data-bs-html="true"
                             data-bs-title="Previous Teaching Load: {{$academic->teaching_load}} <br> Notes: {{$academic->note}}"
                             class="dropdown-item"
-                            value="{{ $academic->id }}" @if ($academic->id == $class->academic_id) selected @endif
+                            value="{{ $academic->id }}" @if (isset($class) && $academic->id == $class->academic_id) selected @endif
                             {{-- title="{{$academic->lastname}}" --}}
                             {{-- title="Load: {{$academic->teaching_load}} Notes: {{$academic->note}}" --}}
                             >
@@ -321,7 +313,7 @@ function addNewRow() {
                 <select class="form-control" name="new_class_type[]">
                 @foreach ($class_types as $class_type)
                     <option name="class_type[]" value="{{ $class_type }}"
-                    @if ($class_type == $class->class_type) selected @endif>
+                    @if (isset($class) && $class_type == $class->class_type) selected @endif>
                     {{ $class_type }}
                 @endforeach
                 </select>

@@ -4,22 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0e3fdc26-a780-4964-b490-9e33aa918199" name="Changes" comment="Changed relationship between courses and academic, fixed next trimester bug">
-      <change afterPath="$PROJECT_DIR$/database/migrations/2024_09_25_041654_create_academic_offering_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2024_09_25_043324_add_yearly_teaching_load_to_academics_table.php" afterDir="false" />
+    <list default="true" id="0e3fdc26-a780-4964-b490-9e33aa918199" name="Changes" comment="Add academic_offering bridging table, add academic yearly workload">
+      <change afterPath="$PROJECT_DIR$/database/migrations/2024_09_25_081934_modify_class_schedule_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/726c7542-c3ea-46ea-b5f0-645aafbd5c5d.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/726c7542-c3ea-46ea-b5f0-645aafbd5c5d.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Exports/AcademicWorkloadExport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exports/AcademicWorkloadExport.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Exports/AcademicsExport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exports/AcademicsExport.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Exports/TrimestersExport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exports/TrimestersExport.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AcademicController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AcademicController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OfferingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OfferingController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/Academic.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Academic.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Offering.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Offering.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/database.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/database/database.sqlite" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/academic/add_academic.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/academic/add_academic.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/academic/edit_form.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/academic/edit_form.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/academic/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/academic/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/settings/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/settings/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/offering/edit_bulk.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/offering/edit_bulk.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/trimester/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/trimester/create.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/trimester/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/trimester/edit.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -209,17 +204,21 @@
     "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "D:/Other/Repos/CourseMaster",
+    "last_opened_file_path": "D:/Other/Repos/CourseMaster/database/migrations",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
     "ts.external.directory.path": "D:\\PhpStorm 2024.1.4\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Other\Repos\CourseMaster\database\migrations" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Other\Repos\CourseMaster\resources\views\home" />
       <recent name="D:\Other\Repos\CourseMaster\resources\views" />
@@ -259,7 +258,7 @@
       <workItem from="1726182126509" duration="3510000" />
       <workItem from="1726367251239" duration="92000" />
       <workItem from="1726628896254" duration="25376000" />
-      <workItem from="1727236858613" duration="3035000" />
+      <workItem from="1727236858613" duration="17195000" />
     </task>
     <task id="LOCAL-00001" summary="Add login page, add stock laravel pages, add logout button to dashboard, add login/register functionality">
       <option name="closed" value="true" />
@@ -565,7 +564,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726721543276</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="Add academic_offering bridging table, add academic yearly workload">
+      <option name="closed" value="true" />
+      <created>1727240008718</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1727240008718</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -584,7 +591,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Create dashboards for offerings and courses, remove ID from bulk edit academics and offerings" />
     <MESSAGE value="composer update run" />
     <MESSAGE value="add ext-pdo_sqlite to composer.json" />
     <MESSAGE value="add post-install-cmd" />
@@ -609,6 +615,7 @@
     <MESSAGE value="Temp fix for index.blade.php, fix HomeController.php classes query" />
     <MESSAGE value="Add sticky filters, teaching load column, correct toggle time and day, better save to trimester page. Add underwork definitions in settings page and underwork values in settings table" />
     <MESSAGE value="Changed relationship between courses and academic, fixed next trimester bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changed relationship between courses and academic, fixed next trimester bug" />
+    <MESSAGE value="Add academic_offering bridging table, add academic yearly workload" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add academic_offering bridging table, add academic yearly workload" />
   </component>
 </project>

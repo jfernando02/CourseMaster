@@ -127,7 +127,7 @@ class AcademicController extends Controller
             $teachingHours[$year . '-' . $trimester] = [
                 'year' => $year,
                 'trimester' => $trimester,
-                'hours' => $this->teachingHoursperSem($academic->id, $year, $trimester)
+                'hours' => $academic->teachingHours($academic->id, $year, $trimester)
             ];
         }
 
@@ -288,66 +288,6 @@ class AcademicController extends Controller
         }
 
         return redirect()->route('academic.index')->with('success', 'Academics updated successfully!');
-    }
-
-    // public function teachingHours($academicID)
-    // {
-    //     $result = ClassSchedule::with('offering.course', 'academic')
-    //         ->selectRaw('
-    //             CONCAT(academics.firstname, " ", academics.lastname) AS academic_name,
-    //             offerings.academic_id AS academic_id,
-    //             offerings.year,
-    //             offerings.trimester,
-    //             SUM(
-    //                 CAST((julianday(classSchedule.end_time) - julianday(classSchedule.start_time)) * 24 AS REAL)
-    //             ) AS teaching_hours
-
-    //         ')
-    //         ->join('offerings', 'classSchedule.offering_id', '=', 'offerings.id')
-    //         ->join('academics', 'classSchedule.academic_id', '=', 'academics.id')
-    //         ->groupBy('academic_name', 'offerings.year', 'offerings.trimester')
-    //         ->orderBy('academic_name')
-    //         ->orderBy('offerings.year')
-    //         ->orderBy('offerings.trimester')
-    //         ->where('offerings.academic_id', $academicID)
-    //         ->get();
-
-    //     return $result;
-    // }
-
-
-    public function teachingHoursperSem($academicID, $year, $trimester)
-    {
-        // Get list of class schedules for the academic
-        $classSchedules = ClassSchedule::where('academic_id', $academicID)->get();
-
-        // Initialize total teaching hours
-        $totalTeachingHours = 0;
-
-        // Loop through each class schedule
-        foreach ($classSchedules as $classSchedule) {
-            // Get the associated offering
-            $offering = Offering::where('id', $classSchedule->offering_id)
-                ->where('year', $year)
-                ->where('trimester', $trimester)
-                ->first();
-
-            // If offering exists for the specified year and trimester
-            if ($offering) {
-                // Calculate teaching hours for the class schedule
-                $startTime = strtotime($classSchedule->start_time);
-                $endTime = strtotime($classSchedule->end_time);
-                $teachingHours = ($endTime - $startTime) / 3600; // Convert seconds to hours
-
-                // Add teaching hours to the total
-                $totalTeachingHours += $teachingHours;
-            }
-        }
-
-        // Optionally, round the total teaching hours to 2 decimal places
-        $totalTeachingHours = round($totalTeachingHours, 2);
-
-        return $totalTeachingHours;
     }
 
     public function deleteClassSchedule($id)

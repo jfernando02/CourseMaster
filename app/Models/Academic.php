@@ -82,15 +82,26 @@ class Academic extends Model
         return $totalTeachingHours;
     }
 
-    public function workloadStatus($academicID, $totalTeachingHours): string
+    public function workloadStatus($academicID, $totalTeachingHours, $yearOrTrimester = "trimester"): string
     {
         $academic = Academic::find($academicID);
         $setting = Setting::latest()->first();
-        if($academic && $academic->teaching_load) {
-            if ($totalTeachingHours > $academic->teaching_load * ($setting->threshold_trimester / 100)) {
-                return "(OW)";
-            } elseif ($totalTeachingHours < $academic->teaching_load * ($setting->underwork_threshold_trimester / 100)) {
-                return "(UW)";
+        if($yearOrTrimester=="trimester") {
+            if ($academic && $academic->teaching_load) {
+                if ($totalTeachingHours > $academic->teaching_load * ($setting->threshold_trimester / 100)) {
+                    return "(OW)";
+                } elseif ($totalTeachingHours < $academic->teaching_load * ($setting->underwork_threshold_trimester / 100)) {
+                    return "(UW)";
+                }
+            }
+        }
+        else{
+            if ($academic && $academic->yearly_teaching_load) {
+                if ($totalTeachingHours > $academic->yearly_teaching_load * ($setting->threshold_year / 100)) {
+                    return "(OW)";
+                } elseif ($totalTeachingHours < $academic->yearly_teaching_load * ($setting->underwork_threshold_year / 100)) {
+                    return "(UW)";
+                }
             }
         }
         return "";

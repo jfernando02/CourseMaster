@@ -51,7 +51,7 @@
       <th>Year</th>
       <th>Trimester</th>
       <th>Campus</th>
-      <th>Convenor</th>
+      <th>Convenors</th>
       <th>Notes</th>
         <th>Select</th>
 
@@ -65,7 +65,6 @@
       <td><input class="form-control" type="text" name="name[]"   value="{{$offering->course->name}}"></td>
       <td><input class="form-control" type="text" name="year[]"   value="{{$offering->year}}"></td>
       <td><input class="form-control" type="text" name="trimester[]" value="{{$offering->trimester}}"></td>
-      {{-- <td><input class="form-control" type="text" name="campus" value="{{$offering->campus}}"></td> --}}
       <td>
         <select class="form-control" name="campus[]">
         @foreach($campuses as $campus)
@@ -74,27 +73,19 @@
         </select>
       </td>
       <td>
-        {{-- @if(isset($offering->convenor))
-        <a href='{{url("academic/{$offering->convenor->id}")}}'>
-        {{$offering->convenor->firstname}} {{$offering->convenor->lastname}}</a>
-        @else Unassigned
-        @endif --}}
-        <select class="selectpicker form-control" name="academic_id[]">
-          {{-- <option
-          title="ddd"
-          >Select Lecturer</option> --}}
-          @foreach ($academics as $academic)
-
-              <option
-
-
-              class="dropdown-item custom-tooltip"
-              value="{{ $academic->id }}" @if ($academic->id == $offering->academic_id) selected @endif
-              >
-             {{ $academic->firstname }} {{ $academic->lastname }} ({{$academic->home_campus}})
-              </option>
-          @endforeach
-      </select>
+          <select class="selectpicker form-control" name="academic_id[{{ $offering->id }}][]" multiple>
+              @php
+                  $offeringAcademicIds = $offering->academics->pluck('id')->toArray();
+              @endphp
+              @foreach ($academics as $academic)
+                  <option
+                      value="{{ $academic->id }}"
+                      class="dropdown-item custom-tooltip"
+                      {{ in_array($academic->id, $offeringAcademicIds) ? 'selected' : '' }}>
+                      {{ $academic->firstname }} {{ $academic->lastname }} ({{$academic->home_campus}})
+                  </option>
+              @endforeach
+          </select>
       </td>
       </td>
       <td>

@@ -94,7 +94,7 @@
                                         >Select Lecturer</option>
                                         @foreach ($academics as $academic)
                                         @php
-                                        $load = $academic->teachingHoursperSem($academic->id, 2022, 1);
+                                        $load = $academic->teachingHours($academic->id, 2022, 1);
                                         $ratio = min(($load / 100), 1) * 100;
 
                                         @endphp

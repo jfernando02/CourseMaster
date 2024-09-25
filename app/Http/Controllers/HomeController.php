@@ -67,15 +67,6 @@ class HomeController extends Controller
         $menu2Options = ['1', '2', '3'];
         $menu3Options = ['2022','2023','2024', '2025', '2026', '2027', '2028'];
 
-        // filter offering based on academic id
-        $offerings = DB::table('offerings')
-            ->join('courses', 'offerings.course_id', '=', 'courses.id')
-            ->select('offerings.year AS Year', 'offerings.trimester AS Term', 'courses.code AS Course_Code', 'courses.name AS Course_Name')
-            ->where('offerings.academic_id', $academic_id) // Filter by academic ID
-            ->where('offerings.year', $year) // Filter by year
-            ->where('offerings.trimester', $trimester) // Filter by trimester
-            ->groupBy('offerings.year', 'offerings.trimester', 'courses.code', 'courses.name')
-            ->get();
-        return view('home.index', compact('threshold_trimester', 'name', 'offerings', 'department', 'setting', 'menu1Options', 'menu2Options', 'menu3Options'));
+        return view('home.index', compact('threshold_trimester', 'name', 'department', 'setting', 'menu1Options', 'menu2Options', 'menu3Options'));
     }
 }

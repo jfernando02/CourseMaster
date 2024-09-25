@@ -111,11 +111,16 @@ class OfferingController extends Controller
         $offering->year = $request->year;
         $offering->trimester = $request->trimester;
         $offering->campus = $request->campus;
-        $offering->academic_id = $request->convenor;
 
         $offering->note = $request->note;
 
         $offering->save();
+
+        foreach($request->convenor as $academicId){
+            $offering->academics()->attach($academicId);
+        }
+
+
         return redirect("offering/");
     }
 
@@ -148,13 +153,13 @@ class OfferingController extends Controller
     public function show(string $id)
     {
         $offering = Offering::findOrFail($id);
-        $academic = Academic::findOrFail($offering->academic_id);
+        $academics = $offering->academics;
         $course = Course::findOrFail($offering->course_id);
         $classes = ClassSchedule::where('offering_id', $id)
                         ->with('academic')
                         ->get();
 
-        return view('offering.show', compact('offering', 'academic', 'course', 'classes'));
+        return view('offering.show', compact('offering', 'academics', 'course', 'classes'));
     }
 
     /**
@@ -172,40 +177,6 @@ class OfferingController extends Controller
     }
 
     /**
-     * Update the specified offering in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  string  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, string $id)
-    {
-        $this->validate($request, [
-            'year' => 'required',
-            'trimester' => 'required|integer|between:1,3',
-            'campus' => 'required',
-/*             'nstudents' => 'integer',
-            'nlectures' => 'integer',
-            'nworkshops' => 'integer' */
-        ]);
-        // validation: need to ensure trimester is an integer betweeen 1 and 3
-        $offering = Offering::findOrFail($id);
-//        if ($this->checkExist($id, $request->year, $request->trimester, $request->campus))
-//            return redirect("course/$id")->with('error', 'Offering NOT added! This offering already exists!');
-        $offering->year = $request->year;
-        $offering->trimester = $request->trimester;
-        $offering->campus = $request->campus;
-        $offering->academic_id = $request->convenor;
-        $offering->note = $request->note;
-
-
-        $offering->save();
-        return redirect("offering/".$id);
-
-
-    }
-
-    /**
      * Remove the specified offering from storage.
      *
      * @param  string  $id
@@ -215,6 +186,7 @@ class OfferingController extends Controller
     {
         $offering = Offering::findOrFail($id);
         $course_id = $offering->course->id;
+        $offering->academics()->detach();
         $offering->delete();
         return redirect("course/".$course_id);
     }
@@ -239,7 +211,7 @@ class OfferingController extends Controller
             $offering->year = $years[$index];
             $offering->trimester = $trimesters[$index];
             $offering->campus = $campuses[$index];
-            $offering->academic_id = $academic_ids[$index];
+            $offering->academics()->sync(isset($academic_ids[$id]) ? $academic_ids[$id] : []);
             $offering->note = $notes[$index];
             if (!$offering->save()) {
                 dd("Save failed!");
@@ -253,7 +225,7 @@ class OfferingController extends Controller
         }
 
         // return redirect('edit_bulk');
-        return redirect()->route('offering.edit_bulks')->with('success', 'Academics updated successfully!');
+        return redirect()->route('offering.edit_bulks')->with('success', 'Offerings updated successfully!');
     }
 
 
