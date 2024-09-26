@@ -19,6 +19,8 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\TrimestersImport;
 use App\Exports\TrimestersExport;
 
+use Illuminate\Support\Facades\Validator;
+
 class TrimesterController extends Controller
 {
     /**
@@ -326,7 +328,20 @@ class TrimesterController extends Controller
             'campus.*' => 'nullable|string',
         ]);
 
+        $validator = Validator::make($request->all(), []);
+
+        // Add academic_id validation only when new_offering_id is not present
+        $validator->sometimes('academic_id.*', 'exists:academics,id', function ($input) {
+            return !(isset($input->new_offering_id) || isset($input->delete));
+        });
+
+        $validator->validate();
+
         $classScheduleIDs = $request->input('class_id', []);
+
+        if ($request->has('delete')) {
+            ClassSchedule::destroy($request->input('save_row'));
+        }
 
         foreach ($classScheduleIDs as $index => $id) {
             // find the index number of the class schedule
@@ -338,7 +353,6 @@ class TrimesterController extends Controller
             $offering = Offering::find($offering_id);
 
             if ($class) {
-                $class->academic_id = $request->input('academic_id')[$rowNo];
                 $class->class_type = $request->input('class_type')[$rowNo];
                 $class->start_time = $request->input('start_time')[$rowNo];
                 $class->end_time = $request->input('end_time')[$rowNo];
@@ -352,15 +366,12 @@ class TrimesterController extends Controller
                     return redirect()->back()->with('error', 'An error occurred while saving the offering and class.');
                 }
                 // dd($offering);
+                $class->academic()->sync([$request->input('academic_id')[$rowNo]=>['offering_id' => $offering_id]]);
 
             }
         }
 
-        if ($request->has('delete')) {
-            ClassSchedule::destroy($request->input('save_row'));
-        }
-
-        else if ($request->input('new_offering_id')) {
+        if ($request->input('new_offering_id')) {
             foreach ($request->input('new_offering_id') as $i => $offering_id) {
                 $offering = Offering::
                 where('id', $offering_id)->first();
@@ -368,7 +379,6 @@ class TrimesterController extends Controller
                 // create new class
                 $class = new ClassSchedule();
                 $class->offering_id = $offering->id;
-                $class->academic_id = $request->new_academic_id[$i] ?? null;
                 $class->class_type = $request->new_class_type[$i];
                 $class->start_time = $request->new_start_time[$i];
                 $class->end_time = $request->new_end_time[$i];

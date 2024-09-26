@@ -29,9 +29,10 @@ class ClassSchedule extends Model
         return $this->belongsTo(Offering::class, 'offering_id');
     }
 
+    //A class will usually belong to only one academic, but it isn't mandatory and the belongsToMany functionality is useful
     public function academic()
     {
-        return $this->belongsTo(Academic::class, 'academic_id');
+        return $this->belongsToMany(Academic::class);
     }
 
     public function findOffering($course_id, $year, $trimester)

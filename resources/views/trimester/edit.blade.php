@@ -124,16 +124,15 @@
                                     <option value="">Unassigned</option>
                                     @foreach ($class->offering->academics as $academic)
                                     @php
-                                    $load = $academic->teachingHours($academic->id, $year ,$trimester);
+                                    $load = $academic->teachingHours($year ,$trimester);
                                     $ratio = min(($load / $threshold_trimester), 1) * 100;
                                     @endphp
                                         <option
-
                                         style="background: linear-gradient(to right, rgb(77, 181, 71) {{ $ratio }}%, white {{ $ratio }}%);"
-
                                         class="dropdown-item custom-tooltip"
-                                        value="{{ $academic->id }}" @if ($academic->id == $class->academic_id) selected @endif
+                                        value="{{ $academic->id }}" @if ($academic->id == optional($class->academic()->first())->id) selected @endif
                                         >
+
                                        {{ $academic->firstname }} {{ $academic->lastname }} ({{$academic->home_campus}})
                                         </option>
                                     @endforeach
@@ -142,9 +141,9 @@
                         </td>
                         <td>
                             @php
-                                $academic = optional(Academic::find($class->academic_id));
-                                $load = $academic->teachingHours($academic->id, $year ,$trimester);
-                                $workloadStatus = $academic->workloadStatus($academic->id, $load);
+                                $academic = optional($class->academic()->first());
+                                $load = $academic->teachingHours($year ,$trimester);
+                                $workloadStatus = $academic->workloadStatus($load);
                             @endphp
                             @if($academic->exists)
                                 {{ $load . ' hours ' . $workloadStatus}}
@@ -152,9 +151,9 @@
                         </td>
                         <td>
                             @php
-                                $academic = optional(Academic::find($class->academic_id));
-                                $load = $academic->teachingHours($academic->id, $year ,0);
-                                $workloadStatus = $academic->workloadStatus($academic->id, $load, "year");
+                                $academic = optional($class->academic()->first());
+                                $load = $academic->teachingHours($year ,0);
+                                $workloadStatus = $academic->workloadStatus($load, "year");
                             @endphp
                             @if($academic->exists)
                                 {{ $load . ' hours ' . $workloadStatus}}

@@ -73,7 +73,7 @@
         </select>
       </td>
       <td>
-          <select class="selectpicker form-control" name="academic_id[{{ $offering->id }}][]" multiple>
+          <select class="selectpicker form-control" name="academic_id[{{ $offering->id }}][]" multiple data-selected-text-format="count > 2">
               @php
                   $offeringAcademicIds = $offering->academics->pluck('id')->toArray();
               @endphp

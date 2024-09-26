@@ -13,13 +13,13 @@ class Academic extends Model
 
     protected $fillable = ['firstname', 'lastname', 'teaching_load', 'area', 'note', 'home_campus'];
 
-    //an academic can have many offerings as convenor
+    //an academic can have many offerings
     function offerings(){
         return $this->belongsToMany(Offering::class);
     }
 
 
-    //an academic can have many courses
+    //an academic can be primary convenor of many courses
     function course()
     {
         // return $this->belongsToMany('App\Models\Course', 'id');
@@ -30,7 +30,7 @@ class Academic extends Model
     //an academic can have many class schedules
     function classSchedules()
     {
-        return $this->hasMany(ClassSchedule::class, 'academic_id');
+        return $this->belongsToMany(ClassSchedule::class);
     }
 
     public function user(){
@@ -40,10 +40,10 @@ class Academic extends Model
 
     // Calculate the total teaching hours for an academic in a specified year and trimester
     // If trimester is 0, will get classes for whole year
-    public function teachingHours($academicID, $year, $trimester = 0)
+    public function teachingHours($year, $trimester = 0)
     {
         // Get list of class schedules for the academic
-        $classSchedules = ClassSchedule::where('academic_id', $academicID)->get();
+        $classSchedules = $this->classSchedules()->get();
 
         // Initialize total teaching hours
         $totalTeachingHours = 0;
@@ -82,24 +82,23 @@ class Academic extends Model
         return $totalTeachingHours;
     }
 
-    public function workloadStatus($academicID, $totalTeachingHours, $yearOrTrimester = "trimester"): string
+    public function workloadStatus($totalTeachingHours, $yearOrTrimester = "trimester"): string
     {
-        $academic = Academic::find($academicID);
         $setting = Setting::latest()->first();
         if($yearOrTrimester=="trimester") {
-            if ($academic && $academic->teaching_load) {
-                if ($totalTeachingHours > $academic->teaching_load * ($setting->threshold_trimester / 100)) {
+            if ($this->teaching_load) {
+                if ($totalTeachingHours > $this->teaching_load * ($setting->threshold_trimester / 100)) {
                     return "(OW)";
-                } elseif ($totalTeachingHours < $academic->teaching_load * ($setting->underwork_threshold_trimester / 100)) {
+                } elseif ($totalTeachingHours < $this->teaching_load * ($setting->underwork_threshold_trimester / 100)) {
                     return "(UW)";
                 }
             }
         }
         else{
-            if ($academic && $academic->yearly_teaching_load) {
-                if ($totalTeachingHours > $academic->yearly_teaching_load * ($setting->threshold_year / 100)) {
+            if ($this->yearly_teaching_load) {
+                if ($totalTeachingHours > $this->yearly_teaching_load * ($setting->threshold_year / 100)) {
                     return "(OW)";
-                } elseif ($totalTeachingHours < $academic->yearly_teaching_load * ($setting->underwork_threshold_year / 100)) {
+                } elseif ($totalTeachingHours < $this->yearly_teaching_load * ($setting->underwork_threshold_year / 100)) {
                     return "(UW)";
                 }
             }
