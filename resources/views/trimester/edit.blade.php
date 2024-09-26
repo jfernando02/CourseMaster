@@ -49,11 +49,6 @@
                         href="{{ route('trimester.edit', ['year' => $next_trimester[0], 'trimester' => $next_trimester[1]]) }}">
                         <i class="fa-solid fa-chevron-right"></i> Next Trimester
                     </a>
-<!--
-                <a class="btn btn-primary"
-                    href="{{ route('trimester.edit', ['year' => $next_trimester[0], 'trimester' => $next_trimester[1]]) }}">
-                    Next Trimester
-                </a> -->
 
             </div>
 
@@ -120,7 +115,7 @@
                         <input type="hidden" name="class_id[]" id="selectedClassID" value="{{ $class->id }}">
                         <input type="hidden" name="offering_id[]" id="selectedOfferingID" value="{{ $class->offering_id }}">
                         <td>
-                            {{$class->offering->course->name}}
+                            {{optional($class->offering->course)->name}}
 
                         </td>
                         <td>
@@ -152,7 +147,7 @@
                                 $workloadStatus = $academic->workloadStatus($academic->id, $load);
                             @endphp
                             @if($academic->exists)
-                                {{ $load . ' ' . $workloadStatus}}
+                                {{ $load . ' hours ' . $workloadStatus}}
                             @endif
                         </td>
                         <td>
@@ -162,7 +157,7 @@
                                 $workloadStatus = $academic->workloadStatus($academic->id, $load, "year");
                             @endphp
                             @if($academic->exists)
-                                {{ $load . ' ' . $workloadStatus}}
+                                {{ $load . ' hours ' . $workloadStatus}}
                             @endif
                         </td>
                         <td>

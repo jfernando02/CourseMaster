@@ -184,17 +184,18 @@ class TrimesterController extends Controller
             ->groupBy('year', 'tri')
             ->get();
 
-        $trimester_combinations = [];
-        foreach ($trimester_number as $item) {
-            $trimester_combinations[] = [$item->year, $item->tri];
+        if($trimester==1){
+            $prev_trimester = [$year-1, 3];
         }
-
-        $current_index = array_search([$year, $trimester], $trimester_combinations);
-        $prev_index = max(0, $current_index - 1);
-        $next_index = min(count($trimester_combinations) - 1, $current_index + 1);
-
-        $prev_trimester = $trimester_combinations[$prev_index];
-        $next_trimester = $trimester_combinations[$next_index];
+        else{
+            $prev_trimester = [$year, $trimester-1];
+        }
+        if($trimester==3){
+            $next_trimester = [$year+1, 1];
+        }
+        else{
+            $next_trimester = [$year, $trimester+1];
+        }
 
 
         $classes = ClassSchedule::whereHas('offering', function ($query) use ($year, $trimester) {
