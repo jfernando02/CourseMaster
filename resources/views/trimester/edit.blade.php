@@ -97,7 +97,7 @@
                     {{-- <th>ID</th> --}}
                     <th>Offering</th>
                     <th>Lecturers</th>
-                    <th>Teaching Load</th>
+                    <th>Teaching Load (Trimester)</th>
                     <th>Teaching Load (Year)</th>
                     <th>Class Type</th>
                     <th>Campus</th>
@@ -146,17 +146,29 @@
                                 $workloadStatus = $academic->workloadStatus($load);
                             @endphp
                             @if($academic->exists)
-                                {{ $load . ' hours ' . $workloadStatus}}
+                                @if($workloadStatus === 'OW')
+                                    <span style="color: red;">{{ $load . ' hours '}}</span>
+                                @elseif($workloadStatus === 'UW')
+                                    <span style="color: blue;">{{ $load . ' hours '}}</span>
+                                @else
+                                    <span>{{ $load . ' hours '}}</span>
+                                @endif
                             @endif
                         </td>
                         <td>
                             @php
                                 $academic = optional($class->academic()->first());
-                                $load = $academic->teachingHours($year ,0);
-                                $workloadStatus = $academic->workloadStatus($load, "year");
+                                $yearLoad = $academic->teachingHours($year ,0);
+                                $yearWorkloadStatus = $academic->workloadStatus($yearLoad, "year");
                             @endphp
                             @if($academic->exists)
-                                {{ $load . ' hours ' . $workloadStatus}}
+                                @if($yearWorkloadStatus === 'OW')
+                                    <span style="color: red;">{{ $yearLoad . ' hours '}}</span>
+                                @elseif($yearWorkloadStatus === 'UW')
+                                    <span style="color: blue;">{{ $yearLoad . ' hours '}}</span>
+                                @else
+                                    <span>{{ $yearLoad . ' hours '}}</span>
+                                @endif
                             @endif
                         </td>
                         <td>

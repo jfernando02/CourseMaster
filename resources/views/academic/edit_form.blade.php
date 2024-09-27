@@ -66,7 +66,7 @@
             <th>First Name</th>
             <th>Last Name</th>
             <th>Email</th>
-            <th>Teaching Load</th>
+            <th>Teaching Load (Trimester)</th>
             <th>Teaching Load (Year)</th>
             <th>Area</th>
             <th>Home Campus</th>

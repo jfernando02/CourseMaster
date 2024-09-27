@@ -88,18 +88,18 @@ class Academic extends Model
         if($yearOrTrimester=="trimester") {
             if ($this->teaching_load) {
                 if ($totalTeachingHours > $this->teaching_load * ($setting->threshold_trimester / 100)) {
-                    return "(OW)";
+                    return "OW";
                 } elseif ($totalTeachingHours < $this->teaching_load * ($setting->underwork_threshold_trimester / 100)) {
-                    return "(UW)";
+                    return "UW";
                 }
             }
         }
         else{
             if ($this->yearly_teaching_load) {
                 if ($totalTeachingHours > $this->yearly_teaching_load * ($setting->threshold_year / 100)) {
-                    return "(OW)";
+                    return "OW";
                 } elseif ($totalTeachingHours < $this->yearly_teaching_load * ($setting->underwork_threshold_year / 100)) {
-                    return "(UW)";
+                    return "UW";
                 }
             }
         }
