@@ -224,6 +224,7 @@ class OfferingController extends Controller
             Offering::destroy($request->input('save_row'));
         }
 
+        session()->flash('message', 'Save successful');
         // return redirect('edit_bulk');
         return redirect()->route('offering.edit_bulks')->with('success', 'Offerings updated successfully!');
     }

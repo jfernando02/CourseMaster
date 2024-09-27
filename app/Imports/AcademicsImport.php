@@ -28,6 +28,7 @@ class AcademicsImport implements ToModel, WithHeadingRow, WithValidation
             'lastname' => $row['lastname'],
         ], [
             'teaching_load' => $row['teaching_load'],
+            'yearly_teaching_load' => $row['yearly_teaching_load'],
             'area' => $row['area'],
             'note' => $row['note'],
         ]);
@@ -39,6 +40,7 @@ class AcademicsImport implements ToModel, WithHeadingRow, WithValidation
             'firstname' => 'required|string',
             'lastname' => 'required|string',
             'teaching_load' => 'numeric',
+            'yearly_teaching_load' => 'numeric',
             'area' => 'required|string',
             'note' => 'nullable|string',
         ];

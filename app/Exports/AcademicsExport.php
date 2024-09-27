@@ -23,12 +23,13 @@ class AcademicsExport implements FromCollection, WithHeadings
             'First Name',
             'Last Name',
             'Teaching Load',
-            'Yearly Teaching Load',
             'Area',
             'Note',
             'Created At',
             'Updated At',
-            'Home Campus'
+            'Home Campus',
+            'Email',
+            'Yearly Teaching Load'
         ];
     }
 }

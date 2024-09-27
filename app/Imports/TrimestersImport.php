@@ -49,9 +49,9 @@ class TrimestersImport implements ToModel, WithHeadingRow, WithValidation
             throw new Exception("Offering not found: {$course->id} {$row['trimester']} {$row['year']} {$academic->id}");
             // throw new Exception("Offering not found: {$row['course_code']} {$row['trimester']} {$row['year']} {$row['academic_firstname']} {$row['academic_lastname']}");
         }
-        
+
         $key = $offering->id . $academic->id . $row['class_type'] . $row['start_time'] . $row['end_time'] . $row['class_day'] . $row['numberofstudents'] . $row['campus'];
-        
+
         if (isset($this->processed[$key])) {
             throw new Exception("Duplicate entry found: {$offering->id} {$academic->id} {$row['class_type']} {$row['start_time']} {$row['end_time']} {$row['class_day']} {$row['numberofstudents']} {$row['campus']}");
         }
@@ -60,7 +60,6 @@ class TrimestersImport implements ToModel, WithHeadingRow, WithValidation
 
         return ClassSchedule::updateOrCreate([
             'offering_id' => $offering->id,
-            'academic_id' => $academic->id,
             'class_type' => $row['class_type'],
             'start_time' => $row['start_time'],
             'end_time' => $row['end_time'],
@@ -76,8 +75,6 @@ class TrimestersImport implements ToModel, WithHeadingRow, WithValidation
             'trimester' => 'required|integer',
             'year' => 'required|integer',
             'campus' => 'required|string',
-            'academic_firstname' => 'required|string',
-            'academic_lastname' => 'required|string',
             'class_type' => 'required|string',
             'start_time' => 'required|date_format:H:i',
             'end_time' => 'required|date_format:H:i',

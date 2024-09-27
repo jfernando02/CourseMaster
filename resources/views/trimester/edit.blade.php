@@ -42,7 +42,13 @@
                 <button id="toggleColumns" class="btn btn-outline-success">Toggle Time & Day Columns</button>
 
                 <button class="btn btn-outline-success" type="submit"><i class="fa-regular fa-floppy-disk"></i> Save</button>
-
+                @if (session('message'))
+                    <script>
+                        window.onload = function () {
+                            alert("{{ session('message') }}");
+                        }
+                    </script>
+                @endif
                 <button class="btn btn-outline-danger" type="submit" name="delete" value="delete" onclick="return confirm('Are you sure you want to delete these classes?')"><i class="fa-regular fa-trash"></i> Delete Selected Classes</button>
                     <a class="btn btn-outline-primary"
 

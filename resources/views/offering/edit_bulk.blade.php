@@ -19,7 +19,13 @@
     </button>
 
             <button type="submit" class="btn btn-primary">Save</button>
-
+            @if (session('message'))
+                <script>
+                    window.onload = function () {
+                        alert("{{ session('message') }}");
+                    }
+                </script>
+            @endif
         </div>
     </div>
 <table class="table table-striped" id="offeringsTable">

@@ -175,56 +175,51 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($offerings as $offering)
+            @foreach ($classSchedules as $classSchedule)
                 <tr>
                     <td>
-                                @foreach ($courses as $course)
-                                @if ($course->id == $offering->course_id)
+                                @if ($course = $classSchedule->offering->course)
                                 {{ $course->code }} {{ $course->name }}
                                  @endif
-                                @endforeach
 
                     </td>
                     <td>
-                                @foreach ($academics as $academic)
-                                    @if ($academic->id == $offering->academic_id)
+
+                                    @if ($academic = $classSchedule->academic->first())
 
                                     {{ $academic->firstname }} {{ $academic->lastname }}
                                     @endif
-                                @endforeach
-                            </select>
-                        </div>
                     </td>
                     <td>
 
-                            @foreach ($class_types as $class_type)
-                                @if ($class_type == $offering->class_type)
+
+                                @if ($class_type = $classSchedule->class_type)
 
                                 {{ $class_type }}
                                 @endif
-                            @endforeach
-                    </td>
-                    <td>
-                                @foreach ($campuses as $campus)
-                                    @if ($campus == $offering->campus)
-                                    {{ $campus }}
-                                    @endif
-                                @endforeach
 
                     </td>
                     <td>
-                        {{ $offering->start_time }}
-                    </td>
-                    <td>
-                        {{ $offering->end_time }}
-                    </td>
-                    <td>
-                                @foreach ($days as $day)
-                                    @if ($day == $offering->class_day)
-                                    {{ $day }}
+
+                                    @if ($campus = $classSchedule->offering->campus)
+                                    {{ $campus }}
                                     @endif
-                                @endforeach
-                        </div>
+
+
+                    </td>
+                    <td>
+                        {{ $classSchedule->start_time }}
+                    </td>
+                    <td>
+                        {{ $classSchedule->end_time }}
+                    </td>
+                    <td>
+
+                        @if ($day =$classSchedule->class_day)
+                            {{ $day }}
+                        @endif
+
+
                     </td>
 
                 </tr>

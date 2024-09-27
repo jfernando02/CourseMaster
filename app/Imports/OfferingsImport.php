@@ -25,7 +25,7 @@ class OfferingsImport implements ToModel, WithHeadingRow, WithValidation
         $academic = Academic::where('firstname', $row['instructor_firstname'])
             ->where('lastname', $row['instructor_lastname'])
             ->first();
-        
+
         if (!$academic) {
             throw new Exception("Academic not found: {$row['instructor_firstname']} {$row['instructor_lastname']}");
         }
@@ -42,11 +42,9 @@ class OfferingsImport implements ToModel, WithHeadingRow, WithValidation
             'course_id' => $course->id,
             'trimester' => $row['trimester'],
             'year' => $row['year'],
-            'academic_id' => $academic->id,
-            'campus' => $row['campus'],
+            'campus' => $row['campus']
         ], [
-            'note' => $row['note'],
-            'reserved' => $row['reserved'],
+            'note' => $row['note']
         ]);
     }
 
@@ -57,10 +55,7 @@ class OfferingsImport implements ToModel, WithHeadingRow, WithValidation
             'trimester' => 'required|numeric',
             'year' => 'required|numeric',
             'campus' => 'required|string',
-            'note' => 'nullable|string',
-            'reserved' => 'nullable|string',
-            'instructor_firstname' => 'required|string',
-            'instructor_lastname' => 'required|string',
+            'note' => 'nullable|string'
         ];
     }
 

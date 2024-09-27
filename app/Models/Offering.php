@@ -26,7 +26,7 @@ class Offering extends Model
 
     function course(){
         // return $this->belongsTo('App\Models\Course', 'course_id');
-        return $this->belongsTo(Course::class);
+        return $this->belongsTo(Course::class, 'course_id');
     }
 
     function academics(){

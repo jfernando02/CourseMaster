@@ -56,7 +56,7 @@
                 <th>Year</th>
                 <th>Trimester</th>
                 <th>Campus</th>
-                <th>Convenor</th>
+                <th>Convenors</th>
                 <th>Notes</th>
             </tr>
             <tr>
@@ -92,9 +92,11 @@
                     <td>{{ $offering->trimester }}</td>
                     <td>{{ $offering->campus }}</td>
                     <td>
-                        @if (isset($offering->convenor))
-                            <a href='{{ url("academic/{$offering->convenor->id}") }}'>
-                                {{ $offering->convenor->firstname }} {{ $offering->convenor->lastname }}</a>
+                        @if (isset($offering->academics) && $offering->academics->count() > 0)
+                            @foreach($offering->academics as $academic)
+                            <a href='{{ url("academic/{$academic->id}") }}'>
+                                {{ $academic->firstname }} {{ $academic->lastname }}</a>
+                            @endforeach
                         @else
                             Unassigned
                         @endif

@@ -85,11 +85,14 @@ class TrimesterController extends Controller
         $campuses = ['GC', 'NA', 'OL'];
         $class_types = ['Lecture', 'Workshop'];
         $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
-
+        $classSchedules = ClassSchedule::whereHas('offering', function ($query) use ($year, $trimester) {
+            $query->where('year', $year);
+            $query->where('trimester', $trimester);
+        })->get();
         // dd($trimester_number);
 
 
-        return view('trimester.index', compact('currentTrimester', 'days', 'class_types', 'campuses', 'year', 'trimester', 'offerings', 'courses', 'academics', 'trimester_number', 'prev_trimester', 'next_trimester'));
+        return view('trimester.index', compact('classSchedules','currentTrimester', 'days', 'class_types', 'campuses', 'year', 'trimester', 'offerings', 'courses', 'academics', 'trimester_number', 'prev_trimester', 'next_trimester'));
 
     }
 
@@ -389,7 +392,7 @@ class TrimesterController extends Controller
 
         $year = $request->year;
         $trimester = $request->trimester;
-
+        session()->flash('message', 'Save successful');
         return redirect()->route('trimester.edit', ['year' => $year, 'trimester' => $trimester])->with('success', 'Trimester offerings updated successfully!');
     }
 
