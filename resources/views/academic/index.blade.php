@@ -24,9 +24,10 @@
             {{ session('success') }}
         </div>
     @endif
+    <h1>Academics</h1>
+    <p>To see workload for a different trimester/year, change the current trimester/year in settings</p>
     <a class="btn btn-outline-primary" href="{{ url('academic/create') }}"><i class="fa-regular fa-plus"></i> Add a new
         academic</a>
-    <h1>Academics</h1>
     <!-- @if ($academics)
     <ul>
                             @foreach ($academics as $academic)
@@ -109,8 +110,8 @@
                             {{ $academic->firstname }}</a></td>
                     {{-- <td><a href="{{url("academic/$academic->id")}}">{{$academic->firstname}} {{$academic->lastname}}, </a></td> --}}
                     <td>{{ $academic->email }}</td>
-                    <td>{{ $academic->teachingHours($academic->id, 2024, 1) }} hours</td>
-                    <td>{{ $academic->teachingHours($academic->id, 2024, 0) }} hours</td>
+                    <td>{{ $academic->teachingHours($settings->current_year, $settings->current_trimester) }} hours ({{$academic->workloadStatus($academic->teachingHours($settings->current_year, $settings->current_trimester))}})</td>
+                    <td>{{ $academic->teachingHours($settings->current_year, 0) }} hours ({{$academic->workloadStatus($academic->teachingHours($settings->current_year, 0), "year")}})</td>
                     <td>{{ $academic->area }}</td>
                     <td>{{ $academic->home_campus }}</td>
                     <td>{{ $academic->note }}</td>

@@ -35,12 +35,12 @@ class AcademicController extends Controller
         $courses = Course::all();
         $classes = ClassSchedule::all();
         $offering_trimester = Offering::select('year', 'trimester')->distinct()->get();
-
+        $settings = Setting::latest()->first();
 
         $displayAssignedOfferings = session('displayAssignedOfferings', false);
         // $unassigned_academics = [];
 
-        return view('academic.index', compact('classes', 'academics', 'offerings', 'offering_trimester'));
+        return view('academic.index', compact('classes', 'academics', 'offerings', 'offering_trimester', 'settings'));
     }
 
     /**

@@ -103,7 +103,7 @@ class Academic extends Model
                 }
             }
         }
-        return "";
+        return "OK";
     }
 
 

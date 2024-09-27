@@ -24,10 +24,10 @@
             {{ session('success') }}
         </div>
     @endif
+
+    <h1>Courses</h1>
     <a class="btn btn-outline-primary" href="{{ url('course/create') }}"><i class="fa-regular fa-plus"></i> Add a new
         course</a>
-    <h1>Courses</h1>
-
     <a class="btn btn-outline-primary" href="{{ url('course/1/edit') }}"><i class="fa-regular fa-pen-to-square"></i> Edit</a>
     <div class="row mt-3">
         {{-- <a class="btn btn-warning" href="{{ url('course/1/edit') }}">Edit</a> --}}

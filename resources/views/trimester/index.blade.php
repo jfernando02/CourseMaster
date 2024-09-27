@@ -84,7 +84,7 @@
                 </ul>
             </div>
         </form>
-        <a class="btn btn-outline-primary" href="{{ route('trimester.create') }}"><i class="fa-regular fa-plus"></i> Create Trimester</a>
+        {{-- Don't know if this works so disabling <a class="btn btn-outline-primary" href="{{ route('trimester.create') }}"><i class="fa-regular fa-plus"></i> Create Trimester</a> --}}
         <a class="btn btn-outline-primary" href="{{ route('trimester.edit', ['year' => $currentTrimester[0], 'trimester' => $currentTrimester[1]]) }}"><i class="fa-regular fa-pen-to-square"></i> Edit Trimester</a>
         {{-- Form for copying trimester --}}
         <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#copyTrimesterModal">

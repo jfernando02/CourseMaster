@@ -163,7 +163,7 @@
               <li><a class="dropdown-item" href="{{ url('academic') }}">Academics Report</a></li>
               <li><a class="dropdown-item" href="{{ url('course') }}">Courses Report</a></li>
               <li><a class="dropdown-item" href="{{ url('offering') }}">Offerings Report</a></li>
-              <li><a class="dropdown-item" href="{{ url('trimester') }}">Trimesters Report</a></li>
+              <li><a class="dropdown-item" href="{{ route('trimester.index', ['year' => $settings->current_year, 'trimester' => $settings->current_trimester]) }}">Trimesters Report</a></li>
           </ul>
       </li>
 
