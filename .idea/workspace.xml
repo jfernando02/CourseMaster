@@ -4,14 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0e3fdc26-a780-4964-b490-9e33aa918199" name="Changes" comment="Add fixes to import and export (WIP), add save successful prompts for offerings and trimesters, add fixes to report display">
+    <list default="true" id="0e3fdc26-a780-4964-b490-9e33aa918199" name="Changes" comment="Academic report reflects current year/trimester correctly, displays workload status, trimester report goes to current trimester/year, disabled create trimester button">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AcademicController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AcademicController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Academic.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Academic.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/database.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/database/database.sqlite" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/academic/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/academic/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/course/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/course/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/master.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/master.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/trimester/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/trimester/index.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -257,7 +251,7 @@
       <workItem from="1726628896254" duration="25376000" />
       <workItem from="1727236858613" duration="25104000" />
       <workItem from="1727319596249" duration="25425000" />
-      <workItem from="1727406524066" duration="3781000" />
+      <workItem from="1727406524066" duration="4002000" />
     </task>
     <task id="LOCAL-00001" summary="Add login page, add stock laravel pages, add logout button to dashboard, add login/register functionality">
       <option name="closed" value="true" />
@@ -611,7 +605,15 @@
       <option name="project" value="LOCAL" />
       <updated>1727409009007</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="Academic report reflects current year/trimester correctly, displays workload status, trimester report goes to current trimester/year, disabled create trimester button">
+      <option name="closed" value="true" />
+      <created>1727410442598</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1727410442598</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -630,7 +632,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Undo bad fix" />
     <MESSAGE value="Modify post-install-cmd" />
     <MESSAGE value="Modify VerifyCsrfToken.php" />
     <MESSAGE value="use secure_asset for master.blade.php" />
@@ -655,6 +656,7 @@
     <MESSAGE value="Fix next and prev trimester" />
     <MESSAGE value="Add schedule_academic table, add compatibility with current trimester page, fix convenors being too long under offerings" />
     <MESSAGE value="Add fixes to import and export (WIP), add save successful prompts for offerings and trimesters, add fixes to report display" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add fixes to import and export (WIP), add save successful prompts for offerings and trimesters, add fixes to report display" />
+    <MESSAGE value="Academic report reflects current year/trimester correctly, displays workload status, trimester report goes to current trimester/year, disabled create trimester button" />
+    <option name="LAST_COMMIT_MESSAGE" value="Academic report reflects current year/trimester correctly, displays workload status, trimester report goes to current trimester/year, disabled create trimester button" />
   </component>
 </project>
