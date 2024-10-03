@@ -331,15 +331,6 @@ class TrimesterController extends Controller
             'campus.*' => 'nullable|string',
         ]);
 
-        $validator = Validator::make($request->all(), []);
-
-        // Add academic_id validation only when new_offering_id is not present
-        $validator->sometimes('academic_id.*', 'exists:academics,id', function ($input) {
-            return !(isset($input->new_offering_id) || isset($input->delete));
-        });
-
-        $validator->validate();
-
         $classScheduleIDs = $request->input('class_id', []);
 
         if ($request->has('delete')) {
@@ -366,11 +357,16 @@ class TrimesterController extends Controller
                     $class->save();
                 } catch (\Exception $e) {
                     // dd($request->all());
-                    return redirect()->back()->with('error', 'An error occurred while saving the offering and class.');
+                    return redirect()->back()->with('error', 'An error occurred while saving the class.');
                 }
                 // dd($offering);
-                $class->academic()->sync([$request->input('academic_id')[$rowNo]=>['offering_id' => $offering_id]]);
+                $academic_id = $request->input('academic_id')[$rowNo];
 
+                if ($academic_id !== null) {
+                    $class->academic()->sync([$academic_id => ['offering_id' => $offering_id]]);
+                } else {
+                    $class->academic()->detach();  // This will remove all assigned academics from the class.
+                }
             }
         }
 

@@ -33,10 +33,7 @@ class OfferingFactory extends Factory
             'year' => $this->faker->numberBetween(2022, 2024),    // Random year between 2020 and 2024
             'trimester' => $this->faker->numberBetween(1, 3),     // Random trimester between 1 and 3
             'campus' => $this->faker->randomElement(['GC', 'NA', 'OL']), // Random campus
-            'academic_id' => Academic::inRandomOrder()->first()->id, // Fetching random academic ID
             'note' => null  // Default note as null
         ];
    }
 }
-
-php artisan db:seed --class=SeederClassName

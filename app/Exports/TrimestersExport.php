@@ -22,8 +22,9 @@ class TrimestersExport implements FromCollection, WithHeadings
      */
     public function collection()
     {
-        return ClassSchedule::with(['offering', 'academic'])
-            ->whereHas('offering', function ($query) {
+
+        return ClassSchedule::with('offering', 'academic')
+            ->whereHas('offering', function($query) {
                 $query->where('trimester', $this->trimester)
                     ->where('year', $this->year);
             })
@@ -32,13 +33,12 @@ class TrimestersExport implements FromCollection, WithHeadings
                 return [
                     'id' => $schedule->id,
                     'offering' => $schedule->offering->course ? $schedule->offering->course->code . ' ' . $schedule->offering->course->name : "N/A",
-                    'academic' => $schedule->academic ? $schedule->academic->firstname . ' ' . $schedule->academic->lastname : 'N/A',
-                    'teaching_load' => $schedule->academic ? $schedule->academic->teaching_load : 'N/A',
+                    'academic' => $schedule->academic->first() ? $schedule->academic->first()->firstname . ' ' . $schedule->academic->first()->lastname : 'N/A',
+                    'teaching_load' => $schedule->academic->first() ? $schedule->academic->first()->teaching_load : 'N/A',
                     'class_type' => $schedule->class_type,
                     'start_time' => $schedule->start_time,
                     'end_time' => $schedule->end_time,
                     'class_day' => $schedule->class_day,
-                    'number_of_students' => $schedule->numberOfStudents,
                     'trimester' => $schedule->offering->trimester,
                     'year' => $schedule->offering->year,
                     'campus' => $schedule->offering->campus,
@@ -59,7 +59,6 @@ class TrimestersExport implements FromCollection, WithHeadings
             'Start Time',
             'End Time',
             'Class Day',
-            'Number of Students',
             'Trimester',
             'Year',
             'Campus',

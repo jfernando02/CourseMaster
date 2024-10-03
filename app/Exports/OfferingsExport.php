@@ -14,8 +14,8 @@ class OfferingsExport implements FromCollection, WithHeadings
     */
     public function collection()
     {
-        return Offering::with(['course', 'academic'])->get()->map(function ($offering) {
-            if (!$offering->course || !$offering->academic) {
+        return Offering::with(['course'])->get()->map(function ($offering) {
+            if (!$offering->course) {
                 throw new Exception('Null value found in offering with id: ' . $offering->id);
             }
             return [
@@ -24,15 +24,12 @@ class OfferingsExport implements FromCollection, WithHeadings
                 'year' => $offering->year,
                 'trimester' => $offering->trimester,
                 'campus' => $offering->campus,
-                'convenor' => $offering->academic->firstname . ' ' . $offering->academic->lastname,
-                'staff_allocated' => $offering->classSchedules->contains(function ($classSchedule) {
-                    return $classSchedule->academic_id === null;
-                }) ? 'No' : 'Yes',
+                'convenors' => $offering->academics()->get()->map(function ($academic) {
+                    return $academic->firstname . ' ' . $academic->lastname;
+                })->toArray(),
                 'note' => $offering->note,
-                'reserved' => $offering->reserved,
                 'created_at' => $offering->created_at,
-                'updated_at' => $offering->updated_at,
-                'notes' => $offering->notes,
+                'updated_at' => $offering->updated_at
             ];
         });
     }
@@ -45,13 +42,10 @@ class OfferingsExport implements FromCollection, WithHeadings
             'Year',
             'Trimester',
             'Campus',
-            'Convenor',
-            'Staff Allocated',
+            'Convenors',
             'Note',
-            'Reserved',
             'Created At',
-            'Updated At',
-            'Notes',
+            'Updated At'
         ];
     }
 }

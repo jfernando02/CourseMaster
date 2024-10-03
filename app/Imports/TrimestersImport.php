@@ -63,8 +63,7 @@ class TrimestersImport implements ToModel, WithHeadingRow, WithValidation
             'class_type' => $row['class_type'],
             'start_time' => $row['start_time'],
             'end_time' => $row['end_time'],
-            'class_day' => $row['class_day'],
-            'numberofstudents' => $row['numberofstudents'],
+            'class_day' => $row['class_day']
         ]);
     }
 
@@ -78,8 +77,7 @@ class TrimestersImport implements ToModel, WithHeadingRow, WithValidation
             'class_type' => 'required|string',
             'start_time' => 'required|date_format:H:i',
             'end_time' => 'required|date_format:H:i',
-            'class_day' => 'required|string',
-            'numberofstudents' => 'required|integer',
+            'class_day' => 'required|string'
         ];
     }
 
