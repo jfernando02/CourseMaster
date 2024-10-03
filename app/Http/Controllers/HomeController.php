@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\Offering;
+use Illuminate\Support\Facades\Log;
 
 class HomeController extends Controller
 {
@@ -15,13 +16,17 @@ class HomeController extends Controller
         $year = (string) $request->query('year');
         $trimester = (string) $request->query('trimester');
         $academic_id = Auth::user()->academic->id;
-        $classes = ClassSchedule::with('offering')->where('academic_id', $academic_id)
+        $classes = ClassSchedule::with('academic', 'offering', 'offering.course')
+            ->whereHas('academic', function ($query) use ($academic_id) {
+                $query->where('academics.id', $academic_id);
+            })
             ->whereHas('offering', function ($query) use ($year, $trimester) {
                 $query->where('year', $year)
                     ->where('trimester', $trimester);
             })
             ->get();
         // Transform the data into a suitable format, if necessary
+        Log::debug('Classes:', $classes->toArray());
 
         return response()->json($classes); // Returns data as JSON response
     }
@@ -30,19 +35,15 @@ class HomeController extends Controller
         $year = (string) $request->query('year');
         $trimester = (string) $request->query('trimester');
         $academic_id = Auth::user()->academic->id;
-        $offerings = Offering::with('course')->where('year', $year)
-                ->where('trimester', $trimester)->where('academic_id', $academic_id)->get();
-        // Transform the data into a suitable format, if necessary
+        $offerings = Offering::with('course', 'academics')
+            ->whereHas('academics', function ($query) use ($academic_id) {
+                $query->where('id', $academic_id);
+            })
+            ->where('year', $year)
+            ->where('trimester', $trimester)
+            ->get();
 
         return response()->json($offerings); // Returns data as JSON response
-    }
-
-    public function getCourses(Request $request){
-        $academic_id = Auth::user()->academic->id;
-        $courses = Course::where('academic_id', $academic_id)->get();
-        // Transform the data into a suitable format, if necessary
-
-        return response()->json($courses); // Returns data as JSON response
     }
     public function showHome()
     {
@@ -63,7 +64,7 @@ class HomeController extends Controller
         $threshold_trimester = $setting ? $setting->threshold_trimester : null;
         $trimester = $setting->current_trimester;
         $year = $setting->current_year;
-        $menu1Options = ['courses', 'offerings', 'classes'];
+        $menu1Options = ['offerings', 'classes'];
         $menu2Options = ['1', '2', '3'];
         $menu3Options = ['2022','2023','2024', '2025', '2026', '2027', '2028'];
 

@@ -62,9 +62,6 @@
             // map selectedOption1 to the API endpoint
             var endpoint;
             switch (selectedOption1) {
-                case 'courses':
-                    endpoint = "/coursesdashboard";
-                    break;
                 case 'offerings':
                     endpoint = "/offeringsdashboard";
                     break;
@@ -101,7 +98,7 @@
                         `;
                         response.data.forEach(function (item) {
                             html += '<tr>'
-                            html += '<td>' + item.id + '</td>'
+                            html += '<td>' + item.offering.course.code + ' ' + item.offering.course.name + '</td>'
                             html += '<td>' + item.class_type + '</td><td>' + item.offering.campus + '</td>';
                             html += '<td>' + item.start_time + '</td><td>' + item.end_time + '</td>';
                             html += '<td>' + item.class_day + '</td>';
@@ -124,37 +121,10 @@
                         response.data.forEach(function (item) {
                             if(item.course) {
                                 html += '<tr>'
-                                html += '<td>' + item.course.name + '</td>';
+                                html += '<td>' + item.course.code + ' ' + item.course.name + '</td>';
                                 html += '<td>' + item.campus + '</td>';
                                 html += '</tr>'
                             }
-                        });
-                        html += '</tbody></table>';
-                    }
-                    else if(selectedOption1==='courses') {
-                        // Define Table Headers
-                        html += `
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Course</th>
-                                    <th>Code</th>
-                                    <th>Note</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                        `;
-                        response.data.forEach(function (item) {
-                            html += '<tr>'
-                            html += '<td>' + item.name + '</td>';
-                            html += '<td>' + item.code + '</td>';
-                            if(item.note===null){
-                                html += '<td>' + "" + '</td>';
-                            }
-                            else{
-                                html += '<td>' + item.note + '</td>';
-                            }
-                            html += '</tr>'
                         });
                         html += '</tbody></table>';
                     }

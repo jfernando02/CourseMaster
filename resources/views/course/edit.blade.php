@@ -48,17 +48,13 @@
               <input type="text" class="form-control filter-input" placeholder="Search Transition" data-column="3">
             </th>
             <th>
-                <input type="text" class="form-control filter-input" placeholder="Search Primary Convener" data-column="3">
-            </th>
-            <th>
-              <input type="text" class="form-control filter-input" placeholder="Search Note" data-column="5">
+              <input type="text" class="form-control filter-input" placeholder="Search Note" data-column="4">
             </th>
         <tr>
           <th>Code</th>
           <th>Name</th>
           <th>Course Level</th>
           <th>Superseded By</th>
-            <th>Primary Convener</th>
           <th>Note</th>
             <th>Select</th>
         </tr>
@@ -92,25 +88,6 @@
               @endforeach
             </select>
           </td>
-            <td>
-                <div class="form-group">
-                    <select class="selectpicker form-control" name="academic_id[]">
-                        {{-- <option
-                        title="ddd"
-                        >Select Lecturer</option> --}}
-                        <option value="">Unassigned</option>
-                        @foreach ($academics as $academic)
-                            <option
-
-                                class="dropdown-item custom-tooltip"
-                                value="{{ $academic->id }}" @if ($academic->id == $course->academic_id) selected @endif
-                            >
-                                {{ $academic->firstname }} {{ $academic->lastname }} ({{$academic->home_campus}})
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-            </td>
           <td>
             <input class="form-control type="text" name="note[]" value="{{ $course->note }}">
           </td>

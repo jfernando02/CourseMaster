@@ -55,7 +55,6 @@
                 <th>Name</th>
                 <th>Prerequisite</th>
                 <th>Transition</th>
-                <th>Primary Convener</th>
                 <th>Note</th>
             </tr>
             <tr>
@@ -75,10 +74,7 @@
                     <input type="text" class="form-control filter-input" placeholder="Search Transition" data-column="4">
                 </td>
                 <td>
-                    <input type="text" class="form-control filter-input" placeholder="Search Primary Convener" data-column="4">
-                </td>
-                <td>
-                    <input type="text" class="form-control filter-input" placeholder="Search Note" data-column="6">
+                    <input type="text" class="form-control filter-input" placeholder="Search Note" data-column="5">
                 </td>
             </tr>
         </thead>
@@ -90,7 +86,6 @@
                     <td><a href="{{ url("course/$course->id") }}">{{ $course->name }}</a></td>
                     <td>{{ $course->prereq }}</td>
                     <td>{{ $course->transition }}</td>
-                    <td>{{ $course->academic ? $course->academic->firstname.' '.$course->academic->lastname : '' }}</td>
                     <td>{{ $course->note }}</td>
                 </tr>
             @endforeach

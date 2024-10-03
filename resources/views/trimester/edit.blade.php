@@ -121,7 +121,7 @@
                         <input type="hidden" name="class_id[]" id="selectedClassID" value="{{ $class->id }}">
                         <input type="hidden" name="offering_id[]" id="selectedOfferingID" value="{{ $class->offering_id }}">
                         <td>
-                            {{optional($class->offering->course)->name}}
+                            {{optional($class->offering->course)->name}} ({{optional($class->offering->course)->code}})
 
                         </td>
                         <td>

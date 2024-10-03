@@ -4,15 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0e3fdc26-a780-4964-b490-9e33aa918199" name="Changes" comment="Disable copy trimester">
-      <change afterPath="$PROJECT_DIR$/database/migrations/2024_10_03_041546_add_unique_index_to_offerings.php" afterDir="false" />
+    <list default="true" id="0e3fdc26-a780-4964-b490-9e33aa918199" name="Changes" comment="Add fix to imports and exports, classes can now be unassigned correctly, tweak offering factory">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Exports/OfferingsExport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exports/OfferingsExport.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Exports/TrimestersExport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exports/TrimestersExport.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TrimesterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TrimesterController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Imports/TrimestersImport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Imports/TrimestersImport.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/database.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/database/database.sqlite" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/factories/OfferingFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/factories/OfferingFactory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/course/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/course/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/course/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/course/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/home/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/master.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/master.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/trimester/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/trimester/edit.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -259,7 +259,7 @@
       <workItem from="1727319596249" duration="25425000" />
       <workItem from="1727406524066" duration="4121000" />
       <workItem from="1727418226340" duration="2544000" />
-      <workItem from="1727925942008" duration="7211000" />
+      <workItem from="1727925942008" duration="11533000" />
     </task>
     <task id="LOCAL-00001" summary="Add login page, add stock laravel pages, add logout button to dashboard, add login/register functionality">
       <option name="closed" value="true" />
@@ -629,7 +629,15 @@
       <option name="project" value="LOCAL" />
       <updated>1727410632931</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="Add fix to imports and exports, classes can now be unassigned correctly, tweak offering factory">
+      <option name="closed" value="true" />
+      <created>1727933558626</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1727933558626</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -648,7 +656,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Modify VerifyCsrfToken.php" />
     <MESSAGE value="use secure_asset for master.blade.php" />
     <MESSAGE value="force HTTPS for AppServiceProvider.php" />
     <MESSAGE value="changed secure_asset to asset in master layout, added primary convenor column to courses, fixed config for local vs prod env" />
@@ -673,6 +680,7 @@
     <MESSAGE value="Add fixes to import and export (WIP), add save successful prompts for offerings and trimesters, add fixes to report display" />
     <MESSAGE value="Academic report reflects current year/trimester correctly, displays workload status, trimester report goes to current trimester/year, disabled create trimester button" />
     <MESSAGE value="Disable copy trimester" />
-    <option name="LAST_COMMIT_MESSAGE" value="Disable copy trimester" />
+    <MESSAGE value="Add fix to imports and exports, classes can now be unassigned correctly, tweak offering factory" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add fix to imports and exports, classes can now be unassigned correctly, tweak offering factory" />
   </component>
 </project>

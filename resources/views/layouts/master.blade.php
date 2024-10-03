@@ -140,7 +140,7 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav me-auto mb-2 mb-md-0">
           <li class="nav-item">
-              <a class="nav-link" href="{{route('trimester.edit', ['year' => $settings->current_year, 'trimester' => $settings->current_trimester])}}">Trimesters</a>
+              <a class="nav-link" href="{{route('trimester.edit', ['year' => $settings->current_year, 'trimester' => $settings->current_trimester])}}">Classes</a>
           </li>
           <li class="nav-item">
               <a class="nav-link" href="{{route('offering.edit_bulks')}}">Offerings</a>
