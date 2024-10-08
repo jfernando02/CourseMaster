@@ -16,7 +16,6 @@ class ClassSchedule extends Model
 
     protected $fillable = [
         'offering_id',
-        'academic_id',
         'class_type',
         'start_time',
         'end_time',

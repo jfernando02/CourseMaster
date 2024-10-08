@@ -31,14 +31,6 @@ class TrimestersImport implements ToModel, WithHeadingRow, WithValidation
             throw new Exception("Course not found: {$row['course_code']}");
         }
 
-        $academic = Academic::where('firstname', $row['academic_firstname'])
-            ->where('lastname', $row['academic_lastname'])
-            ->first();
-
-        if (!$academic) {
-            throw new Exception("Academic not found: {$row['academic_firstname']} {$row['academic_lastname']}");
-        }
-
         $offering = Offering::where('course_id', $course->id)
             ->where('trimester', $row['trimester'])
             ->where('year', $row['year'])
@@ -46,14 +38,14 @@ class TrimestersImport implements ToModel, WithHeadingRow, WithValidation
             ->first();
 
         if (!$offering) {
-            throw new Exception("Offering not found: {$course->id} {$row['trimester']} {$row['year']} {$academic->id}");
+            throw new Exception("Offering not found: {$course->id} {$row['trimester']} {$row['year']}");
             // throw new Exception("Offering not found: {$row['course_code']} {$row['trimester']} {$row['year']} {$row['academic_firstname']} {$row['academic_lastname']}");
         }
 
-        $key = $offering->id . $academic->id . $row['class_type'] . $row['start_time'] . $row['end_time'] . $row['class_day'] . $row['numberofstudents'] . $row['campus'];
+        $key = $offering->id . $row['class_type'] . $row['start_time'] . $row['end_time'] . $row['class_day'] . $row['numberofstudents'] . $row['campus'];
 
         if (isset($this->processed[$key])) {
-            throw new Exception("Duplicate entry found: {$offering->id} {$academic->id} {$row['class_type']} {$row['start_time']} {$row['end_time']} {$row['class_day']} {$row['numberofstudents']} {$row['campus']}");
+            throw new Exception("Duplicate entry found: {$offering->id} {$row['class_type']} {$row['start_time']} {$row['end_time']} {$row['class_day']} {$row['numberofstudents']} {$row['campus']}");
         }
 
         $this->processed[$key] = true;

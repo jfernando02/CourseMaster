@@ -11,7 +11,7 @@ class Academic extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['firstname', 'lastname', 'teaching_load', 'area', 'note', 'home_campus'];
+    protected $fillable = ['firstname', 'lastname', 'teaching_load', 'area', 'note', 'home_campus', 'yearly_teaching_load'];
 
     //an academic can have many offerings
     function offerings(){

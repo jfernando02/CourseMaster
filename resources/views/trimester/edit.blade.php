@@ -12,6 +12,7 @@
 
     <div >
         <h1>Edit Classes</h1>
+        <p>NOTE: Classes can only have academics assigned to the offering they are a part of.</p>
     @if(session('error'))
         <div class="alert alert-danger">
             {{ session('error') }}
@@ -292,13 +293,14 @@ function addNewRow() {
                 </select>
             </td>
             <td>
-            </td>
-             <td>
-            </td>
-             <td>
+                </div>Save class offering before adding lecturer<div>
             </td>
             <td>
-                <select class="form-control" name="new_class_type[]">
+            </td>
+            <td>
+            </td>
+            <td>
+    <select class="form-control" name="new_class_type[]">
                 @foreach ($class_types as $class_type)
                     <option name="class_type[]" value="{{ $class_type }}"
                     @if (isset($class) && $class_type == $class->class_type) selected @endif>

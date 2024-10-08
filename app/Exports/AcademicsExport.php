@@ -20,16 +20,16 @@ class AcademicsExport implements FromCollection, WithHeadings
     {
         return [
             'ID',
-            'First Name',
-            'Last Name',
-            'Teaching Load',
-            'Area',
-            'Note',
-            'Created At',
-            'Updated At',
-            'Home Campus',
-            'Email',
-            'Yearly Teaching Load'
+            'first_name',
+            'last_name',
+            'teaching_load',
+            'area',
+            'note',
+            'created_at',
+            'updated_at',
+            'home_campus',
+            'email',
+            'yearly_teaching_load'
         ];
     }
 }

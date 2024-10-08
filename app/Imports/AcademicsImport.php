@@ -15,17 +15,18 @@ class AcademicsImport implements ToModel, WithHeadingRow, WithValidation
 
     public function model(array $row)
     {
-        $key = $row['firstname'] . $row['lastname'];
+        \Log::info('Row data: ', $row);
+        $key = $row['first_name'] . $row['last_name'];
 
         if (isset($this->processed[$key])) {
-            throw new Exception("Duplicate entry found: {$row['firstname']} {$row['lastname']}");
+            throw new Exception("Duplicate entry found: {$row['first_name']} {$row['last_name']}");
         }
 
         $this->processed[$key] = true;
 
         return Academic::updateOrCreate([
-            'firstname' => $row['firstname'],
-            'lastname' => $row['lastname'],
+            'firstname' => $row['first_name'],
+            'lastname' => $row['last_name'],
         ], [
             'teaching_load' => $row['teaching_load'],
             'yearly_teaching_load' => $row['yearly_teaching_load'],
@@ -37,11 +38,11 @@ class AcademicsImport implements ToModel, WithHeadingRow, WithValidation
     public function rules(): array
     {
         return [
-            'firstname' => 'required|string',
-            'lastname' => 'required|string',
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
             'teaching_load' => 'numeric',
             'yearly_teaching_load' => 'numeric',
-            'area' => 'required|string',
+            'area' => 'nullable|string',
             'note' => 'nullable|string',
         ];
     }

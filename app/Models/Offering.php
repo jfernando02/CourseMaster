@@ -11,12 +11,9 @@ class Offering extends Model
 
     protected $fillable = [
         'course_id',
-        'academic_id',
         'trimester',
         'campus',
         'year',
-        'capacity',
-        'status',
         'note',
     ];
 
