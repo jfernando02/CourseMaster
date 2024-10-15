@@ -15,22 +15,17 @@ class CoursesExport implements FromCollection, WithHeadings
     {
         $courses = Course::all();
         $entries = collect();
-        
+
         foreach ($courses as $course) {
             $entry = [
                 'id' => $course->id,
                 'code' => $course->code,
                 'name' => $course->name,
                 'prereq' => $course->prereq,
-                'offered' => $course->offerings->pluck('trimester')->unique()->map(function ($trimester) {
-                    return 'Tri ' . $trimester;
-                })->implode(', '),
                 'transition' => $course->transition,
                 'supersededby' => $course->supersededBy,
-                'coursedelivery' => $course->offerings->pluck('campus')->unique()->implode(', '),
-                'tmethod' => $course->tmethod,
-                'note' => $course->note,
                 'courselevel' => $course->course_level,
+                'note' => $course->note,
                 'created_at' => $course->created_at,
                 'updated_at' => $course->updated_at,
             ];
@@ -43,18 +38,15 @@ class CoursesExport implements FromCollection, WithHeadings
     {
         return [
             'ID',
-            'Code',
-            'Name',
-            'Pre Requisites',
-            'Offered in Terms',
-            'Transition',
-            'Superseded By',
-            'Course Delivery',
-            'Tmethod',
-            'Note',
-            'Course Level',
-            'Created At',
-            'Updated At',
+            'code',
+            'name',
+            'prereq',
+            'transition',
+            'supersededBy',
+            'course_level',
+            'note',
+            'created_at',
+            'updated_at',
         ];
     }
 }

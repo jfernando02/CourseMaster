@@ -17,28 +17,20 @@ class OfferingsImport implements ToModel, WithHeadingRow, WithValidation
 
     public function model(array $row)
     {
-        $course = Course::where('code', $row['course_code'])->first();
+        $course = Course::where('code', $row['course_id'])->first();
         if (!$course) {
-            throw new Exception("Course not found: {$row['course_code']}");
+            throw new Exception("Course not found: {$row['course_id']}");
         }
 
-        $academic = Academic::where('firstname', $row['instructor_firstname'])
-            ->where('lastname', $row['instructor_lastname'])
-            ->first();
-
-        if (!$academic) {
-            throw new Exception("Academic not found: {$row['instructor_firstname']} {$row['instructor_lastname']}");
-        }
-
-        $key = $course->id . $row['trimester'] . $row['year'] . $academic->id;
+        $key = $course->id . $row['trimester'] . $row['year'] . $row['campus'];
 
         if (isset($this->processed[$key])) {
-            throw new Exception("Duplicate entry found: {$row['course_code']} {$row['trimester_id']} {$row['year']} {$row['academic_id']}");
+            throw new Exception("Duplicate entry found: {$row['course_id']} {$row['trimester_id']} {$row['year']} {$row['campus']}");
         }
 
         $this->processed[$key] = true;
 
-        return Offering::updateOrCreate([
+        $offering = Offering::updateOrCreate([
             'course_id' => $course->id,
             'trimester' => $row['trimester'],
             'year' => $row['year'],
@@ -46,16 +38,40 @@ class OfferingsImport implements ToModel, WithHeadingRow, WithValidation
         ], [
             'note' => $row['note']
         ]);
+
+        $academics = $row['academics'];
+        $academics = json_decode($academics, true);
+
+        if($academics!==null) {
+            foreach ($academics as $academic) {
+                $nameParts = explode(" ", $academic); // Split the string into an array: ['First', 'Last']
+                $firstName = $nameParts[0];
+                $lastName = $nameParts[1];
+                $academic = Academic::where('firstname', $firstName)
+                    ->where('lastname', $lastName)
+                    ->first();
+
+                if (!$academic) {
+                    throw new Exception("Academic not found: {$firstName} {$lastName}");
+                }
+                $offering->academics()->sync($academic->id);
+            }
+        }
+
+        return $offering;
     }
 
     public function rules(): array
     {
+
         return [
-            'course_code' => 'required|string',
+            'course_id' => 'required|string',
             'trimester' => 'required|numeric',
             'year' => 'required|numeric',
             'campus' => 'required|string',
-            'note' => 'nullable|string'
+            'academics' => 'nullable|json',
+            'academics.*' => 'string',
+            'note' => 'nullable|string',
         ];
     }
 

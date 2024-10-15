@@ -15,7 +15,6 @@ class AcademicsImport implements ToModel, WithHeadingRow, WithValidation
 
     public function model(array $row)
     {
-        \Log::info('Row data: ', $row);
         $key = $row['first_name'] . $row['last_name'];
 
         if (isset($this->processed[$key])) {
@@ -29,21 +28,30 @@ class AcademicsImport implements ToModel, WithHeadingRow, WithValidation
             'lastname' => $row['last_name'],
         ], [
             'teaching_load' => $row['teaching_load'],
-            'yearly_teaching_load' => $row['yearly_teaching_load'],
             'area' => $row['area'],
             'note' => $row['note'],
+            'home_campus' => $row['home_campus'],
+            'email' => $row['email'],
+            'yearly_teaching_load' => $row['yearly_teaching_load'],
         ]);
     }
 
     public function rules(): array
     {
+        request()->merge([
+            'yearly_teaching_load' => request()->input('yearly_teaching_load', 0),
+            'teaching_load' => request()->input('teaching_load', 0),
+        ]);
+
         return [
             'first_name' => 'required|string',
             'last_name' => 'required|string',
-            'teaching_load' => 'numeric',
-            'yearly_teaching_load' => 'numeric',
+            'teaching_load' => 'nullable|numeric',
             'area' => 'nullable|string',
             'note' => 'nullable|string',
+            'home_campus' => 'nullable|string',
+            'email' => 'nullable|string',
+            'yearly_teaching_load' => 'nullable|numeric',
         ];
     }
 

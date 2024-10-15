@@ -4,16 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0e3fdc26-a780-4964-b490-9e33aa918199" name="Changes" comment="Fix dashboard, remove primary convenor from course due to potential confusion with convenors of offerings">
+    <list default="true" id="0e3fdc26-a780-4964-b490-9e33aa918199" name="Changes" comment="Fix import, export">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Exports/AcademicsExport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exports/AcademicsExport.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Exports/AcademicWorkloadExport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exports/AcademicWorkloadExport.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Exports/CoursesExport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exports/CoursesExport.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Exports/OfferingsExport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exports/OfferingsExport.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Exports/TrimestersExport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exports/TrimestersExport.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Imports/AcademicsImport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Imports/AcademicsImport.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Imports/CoursesImport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Imports/CoursesImport.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Imports/OfferingsImport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Imports/OfferingsImport.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Imports/TrimestersImport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Imports/TrimestersImport.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/Academic.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Academic.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/ClassSchedule.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/ClassSchedule.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Offering.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Offering.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/database.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/database/database.sqlite" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/trimester/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/trimester/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/trimester/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/trimester/index.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -196,23 +200,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "D:/Other/Repos/2808ICTApp",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "ts.external.directory.path": "D:\\PhpStorm 2024.1.4\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Other/Repos/2808ICTApp&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;D:\\PhpStorm 2024.1.4\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Other\Repos\CourseMaster\database\migrations" />
@@ -263,6 +267,8 @@
       <workItem from="1727925942008" duration="12111000" />
       <workItem from="1728294169103" duration="3850000" />
       <workItem from="1728350752037" duration="4410000" />
+      <workItem from="1728462319464" duration="3331000" />
+      <workItem from="1728957179900" duration="12561000" />
     </task>
     <task id="LOCAL-00001" summary="Add login page, add stock laravel pages, add logout button to dashboard, add login/register functionality">
       <option name="closed" value="true" />
@@ -667,7 +673,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="force HTTPS for AppServiceProvider.php" />
     <MESSAGE value="changed secure_asset to asset in master layout, added primary convenor column to courses, fixed config for local vs prod env" />
     <MESSAGE value="courses column primary_convener to correct FK academic_id, course pages reflect new column, minor text edits to various pages" />
     <MESSAGE value="Fix academic and offering save, add 1:1 relationship between user and academic" />
@@ -692,6 +697,7 @@
     <MESSAGE value="Disable copy trimester" />
     <MESSAGE value="Add fix to imports and exports, classes can now be unassigned correctly, tweak offering factory" />
     <MESSAGE value="Fix dashboard, remove primary convenor from course due to potential confusion with convenors of offerings" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix dashboard, remove primary convenor from course due to potential confusion with convenors of offerings" />
+    <MESSAGE value="Fix import, export" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix import, export" />
   </component>
 </project>

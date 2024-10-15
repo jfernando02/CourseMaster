@@ -6,6 +6,7 @@ use App\Models\ClassSchedule;
 use App\Models\Course;
 use App\Models\Academic;
 use App\Models\Offering;
+use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithValidation;
@@ -18,34 +19,38 @@ class TrimestersImport implements ToModel, WithHeadingRow, WithValidation
 
     public function prepareForValidation($row)
     {
-        $row['start_time'] = sprintf('%02d:%02d', floor($row['start_time'] * 24), round(60*($row['start_time'] * 24 - floor($row['start_time'] * 24))));
-        $row['end_time'] = sprintf('%02d:%02d', floor($row['end_time'] * 24), round(60*($row['end_time'] * 24 - floor($row['end_time'] * 24))));
+        //Excel stores times as fractions, turn from fraction to time (e.g 12PM is stored as 0.5, turn this to 12:00)
+        if(!str_contains($row['start_time'], ':')) {
+            $row['start_time'] = sprintf('%02d:%02d', floor($row['start_time'] * 24), round(60 * ($row['start_time'] * 24 - floor($row['start_time'] * 24))));
+        }
+        if(!str_contains($row['end_time'], ':')) {
+            $row['end_time'] = sprintf('%02d:%02d', floor($row['end_time'] * 24), round(60 * ($row['end_time'] * 24 - floor($row['end_time'] * 24))));
+        }
         return $row;
     }
 
     public function model(array $row)
     {
 
-        $course = Course::where('code', $row['course_code'])->first();
+        $course = Course::where('code', $row['offering_course_code'])->first();
         if (!$course) {
-            throw new Exception("Course not found: {$row['course_code']}");
+            throw new Exception("Course not found: {$row['offering_course_code']}");
         }
 
         $offering = Offering::where('course_id', $course->id)
-            ->where('trimester', $row['trimester'])
-            ->where('year', $row['year'])
-            ->where('campus', $row['campus'])
+            ->where('trimester', $row['offering_trimester'])
+            ->where('year', $row['offering_year'])
+            ->where('campus', $row['offering_campus'])
             ->first();
 
         if (!$offering) {
-            throw new Exception("Offering not found: {$course->id} {$row['trimester']} {$row['year']}");
-            // throw new Exception("Offering not found: {$row['course_code']} {$row['trimester']} {$row['year']} {$row['academic_firstname']} {$row['academic_lastname']}");
+            throw new Exception("Offering not found: {$course->code} {$row['offering_trimester']} {$row['offering_year']} {$row['offering_campus']}");
         }
 
-        $key = $offering->id . $row['class_type'] . $row['start_time'] . $row['end_time'] . $row['class_day'] . $row['numberofstudents'] . $row['campus'];
+        $key = $offering->id . $row['class_type'] . $row['start_time'] . $row['end_time'] . $row['class_day'];
 
         if (isset($this->processed[$key])) {
-            throw new Exception("Duplicate entry found: {$offering->id} {$row['class_type']} {$row['start_time']} {$row['end_time']} {$row['class_day']} {$row['numberofstudents']} {$row['campus']}");
+            throw new Exception("Duplicate entry found: {$offering->id} {$row['class_type']} {$row['start_time']} {$row['end_time']} {$row['class_day']}");
         }
 
         $this->processed[$key] = true;
@@ -62,14 +67,14 @@ class TrimestersImport implements ToModel, WithHeadingRow, WithValidation
     public function rules(): array
     {
         return [
-            'course_code' => 'required|string',
-            'trimester' => 'required|integer',
-            'year' => 'required|integer',
-            'campus' => 'required|string',
-            'class_type' => 'required|string',
-            'start_time' => 'required|date_format:H:i',
-            'end_time' => 'required|date_format:H:i',
-            'class_day' => 'required|string'
+            'offering_course_code' => 'required|string',
+            'offering_trimester' => 'required|integer',
+            'offering_year' => 'required|integer',
+            'offering_campus' => 'required|string',
+            'class_type' => 'nullable|string',
+            'start_time' => 'nullable|date_format:H:i',
+            'end_time' => 'nullable|date_format:H:i',
+            'class_day' => 'nullable|string'
         ];
     }
 

@@ -33,7 +33,7 @@
     {{-- display currentTrimester --}}
     <h2>{{ $currentTrimester[0] }} {{ $currentTrimester[1] }}</h2>
     {{-- display the previous and next trimester --}}
-
+    <p>NOTE: Lecturers can only be assigned to classes through the app</p>
     <div class="row mt-3">
         <div class="col-4">
             <form action="{{ route('trimester.import') }}" method="POST" enctype="multipart/form-data">

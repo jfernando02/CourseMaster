@@ -19,8 +19,7 @@ class ClassSchedule extends Model
         'class_type',
         'start_time',
         'end_time',
-        'class_day',
-        'numberOfStudents',
+        'class_day'
     ];
 
     public function offering()

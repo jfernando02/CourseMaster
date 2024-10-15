@@ -11,7 +11,7 @@ class Academic extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['firstname', 'lastname', 'teaching_load', 'area', 'note', 'home_campus', 'yearly_teaching_load'];
+    protected $fillable = ['firstname', 'lastname', 'teaching_load', 'area', 'note', 'home_campus', 'email', 'yearly_teaching_load'];
 
     //an academic can have many offerings
     function offerings(){
@@ -86,7 +86,7 @@ class Academic extends Model
     {
         $setting = Setting::latest()->first();
         if($yearOrTrimester=="trimester") {
-            if ($this->teaching_load) {
+            if ($this->teaching_load !== NULL) {
                 if ($totalTeachingHours > $this->teaching_load * ($setting->threshold_trimester / 100)) {
                     return "OW";
                 } elseif ($totalTeachingHours < $this->teaching_load * ($setting->underwork_threshold_trimester / 100)) {
@@ -95,7 +95,7 @@ class Academic extends Model
             }
         }
         else{
-            if ($this->yearly_teaching_load) {
+            if ($this->yearly_teaching_load !== NULL) {
                 if ($totalTeachingHours > $this->yearly_teaching_load * ($setting->threshold_year / 100)) {
                     return "OW";
                 } elseif ($totalTeachingHours < $this->yearly_teaching_load * ($setting->underwork_threshold_year / 100)) {

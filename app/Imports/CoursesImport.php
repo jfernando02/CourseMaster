@@ -29,7 +29,6 @@ class CoursesImport implements ToModel, WithHeadingRow, WithValidation
             'name' => $row['name'],
             'prereq' => $row['prereq'],
             'transition' => $row['transition'],
-            'course_level' => $row['course_level'],
             'note' => $row['note'],
         ]);
     }
@@ -41,7 +40,6 @@ class CoursesImport implements ToModel, WithHeadingRow, WithValidation
             'name' => 'required|string',
             'prereq' => 'nullable|string',
             'transition' => 'nullable|string',
-            'tmethod' => 'nullable|string',
             'note' => 'nullable|string',
         ];
     }

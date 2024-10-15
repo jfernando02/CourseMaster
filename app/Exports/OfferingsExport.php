@@ -20,11 +20,11 @@ class OfferingsExport implements FromCollection, WithHeadings
             }
             return [
                 'id' => $offering->id,
-                'course_name' => $offering->course->code . ' ' .$offering->course->name,
+                'course_id' => $offering->course->code,
                 'year' => $offering->year,
                 'trimester' => $offering->trimester,
                 'campus' => $offering->campus,
-                'convenors' => $offering->academics()->get()->map(function ($academic) {
+                'academics' => $offering->academics()->get()->map(function ($academic) {
                     return $academic->firstname . ' ' . $academic->lastname;
                 })->toArray(),
                 'note' => $offering->note,
@@ -38,14 +38,14 @@ class OfferingsExport implements FromCollection, WithHeadings
     {
         return [
             'ID',
-            'Course Name',
-            'Year',
-            'Trimester',
-            'Campus',
-            'Convenors',
-            'Note',
-            'Created At',
-            'Updated At'
+            'course_id',
+            'year',
+            'trimester',
+            'campus',
+            'academics',
+            'note',
+            'created_at',
+            'updated_at'
         ];
     }
 }
