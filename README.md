@@ -21,5 +21,4 @@ Project Details - Academics and tutorial staff have complex workloads and teachi
 4. SQLite - For database
 
 ## Acknowledgements
-1. This project is a fork of Course Master worked on by <b>David Chen</b>.
-2. Special thanks to Ernest Foo for his insights which led to us developing the project effectively.
+1. Special thanks to Ernest Foo for his insights which led to us developing the project effectively.
