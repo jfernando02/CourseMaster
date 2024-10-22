@@ -36,14 +36,14 @@
       </div>
 
     <div class="form-group">
-      <label>Teaching load</label>
-      <input type="number" class="form-control" name="teaching_load" value="{{old('teaching_load')}}">
+      <label>Teaching load (required)</label>
+      <input type="number" class="form-control" name="teaching_load" value="{{old('teaching_load')}}" required>
       <small class="form-text text-muted">E.g. enter 30 for 30 hours a trimester</small>
     </div>
 
       <div class="form-group">
-          <label>Teaching load (Year)</label>
-          <input type="number" class="form-control" name="yearly_teaching_load" value="{{old('yearly_teaching_load')}}">
+          <label>Teaching load (Year) (required)</label>
+          <input type="number" class="form-control" name="yearly_teaching_load" value="{{old('yearly_teaching_load')}}" required>
           <small class="form-text text-muted">E.g. enter 60 for 60 hours a year</small>
       </div>
 

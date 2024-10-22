@@ -12,7 +12,6 @@
 
     <div >
         <h1>Edit Classes</h1>
-        <p>NOTE: Classes can only have academics assigned to the offering they are a part of.</p>
     @if(session('error'))
         <div class="alert alert-danger">
             {{ session('error') }}
@@ -128,8 +127,7 @@
                         <td>
                             <div class="form-group">
                                 <select class="selectpicker form-control" name="academic_id[]">
-                                    <option value="">Unassigned</option>
-                                    @foreach ($class->offering->academics as $academic)
+                                    @foreach ($academics as $academic)
                                     @php
                                     $load = $academic->teachingHours($year ,$trimester);
                                     $ratio = min(($load / $threshold_trimester), 1) * 100;
@@ -293,14 +291,18 @@ function addNewRow() {
                 </select>
             </td>
             <td>
-                </div>Save class offering before adding lecturer<div>
-            </td>
-            <td>
-            </td>
-            <td>
-            </td>
-            <td>
-    <select class="form-control" name="new_class_type[]">
+                <select class="selectpicker" name="new_academic_id[]">
+                @foreach ($academics as $academic)
+                    <option value="{{ $academic->id }}">{{ $academic->firstname}} {{ $academic->lastname}}</option>
+                @endforeach
+                </select>
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                <select class="form-control" name="new_class_type[]">
                 @foreach ($class_types as $class_type)
                     <option name="class_type[]" value="{{ $class_type }}"
                     @if (isset($class) && $class_type == $class->class_type) selected @endif>

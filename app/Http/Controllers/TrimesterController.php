@@ -320,13 +320,14 @@ class TrimesterController extends Controller
     }
 
     /**
-     * Save the edited offerings.
+     * Save the edited classes.
      */
     public function save(Request $request)
     {
         // dd($request->all());
         $request->validate([
             'offering_id.*' => 'nullable|exists:offerings,id',
+            'academic_id.*' => 'nullable|exists:academics,id',
             'class_type.*' => 'nullable|string',
             'campus.*' => 'nullable|string',
         ]);
@@ -362,11 +363,7 @@ class TrimesterController extends Controller
                 // dd($offering);
                 $academic_id = $request->input('academic_id')[$rowNo];
 
-                if ($academic_id !== null) {
-                    $class->academic()->sync([$academic_id => ['offering_id' => $offering_id]]);
-                } else {
-                    $class->academic()->detach();  // This will remove all assigned academics from the class.
-                }
+                $class->academic()->sync([$academic_id]);
             }
         }
 
@@ -383,6 +380,7 @@ class TrimesterController extends Controller
                 $class->end_time = $request->new_end_time[$i];
                 $class->class_day = $request->new_class_day[$i];
                 $class->save();
+                $class->academic()->attach([$request->new_academic_id[$i]]);
             }
         }
 

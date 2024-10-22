@@ -12,6 +12,9 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if (Schema::hasTable('academic_offering')) {
+            Schema::rename('academic_offering', 'old_academic_offering');
+        }
         Schema::create('academic_offering', function (Blueprint $table) {
             $table->unsignedBigInteger('academic_id');
             $table->unsignedBigInteger('offering_id');
@@ -22,14 +25,9 @@ return new class extends Migration
             $table->foreign('offering_id')->references('id')->on('offerings')->onDelete('cascade');
         });
 
-        $data = DB::table('old_academic_offering')->select('academic_id', 'offering_id')->get()->toArray();
-
-        foreach ($data as $row) {
-            // Insert each row to new table
-            DB::table('academic_offering')->insert(get_object_vars($row));
+        if (Schema::hasTable('academic_offering')) {
+            Schema::drop('old_academic_offering');
         }
-
-        Schema::drop('old_academic_offering');
     }
 
     /**
@@ -37,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('academic_offering');
+        //
     }
 };

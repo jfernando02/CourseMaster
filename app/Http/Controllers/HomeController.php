@@ -53,8 +53,6 @@ class HomeController extends Controller
             $academic_id = DB::table('academics')->where('email',$user->email)->first();
             if($academic_id) {
                 $academic_id = $academic_id->id;
-            } else {
-                $academic_id = DB::table('academics')->inRandomOrder()->first()->id;
             }
         }
 

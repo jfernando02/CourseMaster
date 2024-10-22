@@ -20,9 +20,6 @@ return new class extends Migration
             $table->unsignedBigInteger('offering_id');
             $table->foreign('offering_id')->references('id')->on('offerings')->onDelete('cascade');
 
-            $table->unsignedBigInteger('academic_id')->nullable();
-            $table->foreign('academic_id')->references('id')->on('academics')->onDelete('set null');
-
             $table->string('class_type')->nullable();
             $table->time('start_time')->nullable();
             $table->time('end_time')->nullable();
@@ -30,9 +27,6 @@ return new class extends Migration
 
             $table->integer('numberOfStudents')->nullable();
         });
-        DB::table('classSchedule')->insert(DB::table('old_classSchedule')->get()->map(function ($classSchedule) {
-            return (array)$classSchedule;
-        })->all());
 
         Schema::drop('old_classSchedule');
     }
