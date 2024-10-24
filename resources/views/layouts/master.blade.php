@@ -156,7 +156,7 @@
           <a class="nav-link" href="{{url("program")}}">Programs</a>
         </li>--}}
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="{{ url('reports') }}" id="navbarDropdown" role="button" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" aria-expanded="false">
               Reports
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">

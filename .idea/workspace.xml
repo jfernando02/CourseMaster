@@ -4,17 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0e3fdc26-a780-4964-b490-9e33aa918199" name="Changes" comment="Fix import, export">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/726c7542-c3ea-46ea-b5f0-645aafbd5c5d.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/726c7542-c3ea-46ea-b5f0-645aafbd5c5d.xml" afterDir="false" />
+    <list default="true" id="0e3fdc26-a780-4964-b490-9e33aa918199" name="Changes" comment="Can now add any academic to a class">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TrimesterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TrimesterController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/database.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/database/database.sqlite" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2024_09_04_012839_change_academics_email_to_allow_null.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2024_10_21_234354_remove_foreign_key_from_academic_class_schedule.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2024_09_25_081934_modify_class_schedule_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2024_09_25_081934_modify_class_schedule_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2024_09_26_084810_recreate_academic_offering_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2024_09_26_084810_recreate_academic_offering_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/academic/add_academic.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/academic/add_academic.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/trimester/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/trimester/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/academic/edit_form.blade copy.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/academic/index.blade test.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/course/edit.blade copy.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/course/index.blade copy.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/master.blade copy.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/master.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/master.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -266,15 +263,8 @@
       <workItem from="1728350752037" duration="4410000" />
       <workItem from="1728462319464" duration="3331000" />
       <workItem from="1728957179900" duration="12679000" />
-      <workItem from="1729553675039" duration="4602000" />
-    </task>
-    <task id="LOCAL-00001" summary="Add login page, add stock laravel pages, add logout button to dashboard, add login/register functionality">
-      <option name="closed" value="true" />
-      <created>1722911936739</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1722911936739</updated>
+      <workItem from="1729553675039" duration="5686000" />
+      <workItem from="1729743040861" duration="744000" />
     </task>
     <task id="LOCAL-00002" summary="Remove unneccessary views">
       <option name="closed" value="true" />
@@ -660,7 +650,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728972039094</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="Can now add any academic to a class">
+      <option name="closed" value="true" />
+      <created>1729558347582</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1729558347582</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -679,7 +677,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="changed secure_asset to asset in master layout, added primary convenor column to courses, fixed config for local vs prod env" />
     <MESSAGE value="courses column primary_convener to correct FK academic_id, course pages reflect new column, minor text edits to various pages" />
     <MESSAGE value="Fix academic and offering save, add 1:1 relationship between user and academic" />
     <MESSAGE value="Minor text edit" />
@@ -704,6 +701,7 @@
     <MESSAGE value="Add fix to imports and exports, classes can now be unassigned correctly, tweak offering factory" />
     <MESSAGE value="Fix dashboard, remove primary convenor from course due to potential confusion with convenors of offerings" />
     <MESSAGE value="Fix import, export" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix import, export" />
+    <MESSAGE value="Can now add any academic to a class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Can now add any academic to a class" />
   </component>
 </project>
