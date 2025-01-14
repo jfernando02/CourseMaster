@@ -49,12 +49,6 @@ COPY . /var/www/html
 # Install Composer Dependencies
 RUN composer install
 
-# Change current user to www-data
-USER www-data
-
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
-RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
-
 # Expose port 10000 and start the application
 EXPOSE 10000
 CMD ["php", "-S", "0.0.0.0:10000", "-t", "public/"]
