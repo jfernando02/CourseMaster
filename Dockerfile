@@ -10,10 +10,6 @@ RUN npm install
 # Add your source files
 COPY . .
 
-# If you are using a build script in your package.json like "build": "react-scripts build",
-# just use `RUN npm run build`
-RUN npm run production
-
 # Build PHP
 FROM php:8.1-fpm
 
