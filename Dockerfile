@@ -54,4 +54,4 @@ USER www-data
 
 # Expose port 10000 and start the application
 EXPOSE 10000
-CMD ["php-fpm"]
+CMD ["php", "-S", "0.0.0.0:10000", "-t", "public/"]
