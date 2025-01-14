@@ -52,6 +52,6 @@ RUN composer install
 # Change current user to www-data
 USER www-data
 
-# Expose port 9000 and start the application
-EXPOSE 9000
+# Expose port 10000 and start the application
+EXPOSE 10000
 CMD ["php-fpm"]
